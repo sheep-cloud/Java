@@ -2,7 +2,7 @@ package cn.colg.lambda;
 
 import org.junit.Test;
 
-import cn.colg.t.MyFun;
+import cn.colg.functional.MyFun;
 import cn.hutool.core.lang.Console;
 
 /**
@@ -48,7 +48,5 @@ public class Lambda03Test {
         Console.log(result);
         
         Console.log(operation(200, (x) -> x + 200));
-        
-
     }
 }

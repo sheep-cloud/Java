@@ -1,4 +1,4 @@
-package cn.colg.t;
+package cn.colg.functional;
 
 /**
  * 函数式接口
