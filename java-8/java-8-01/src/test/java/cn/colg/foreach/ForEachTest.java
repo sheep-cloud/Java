@@ -22,15 +22,13 @@ public final class ForEachTest {
      */
     @Test
     public void testForEachCollection() throws Exception {
+        // 新建一个ArrayList
         List<String> list = CollUtil.newArrayList("Jack", "Rose", "Tom", "Jax");
 
         // 1. 推荐
         list.forEach(str -> Console.log(str));
 
-        // 2. 不推荐
-        list.forEach(System.out::println);
-
-        // 3. 过滤
+        // 2. 过滤
         list.stream().filter(str -> !"Jack".equals(str)).forEach(str -> Console.log(str));
     }
 
@@ -41,12 +39,17 @@ public final class ForEachTest {
      */
     @Test
     public void testDict() throws Exception {
-        Dict dict = new Dict(4);
+        /*
+         * 构造时必须指定初始容量：
+         *  负载因子：static final float DEFAULT_LOAD_FACTOR = 0.75f;
+         *  存储个数：(存储的元素个数 / 负载因子) + 1
+         */
+        Dict dict = new Dict(6);
         dict.set("Jack", 18).set("Rose", 20).set("Tom", 22).set("Jax", 25);
 
         dict.forEach((key, value) -> {
             Console.log(key + ": " + value);
         });
     }
-
+    
 }
