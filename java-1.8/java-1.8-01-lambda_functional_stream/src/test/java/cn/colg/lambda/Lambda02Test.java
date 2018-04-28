@@ -54,12 +54,11 @@ public class Lambda02Test {
         Console.log("cn.colg.lambda.Lambda02Test.test01()");
         // jdk 1.7之前，必须是final，默认在int前加了 final
         int num = 0;
-        
         Runnable r = new Runnable() {
 
             @Override
             public void run() {
-                Console.log("Hello World!" + num);
+                Console.log("Hello World!{}", num);
             }
         };
         r.run();
@@ -70,21 +69,21 @@ public class Lambda02Test {
         Runnable r1 = () -> Console.log("Hello World!");
         r1.run();
     }
-    
+
     @Test
     public void test02() throws Exception {
         Console.log("cn.colg.lambda.Lambda02Test.test02()");
         Consumer<String> con = (x) -> Console.log(x);
         con.accept("Lambda 表达式威武！");
     }
-    
+
     @Test
     public void test03() throws Exception {
         Console.log("cn.colg.lambda.Lambda02Test.test03()");
         Consumer<String> con = x -> Console.log(x);
-        con.accept("Lambda 表达式威武！");
+        Console.log(con);
     }
-    
+
     @Test
     public void test04() throws Exception {
         Console.log("cn.colg.lambda.Lambda02Test.test04()");
@@ -94,12 +93,12 @@ public class Lambda02Test {
         };
         Console.log(com);
     }
-    
+
     @Test
     public void test05() throws Exception {
         Console.log("cn.colg.lambda.Lambda02Test.test05()");
         Comparator<Integer> com = (x, y) -> Integer.compare(x, y);
         Console.log(com);
     }
-    
+
 }

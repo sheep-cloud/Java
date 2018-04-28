@@ -1,19 +1,18 @@
 package cn.colg.lambda;
 
-import static org.junit.Assert.*;
-
 import java.util.Comparator;
 import java.util.TreeSet;
 
 import org.junit.Test;
+
+import cn.hutool.core.lang.Console;
 
 /**
  * Lambda 表达式体验
  *
  * @author colg
  */
-public class Lambda01Test {
-
+public final class Lambda01Test {
     /**
      * 匿名内部类
      *
@@ -30,7 +29,7 @@ public class Lambda01Test {
         };
 
         TreeSet<Integer> treeSet = new TreeSet<>(comparator);
-        assertNotNull(treeSet);
+        Console.log(treeSet);
     }
 
     /**
@@ -42,7 +41,6 @@ public class Lambda01Test {
     public void test02() throws Exception {
         Comparator<Integer> comparator = (o1, o2) -> Integer.compare(o1, o2);
         TreeSet<Integer> treeSet = new TreeSet<>(comparator);
-        assertNotNull(treeSet);
+        Console.log(treeSet);
     }
-
 }

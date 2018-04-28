@@ -22,6 +22,7 @@ public final class ForEachTest {
      */
     @Test
     public void testForEachCollection() throws Exception {
+        Console.log("cn.colg.foreach.ForEachTest.testForEachCollection()");
         // 新建一个ArrayList
         List<String> list = CollUtil.newArrayList("Jack", "Rose", "Tom", "Jax");
 
@@ -39,6 +40,7 @@ public final class ForEachTest {
      */
     @Test
     public void testDict() throws Exception {
+        Console.log("cn.colg.foreach.ForEachTest.testDict()");
         /*
          * 构造时必须指定初始容量：
          *  负载因子：static final float DEFAULT_LOAD_FACTOR = 0.75f;

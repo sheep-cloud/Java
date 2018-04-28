@@ -1,6 +1,6 @@
 package cn.colg.strategy;
 
-import cn.colg.bean.Employee;
+import cn.colg.entity.Employee;
 
 /**
  * 根据年龄过滤员工
