@@ -12,13 +12,6 @@ import cn.hutool.core.lang.Console;
  */
 public class Lambda03Test {
 
-    /*
-     * 需求：
-     *  1、对一个数进行运算
-     */
-
-    /// ----------------------------------------------------------------------------------------------------
-
     /**
      * 对一个数进行运算
      *
@@ -41,12 +34,12 @@ public class Lambda03Test {
             }
         };
         Console.log(operation(10, mf));
-        
+
         // 参数列表：(x)
         // 方法体：x * x
         Integer result = operation(100, (x) -> x * x);
         Console.log(result);
-        
+
         Console.log(operation(200, (x) -> x + 200));
     }
 }

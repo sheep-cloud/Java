@@ -12,9 +12,10 @@
 Lambda 是一个匿名函数，我们可以把 Lambda 表达式理解为是一段可以传递的代码（将代码 像数据一样进行传递）。可以写出更简洁、更 灵活的代码。作为一种更紧凑的代码风格，使 Java的语言表达能力得到了提升。
 
 ### 2. 从匿名类到 Labmbda 的转换
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqqg9c2jooj30w60b9aa7.jpg)
+![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqtuf5ajpfj30w409mglr.jpg)
 
 ### 3. Lambda 表达式语法
+
 ![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqqgp1789oj30np0l7gm7.jpg)
 
 ### 4. Lambda 常用方法

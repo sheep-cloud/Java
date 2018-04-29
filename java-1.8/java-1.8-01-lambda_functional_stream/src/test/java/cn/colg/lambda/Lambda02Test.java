@@ -6,6 +6,7 @@ import java.util.function.Consumer;
 import org.junit.Test;
 
 import cn.hutool.core.lang.Console;
+import cn.hutool.core.thread.ThreadUtil;
 
 /**
  * Lambda 表达式语法
@@ -48,26 +49,24 @@ import cn.hutool.core.lang.Console;
  * @author colg
  */
 public class Lambda02Test {
-
+    
     @Test
     public void test01() throws Exception {
         Console.log("cn.colg.lambda.Lambda02Test.test01()");
-        // jdk 1.7之前，必须是final，默认在int前加了 final
-        int num = 0;
-        Runnable r = new Runnable() {
+        // jdk 1.7之前，必须是final，jdk 1.8默认在变量前加了 final
+        String value = "jdk 新特性";
+        ThreadUtil.execute(new Runnable() {
 
             @Override
             public void run() {
-                Console.log("Hello World!{}", num);
+                Console.log("Hello World!{}", value);
             }
-        };
-        r.run();
+        });
 
         Console.log("----------------------------------------------------------------------------------------------------");
 
         // Lamdba 表达式
-        Runnable r1 = () -> Console.log("Hello World!");
-        r1.run();
+        ThreadUtil.execute(() -> Console.log("Hello World!{}", value));
     }
 
     @Test
