@@ -36,6 +36,9 @@ Lambda 是一个匿名函数，我们可以把 Lambda 表达式理解为是一�
 ### 3. 作为参数传递
 ![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqqh581fr9j30he0fuwer.jpg)
 
+### 4. java内置四大核心函数式接口
+![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqtvk2eao9j30pb0cz40o.jpg)
+
 ## 3、方法引用与构造器引用
 
 ## 4、Stream API
