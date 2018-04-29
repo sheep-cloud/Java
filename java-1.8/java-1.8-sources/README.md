@@ -41,6 +41,13 @@ Lambda 是一个匿名函数，我们可以把 Lambda 表达式理解为是一�
 
 ## 3、方法引用与构造器引用
 
+### 1. 方法引用
+![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqtxzl28poj30oq0dpwg8.jpg)
+![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqty0grv1lj30js0n9t9d.jpg)
+
+### 2. 构造器引用
+![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqty9obdntj30pi0c6jrm.jpg)
+
 ## 4、Stream API
 
 ## 5、接口中的默认方法与静态方法

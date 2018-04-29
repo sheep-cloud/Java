@@ -19,6 +19,13 @@
 			<artifactId>hutool-all</artifactId>
 			<version>4.0.10</version>
 		</dependency>
+		<!-- lombok 依赖 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.16.20</version>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 
 </project>
