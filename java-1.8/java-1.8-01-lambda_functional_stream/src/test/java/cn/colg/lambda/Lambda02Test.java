@@ -59,14 +59,14 @@ public class Lambda02Test {
 
             @Override
             public void run() {
-                Console.log("Hello World!{}", value);
+                Console.log("colg-cloud!{}", value);
             }
         });
 
         Console.log("----------------------------------------------------------------------------------------------------");
 
         // Lamdba 表达式
-        ThreadUtil.execute(() -> Console.log("Hello World!{}", value));
+        ThreadUtil.execute(() -> Console.log("colg-cloud!{}", value));
     }
 
     @Test
