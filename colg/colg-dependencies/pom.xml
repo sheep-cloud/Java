@@ -20,6 +20,7 @@
 		<lombok.version>1.16.20</lombok.version>
 		<hutool.version>4.0.10</hutool.version>
 		<fastjson.version>1.2.47</fastjson.version>
+		<logback.version>1.2.3</logback.version>
 	</properties>
 
 	<dependencies>
@@ -42,6 +43,11 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
 		</dependency>
 	</dependencies>
 
