@@ -3,6 +3,7 @@
 	<groupId>cn.colg</groupId>
 	<artifactId>colg-dependencies</artifactId>
 	<version>0.0.1</version>
+	<name>colg-dependencies :: 包含（hutool-all、junit、lombok、fastjson、logback-classic）</name>
 	
 	<!-- 
 		! Centralized definition of dependent versions
