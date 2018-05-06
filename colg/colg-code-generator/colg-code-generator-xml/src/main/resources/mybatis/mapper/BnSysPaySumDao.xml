@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="opsteel.oupuzw.service.blank.note.dao.BnSysPaySumDao">
+  <resultMap id="BaseResultMap" type="opsteel.oupuzw.api.blank.note.entity.BnSysPaySumEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="BRO_USER_ID" jdbcType="INTEGER" property="broUserId" />
+    <result column="PAY_SUM" jdbcType="DECIMAL" property="paySum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, BRO_USER_ID, PAY_SUM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bn_sys_pay_sum
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bn_sys_pay_sum
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="opsteel.oupuzw.api.blank.note.entity.BnSysPaySumEntity">
+    insert into bn_sys_pay_sum (id, BRO_USER_ID, PAY_SUM
+      )
+    values (#{id,jdbcType=INTEGER}, #{broUserId,jdbcType=INTEGER}, #{paySum,jdbcType=DECIMAL}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="opsteel.oupuzw.api.blank.note.entity.BnSysPaySumEntity">
+    insert into bn_sys_pay_sum
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="broUserId != null">
+        BRO_USER_ID,
+      </if>
+      <if test="paySum != null">
+        PAY_SUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="broUserId != null">
+        #{broUserId,jdbcType=INTEGER},
+      </if>
+      <if test="paySum != null">
+        #{paySum,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="opsteel.oupuzw.api.blank.note.entity.BnSysPaySumEntity">
+    update bn_sys_pay_sum
+    <set>
+      <if test="broUserId != null">
+        BRO_USER_ID = #{broUserId,jdbcType=INTEGER},
+      </if>
+      <if test="paySum != null">
+        PAY_SUM = #{paySum,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="opsteel.oupuzw.api.blank.note.entity.BnSysPaySumEntity">
+    update bn_sys_pay_sum
+    set BRO_USER_ID = #{broUserId,jdbcType=INTEGER},
+      PAY_SUM = #{paySum,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

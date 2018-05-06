@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="opsteel.oupuzw.service.blank.note.dao.BnInterestSumDao">
+  <resultMap id="BaseResultMap" type="opsteel.oupuzw.api.blank.note.entity.BnInterestSumEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="INSTITUTION_ID" jdbcType="INTEGER" property="institutionId" />
+    <result column="INTEREST_SUM" jdbcType="DECIMAL" property="interestSum" />
+    <result column="INTEREST_OK" jdbcType="DECIMAL" property="interestOk" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, INSTITUTION_ID, INTEREST_SUM, INTEREST_OK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bn_interest_sum
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bn_interest_sum
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="opsteel.oupuzw.api.blank.note.entity.BnInterestSumEntity">
+    insert into bn_interest_sum (id, INSTITUTION_ID, INTEREST_SUM, 
+      INTEREST_OK)
+    values (#{id,jdbcType=INTEGER}, #{institutionId,jdbcType=INTEGER}, #{interestSum,jdbcType=DECIMAL}, 
+      #{interestOk,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="opsteel.oupuzw.api.blank.note.entity.BnInterestSumEntity">
+    insert into bn_interest_sum
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="institutionId != null">
+        INSTITUTION_ID,
+      </if>
+      <if test="interestSum != null">
+        INTEREST_SUM,
+      </if>
+      <if test="interestOk != null">
+        INTEREST_OK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="institutionId != null">
+        #{institutionId,jdbcType=INTEGER},
+      </if>
+      <if test="interestSum != null">
+        #{interestSum,jdbcType=DECIMAL},
+      </if>
+      <if test="interestOk != null">
+        #{interestOk,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="opsteel.oupuzw.api.blank.note.entity.BnInterestSumEntity">
+    update bn_interest_sum
+    <set>
+      <if test="institutionId != null">
+        INSTITUTION_ID = #{institutionId,jdbcType=INTEGER},
+      </if>
+      <if test="interestSum != null">
+        INTEREST_SUM = #{interestSum,jdbcType=DECIMAL},
+      </if>
+      <if test="interestOk != null">
+        INTEREST_OK = #{interestOk,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="opsteel.oupuzw.api.blank.note.entity.BnInterestSumEntity">
+    update bn_interest_sum
+    set INSTITUTION_ID = #{institutionId,jdbcType=INTEGER},
+      INTEREST_SUM = #{interestSum,jdbcType=DECIMAL},
+      INTEREST_OK = #{interestOk,jdbcType=DECIMAL}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

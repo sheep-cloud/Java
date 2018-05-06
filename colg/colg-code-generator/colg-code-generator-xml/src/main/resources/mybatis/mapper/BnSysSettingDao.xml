@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="opsteel.oupuzw.service.blank.note.dao.BnSysSettingDao">
+  <resultMap id="BaseResultMap" type="opsteel.oupuzw.api.blank.note.entity.BnSysSettingEntity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="SETTING_KEY" jdbcType="VARCHAR" property="settingKey" />
+    <result column="SETTING_VALUE" jdbcType="VARCHAR" property="settingValue" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, SETTING_KEY, SETTING_VALUE, REMARK
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bn_sys_setting
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bn_sys_setting
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="opsteel.oupuzw.api.blank.note.entity.BnSysSettingEntity">
+    insert into bn_sys_setting (id, SETTING_KEY, SETTING_VALUE, 
+      REMARK)
+    values (#{id,jdbcType=INTEGER}, #{settingKey,jdbcType=VARCHAR}, #{settingValue,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="opsteel.oupuzw.api.blank.note.entity.BnSysSettingEntity">
+    insert into bn_sys_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="settingKey != null">
+        SETTING_KEY,
+      </if>
+      <if test="settingValue != null">
+        SETTING_VALUE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="settingKey != null">
+        #{settingKey,jdbcType=VARCHAR},
+      </if>
+      <if test="settingValue != null">
+        #{settingValue,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="opsteel.oupuzw.api.blank.note.entity.BnSysSettingEntity">
+    update bn_sys_setting
+    <set>
+      <if test="settingKey != null">
+        SETTING_KEY = #{settingKey,jdbcType=VARCHAR},
+      </if>
+      <if test="settingValue != null">
+        SETTING_VALUE = #{settingValue,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="opsteel.oupuzw.api.blank.note.entity.BnSysSettingEntity">
+    update bn_sys_setting
+    set SETTING_KEY = #{settingKey,jdbcType=VARCHAR},
+      SETTING_VALUE = #{settingValue,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
