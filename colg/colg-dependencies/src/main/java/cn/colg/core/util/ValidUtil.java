@@ -1,4 +1,4 @@
-package cn.colg.util;
+package cn.colg.core.util;
 
 import java.util.regex.Pattern;
 
@@ -60,14 +60,15 @@ public final class ValidUtil {
     /** MAC地址 格式如：00-01-6C-06-A6-29 或 00:01:6C:06:A6:29 */
     public static final Pattern MAC = Pattern.compile("((?:[A-F0-9]{1,2}[:-]){5}[A-F0-9]{1,2})|(?:0x)(\\d{12})(?:.+ETHER)", Pattern.CASE_INSENSITIVE);
 
-    /// ---------------------------------------------------------------------------------------------------- ----------------------------------------------------------------------------------------------------
+    /// ----------------------------------------------------------------------------------------------------
+    /// ----------------------------------------------------------------------------------------------------
 
     /**
      * 通过正则对象校验
      * 
-     * @param pattern
-     * @param value
-     * @return
+     * @param pattern 正在表达式的编译对象
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isMatch(Pattern pattern, String value) {
         if (pattern == null || StrUtil.isEmpty(value)) {
@@ -83,9 +84,9 @@ public final class ValidUtil {
     /**
      * 通过正则表达式校验
      * 
-     * @param regex
-     * @param value
-     * @return
+     * @param regex 正则表达式
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isMatch(String regex, String value) {
         if (StrUtil.isEmpty(regex)) {
@@ -101,8 +102,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>数字</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isNumber(String value) {
         return isMatch(NUMBERS, value);
@@ -115,8 +116,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>整数</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isInteger(String value) {
         return isMatch(INTEGER, value);
@@ -129,8 +130,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>正整数</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isIntegerPositive(String value) {
         return isMatch(INTEGER_POSITIVE, value);
@@ -143,8 +144,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>英文字母 、数字和下划线</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isGeneral(String value) {
         return isMatch(GENERAL, value);
@@ -156,8 +157,9 @@ public final class ValidUtil {
 
     /**
      * 验证是否为 <b>单个中文汉字</b>
-     * 
-     * @param value
+     *
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isChinese(String value) {
         return isMatch(CHINESE, value);
@@ -170,8 +172,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>中文汉字</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isChineses(String value) {
         return isMatch(CHINESES, value);
@@ -184,8 +186,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>中文字、英文字母、数字和下划线</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isGeneralWithChinese(String value) {
         return isMatch(GENERAL_WITH_CHINESE, value);
@@ -198,8 +200,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>用户名</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isAccount(String value) {
         return isMatch(ACCOUNT, value);
@@ -211,8 +213,9 @@ public final class ValidUtil {
 
     /**
      * 验证是否为 <b>密码</b>
-     * 
-     * @return
+     *
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isPassword(String value) {
         return isMatch(PASSWORD, value);
@@ -225,8 +228,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>IP v4</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isIPv4(String value) {
         return isMatch(IPV4, value);
@@ -239,8 +242,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>货币</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isMoney(String value) {
         return isMatch(MONEY, value);
@@ -253,8 +256,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>邮箱</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isEmail(String value) {
         return isMatch(EMAIL, value);
@@ -267,8 +270,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>移动电话/手机号码</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isMoblePhone(String value) {
         return isMatch(MOBILE_PHONE, value);
@@ -281,8 +284,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>固定电话/座机</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isPhone(String value) {
         return isMatch(PHONE, value);
@@ -295,8 +298,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>18位身份证号码</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isCitizenId(String value) {
         return isMatch(CITIZEN_ID, value);
@@ -309,8 +312,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>邮编</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isZipCode(String value) {
         return isMatch(ZIP_CODE, value);
@@ -323,8 +326,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>生日</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isBirthday(String value) {
         return isMatch(BIRTHDAY, value);
@@ -337,8 +340,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>URL</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isURL(String value) {
         return isMatch(URL, value);
@@ -349,10 +352,11 @@ public final class ValidUtil {
     }
 
     /**
-     * 验证是否为 <b>UUID</b>
+     * 验证是否为 <b>UUID</b><br>
+     * 包括带横线标准格式和不带横线的简单模式
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isUUID(String value) {
         return isMatch(UUID, value) || isMatch(UUID_SIMPLE, value);
@@ -365,8 +369,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>中国车牌号码</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isPlateNumber(String value) {
         return isMatch(PLATE_NUMBER, value);
@@ -379,8 +383,8 @@ public final class ValidUtil {
     /**
      * 验证是否为 <b>MAC地址</b>
      * 
-     * @param value
-     * @return
+     * @param value 值
+     * @return 满足返回true，不满足返回false
      */
     public static boolean isMAC(String value) {
         return isMatch(MAC, value);

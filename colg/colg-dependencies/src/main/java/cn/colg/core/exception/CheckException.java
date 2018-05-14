@@ -1,4 +1,4 @@
-package cn.colg.exception;
+package cn.colg.core.exception;
 
 /**
  * 校验错误异常
