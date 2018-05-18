@@ -228,8 +228,8 @@ SELECT * FROM xxl_job_qrtz_cron_triggers;
 SELECT * FROM xxl_job_qrtz_trigger_log;
 
 # 查询任务列表
- SELECT
-    t.id, t.job_group, t.job_cron, t.job_desc, t.add_time, t.update_time, t.author, t.alarm_email, t.executor_route_strategy, t.executor_handler,
-    t.executor_param, t.executor_block_strategy, t.executor_fail_strategy, t.glue_type, t.glue_source, t.glue_remark, t.glue_updatetime, t.child_jobid
-FROM XXL_JOB_QRTZ_TRIGGER_INFO AS t
+SELECT t.*
+FROM xxl_job_qrtz_trigger_info AS t
 ORDER BY id DESC;
+
+SELECT * FROM dept;

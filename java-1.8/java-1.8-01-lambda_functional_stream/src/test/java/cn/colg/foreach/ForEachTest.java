@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import cn.colg.BaseTest;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.Dict;
@@ -13,7 +14,16 @@ import cn.hutool.core.lang.Dict;
  *
  * @author colg
  */
-public final class ForEachTest {
+public final class ForEachTest extends BaseTest{
+    
+    @Test
+    public void testArray() throws Exception {
+        Console.log("cn.colg.foreach.ForEachTest.testArray()");
+        // 新建一个Array
+        String[] strings = {"Jack", "Rose", "Tom", "Jax"};
+        
+        CollUtil.newArrayList(strings).forEach(e -> Console.log(e));
+    }
 
     /**
      * ForEach 遍历集合
@@ -47,7 +57,10 @@ public final class ForEachTest {
          *  存储个数：(存储的元素个数 / 负载因子) + 1
          */
         Dict dict = new Dict(6);
-        dict.set("Jack", 18).set("Rose", 20).set("Tom", 22).set("Jax", 25);
+        dict.set("Jack", 18)
+            .set("Rose", 20)
+            .set("Tom", 22)
+            .set("Jax", 25);
 
         dict.forEach((key, value) -> {
             Console.log(key + ": " + value);
