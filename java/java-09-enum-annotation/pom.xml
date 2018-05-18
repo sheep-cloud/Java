@@ -16,6 +16,7 @@
 
     <modules>
         <module>java-09-enum-annotation-01-enum</module>
+        <module>java-09-enum-annotation-02-annotation</module>
     </modules>
 
 </project>
