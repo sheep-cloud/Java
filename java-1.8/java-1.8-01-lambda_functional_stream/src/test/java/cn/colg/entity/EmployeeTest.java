@@ -20,12 +20,12 @@ public final class EmployeeTest {
     
     /** 初始化员工信息 */
     private List<Employee> employees = CollUtil.newArrayList(
-            new Employee("Jack", 18, 2222.99),
-            new Employee("Rose", 28, 5555.99),
-            new Employee("Tom", 50, 4444.99),
-            new Employee("Jax", 16, 3333.99),
-            new Employee("Luo", 8, 7777.99)
-        );
+        new Employee("Jack", 18, 2222.99),
+        new Employee("Rose", 28, 5555.99),
+        new Employee("Tom", 50, 4444.99),
+        new Employee("Jax", 16, 3333.99),
+        new Employee("Luo", 8, 7777.99)
+    );
 
     /**
      * 1. 获取年龄大于35的员工信息

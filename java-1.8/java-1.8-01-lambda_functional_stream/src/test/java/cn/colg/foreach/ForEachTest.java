@@ -40,7 +40,8 @@ public final class ForEachTest extends BaseTest{
         list.forEach(str -> Console.log(str));
 
         // 2. 过滤
-        list.stream().filter(str -> !"Jack".equals(str)).forEach(str -> Console.log(str));
+        list.stream().filter(str -> !"Jack".equals(str))
+                     .forEach(str -> Console.log(str));
     }
 
     /**
@@ -56,11 +57,10 @@ public final class ForEachTest extends BaseTest{
          *  负载因子：static final float DEFAULT_LOAD_FACTOR = 0.75f;
          *  存储个数：(存储的元素个数 / 负载因子) + 1
          */
-        Dict dict = new Dict(6);
-        dict.set("Jack", 18)
-            .set("Rose", 20)
-            .set("Tom", 22)
-            .set("Jax", 25);
+        Dict dict = new Dict(6).set("Jack", 18)
+                               .set("Rose", 20)
+                               .set("Tom", 22)
+                               .set("Jax", 25);
 
         dict.forEach((key, value) -> {
             Console.log(key + ": " + value);
