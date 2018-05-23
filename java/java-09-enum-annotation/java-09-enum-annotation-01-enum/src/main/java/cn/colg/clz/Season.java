@@ -14,8 +14,10 @@ public class Season {
      *  3. 通过公共的方法来调用属性
      *  4. 创建枚举类的对象
      */
-    
+
+    /** 季节名称 */
     private final String seasonName;
+    /** 季节描述 */
     private final String seasonDesc;
 
     private Season(String seasonName, String seasonDesc) {

@@ -10,7 +10,7 @@ import cn.hutool.core.lang.Console;
  *
  * @author colg
  */
-public class SeasonTest extends BaseTest{
+public class SeasonTest extends BaseTest {
 
     /**
      * Test method for {@link cn.colg.clz.Season#toString()}.

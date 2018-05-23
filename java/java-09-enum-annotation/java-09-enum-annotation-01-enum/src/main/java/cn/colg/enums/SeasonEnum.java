@@ -47,7 +47,9 @@ public enum SeasonEnum implements Info {
         }
     };
 
+    /** 季节名称 */
     private String seasonName;
+    /** 季节描述 */
     private String seasonDesc;
 
     private SeasonEnum(String seasonName, String seasonDesc) {
