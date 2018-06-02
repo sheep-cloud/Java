@@ -22,7 +22,7 @@ public final class CheckUtil {
      */
     public static void check(boolean condition, String msg) {
         if (!condition) {
-            fail(msg);
+            throwFail(msg);
         }
     }
 
@@ -38,26 +38,26 @@ public final class CheckUtil {
      */
     public static void notNull(Object value, String msg) {
         if (value == null) {
-            fail(msg);
+            throwFail(msg);
         }
 
         if (value instanceof String) {
             // 校验 String
             String str = (String)value;
             if (str.trim().length() == 0) {
-                fail(msg);
+                throwFail(msg);
             }
         } else if (value instanceof Collection<?>) {
             // 校验 Collection
             Collection<?> coll = (Collection<?>)value;
             if (coll.size() == 0) {
-                fail(msg);
+                throwFail(msg);
             }
         } else if (value instanceof Map<?, ?>) {
             // 校验 Map
             Map<?, ?> map = (Map<?, ?>)value;
             if (map.size() == 0) {
-                fail(msg);
+                throwFail(msg);
             }
         }
     }
@@ -67,7 +67,7 @@ public final class CheckUtil {
      *
      * @param msg 错误提示消息
      */
-    private static void fail(String msg) {
+    public static void throwFail(String msg) {
         throw new CheckException(msg);
     }
 }
