@@ -126,6 +126,8 @@ public final class ValidUtilTest {
     public void testIsInteger() {
         String value = Integer.MAX_VALUE + "";
         assertTrue(isInteger(value));
+        String value2 = -Integer.MAX_VALUE + "";
+        assertTrue(isInteger(value2));
     }
 
     /**
@@ -135,6 +137,8 @@ public final class ValidUtilTest {
     public void testIsNotInteger() {
         String value = Integer.MAX_VALUE + "";
         assertFalse(isNotInteger(value));
+        String value2 = -Integer.MAX_VALUE + "";
+        assertFalse(isNotInteger(value2));
     }
 
     /**

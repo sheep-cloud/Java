@@ -18,7 +18,7 @@ public final class ValidUtil {
     /** 数字 */
     public final static Pattern NUMBERS = Pattern.compile("^([+-]?)\\d*\\.?\\d+$");
     /** 整数 */
-    public final static Pattern INTEGER = Pattern.compile("^[0-9]+$");
+    public final static Pattern INTEGER = Pattern.compile("^-?\\d+$");
     /** 正整数 */
     public final static Pattern INTEGER_POSITIVE = Pattern.compile("^[1-9]\\d*$");
     /** 英文字母 、数字和下划线 */
