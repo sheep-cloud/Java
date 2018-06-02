@@ -3,6 +3,11 @@ package cn.colg.core.util;
 import static cn.colg.core.util.CheckUtil.check;
 import static cn.colg.core.util.CheckUtil.notNull;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Test;
 
 import cn.colg.core.exception.CheckException;
@@ -23,18 +28,35 @@ public class CheckUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.CheckUtil#notNull(java.lang.Object, java.lang.String)}.
+     * Test method for {@link cn.colg.core.util.CheckUtil#notNull(Object, java.lang.String)}.
      */
     @Test(expected = CheckException.class)
-    public final void testNotNull() {
-        String obj = null;
-        notNull(obj, "error");
-
-        String str = "";
-        notNull(str, "error");
-
-        String space = "  ";
-        notNull(space, "error");
+    public final void testNotNullObject() {
+        String value = null;
+        notNull(value, "error");
     }
 
+    @Test
+    public void testNotNullString() throws Exception {
+        String value = "a";
+        notNull(value, "error");
+    }
+
+    @Test(expected = CheckException.class)
+    public void testNotNullCollection() throws Exception {
+        List<?> list = new ArrayList<>();
+        notNull(list, "error");
+    }
+
+    @Test(expected = CheckException.class)
+    public void testNotNullMap() throws Exception {
+        Map<?, ?> map = new HashMap<>();
+        notNull(map, "error");
+    }
+
+    @Test
+    public void testName() throws Exception {
+        Character a = ' ';
+        notNull(a, "error");
+    }
 }

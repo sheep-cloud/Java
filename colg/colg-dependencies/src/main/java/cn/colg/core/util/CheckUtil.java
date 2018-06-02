@@ -1,5 +1,8 @@
 package cn.colg.core.util;
 
+import java.util.Collection;
+import java.util.Map;
+
 import cn.colg.core.exception.CheckException;
 
 /**
@@ -24,21 +27,36 @@ public final class CheckUtil {
     }
 
     /**
-     * 对象为null或字符串为空白则抛出校验异常，空白的定义如下： <br>
-     * 1、为null <br>
-     * 2、为不可见字符（如空格）<br>
-     * 3、""<br>
+     * 对象，字符串，集合为空白时，抛出校验异常，空白的定义如下：<br>
+     * 1、Object: 为null <br>
+     * 2、String: 为不可见字符（如空格） <br>
+     * 3、String: ""<br>
+     * 4、Collection/Map: size()==0 <br>
      *
-     * @param value 需要校验的对象或字符串
+     * @param value 需要校验的对象，字符串，集合
      * @param msg 错误消息提示
      */
     public static void notNull(Object value, String msg) {
         if (value == null) {
             fail(msg);
         }
+
         if (value instanceof String) {
+            // 校验 String
             String str = (String)value;
-            if ("".equals(str.trim())) {
+            if (str.trim().length() == 0) {
+                fail(msg);
+            }
+        } else if (value instanceof Collection<?>) {
+            // 校验 Collection
+            Collection<?> coll = (Collection<?>)value;
+            if (coll.size() == 0) {
+                fail(msg);
+            }
+        } else if (value instanceof Map<?, ?>) {
+            // 校验 Map
+            Map<?, ?> map = (Map<?, ?>)value;
+            if (map.size() == 0) {
                 fail(msg);
             }
         }
