@@ -1,7 +1,7 @@
 package cn.colg.core.exception;
 
 /**
- * 校验错误异常
+ * 校验异常
  *
  * @author colg
  */
