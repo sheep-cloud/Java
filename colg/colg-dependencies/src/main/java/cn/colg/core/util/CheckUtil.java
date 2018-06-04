@@ -19,6 +19,7 @@ public final class CheckUtil {
      *
      * @param condition 校验条件
      * @param msg 错误消息提示
+     * @author colg
      */
     public static void check(boolean condition, String msg) {
         if (!condition) {
@@ -27,14 +28,15 @@ public final class CheckUtil {
     }
 
     /**
-     * 对象，字符串，集合为空白时，抛出校验异常，空白的定义如下：<br>
-     * 1、Object: 为null <br>
+     * 对象，字符串，集合为空白时，抛出校验异常，空白的定义如下： <br>
+     * 1、Object: 为 null <br>
      * 2、String: 为不可见字符（如空格） <br>
-     * 3、String: ""<br>
+     * 3、String: "" <br>
      * 4、Collection/Map: size()==0 <br>
      *
      * @param value 需要校验的对象，字符串，集合
      * @param msg 错误消息提示
+     * @author colg
      */
     public static void notNull(Object value, String msg) {
         if (value == null) {
@@ -66,6 +68,7 @@ public final class CheckUtil {
      * 抛出校验异常
      *
      * @param msg 错误提示消息
+     * @author colg
      */
     public static void throwFail(String msg) {
         throw new CheckException(msg);
