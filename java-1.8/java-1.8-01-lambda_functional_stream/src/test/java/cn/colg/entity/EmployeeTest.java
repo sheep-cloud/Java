@@ -142,7 +142,8 @@ public final class EmployeeTest {
     @Test
     public void test05() throws Exception {
         Console.log("cn.colg.entity.EmployeeTest.test05()");
-        List<Employee> list = filterEmployeesByStrategy(employees, employee -> employee.getAge() > 35);
+        MyStrategy<Employee> myStrategy = employee -> employee.getAge() > 35;
+        List<Employee> list = filterEmployeesByStrategy(employees, myStrategy);
         Console.log(list);
         
         List<Employee> list2 = filterEmployeesByStrategy(employees, employee -> employee.getSalary() > 5000);
