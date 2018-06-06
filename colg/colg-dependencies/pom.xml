@@ -22,6 +22,7 @@
         <hutool.version>4.0.12</hutool.version>
         <fastjson.version>1.2.47</fastjson.version>
         <logback.version>1.2.3</logback.version>
+        <commons-lang3.version>3.7</commons-lang3.version>
     </properties>
 
     <!-- 
@@ -52,6 +53,11 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${logback.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
         </dependency>
     </dependencies>
 
