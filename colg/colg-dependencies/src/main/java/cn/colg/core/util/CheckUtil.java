@@ -15,14 +15,27 @@ public final class CheckUtil {
     private CheckUtil() {}
 
     /**
-     * 表达式的结果为false时，抛出校验异常
+     * 表达式的结果为 false 时，抛出校验异常
      *
-     * @param condition 校验条件
-     * @param msg 错误消息提示
+     * @param bool 校验条件
+     * @param msg 消息提示
      * @author colg
      */
-    public static void check(boolean condition, String msg) {
-        if (!condition) {
+    public static void checkTrue(boolean bool, String msg) {
+        if (!bool) {
+            throwFail(msg);
+        }
+    }
+
+    /**
+     * 表达式的结果为 true 时，抛出校验异常
+     *
+     * @param bool 校验条件
+     * @param msg 消息提示
+     * @author colg
+     */
+    public static void checkFalse(boolean bool, String msg) {
+        if (bool) {
             throwFail(msg);
         }
     }
@@ -38,7 +51,7 @@ public final class CheckUtil {
      * @param msg 错误消息提示
      * @author colg
      */
-    public static void notNull(Object value, String msg) {
+    public static void checkNotNull(Object value, String msg) {
         if (value == null) {
             throwFail(msg);
         }
@@ -61,6 +74,19 @@ public final class CheckUtil {
             if (map.size() == 0) {
                 throwFail(msg);
             }
+        }
+    }
+
+    /**
+     * 对象不为 null 时，抛出校验异常，空白的定义如下： <br>
+     *
+     * @param value 需要校验的对象
+     * @param msg 错误消息提示
+     * @author colg
+     */
+    public static void checkNull(Object value, String msg) {
+        if (value != null) {
+            throwFail(msg);
         }
     }
 

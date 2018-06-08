@@ -2,7 +2,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.colg</groupId>
     <artifactId>colg-dependencies</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
     <name>colg-dependencies :: 包含（hutool-all、junit、lombok、fastjson、logback-classic）</name>
     
     <!-- 

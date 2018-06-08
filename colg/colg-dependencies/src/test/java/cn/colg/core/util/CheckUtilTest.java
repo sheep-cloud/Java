@@ -1,62 +1,68 @@
 package cn.colg.core.util;
 
-import static cn.colg.core.util.CheckUtil.check;
-import static cn.colg.core.util.CheckUtil.notNull;
+import static cn.colg.core.util.CheckUtil.checkFalse;
+import static cn.colg.core.util.CheckUtil.checkNotNull;
+import static cn.colg.core.util.CheckUtil.checkNull;
+import static cn.colg.core.util.CheckUtil.checkTrue;
+import static cn.colg.core.util.CheckUtil.throwFail;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
 import cn.colg.core.exception.CheckException;
 
 /**
- * 校验工具 测试
+ * 校验工具测试
  *
  * @author colg
  */
 public class CheckUtilTest {
 
-    /**
-     * Test method for {@link cn.colg.core.util.CheckUtil#check(boolean, java.lang.String)}.
-     */
-    @Test(expected = CheckException.class)
-    public final void testCheck() {
-        check(false, "error");
-    }
+    public static final String MSG = "ERROR";
 
     /**
-     * Test method for {@link cn.colg.core.util.CheckUtil#notNull(Object, java.lang.String)}.
+     * Test method for {@link cn.colg.core.util.CheckUtil#checkTrue(boolean, java.lang.String)}.
      */
     @Test(expected = CheckException.class)
-    public final void testNotNullObject() {
-        String value = null;
-        notNull(value, "error");
+    public final void testCheckTrue() {
+        boolean bool = false;
+        checkTrue(bool, MSG);
     }
 
-    @Test
-    public void testNotNullString() throws Exception {
-        String value = "a";
-        notNull(value, "error");
-    }
-
+    /**
+     * Test method for {@link cn.colg.core.util.CheckUtil#checkFalse(boolean, java.lang.String)}.
+     */
     @Test(expected = CheckException.class)
-    public void testNotNullCollection() throws Exception {
-        List<?> list = new ArrayList<>();
-        notNull(list, "error");
+    public final void testCheckFalse() {
+        boolean bool = true;
+        checkFalse(bool, MSG);
     }
 
+    /**
+     * Test method for {@link cn.colg.core.util.CheckUtil#checkNotNull(java.lang.Object, java.lang.String)}.
+     */
     @Test(expected = CheckException.class)
-    public void testNotNullMap() throws Exception {
-        Map<?, ?> map = new HashMap<>();
-        notNull(map, "error");
+    public final void testheckNotNull() {
+        Object value = null;
+        checkNotNull(value, MSG);
     }
 
-    @Test
-    public void testName() throws Exception {
-        Character a = ' ';
-        notNull(a, "error");
+    /**
+     * Test method for {@link cn.colg.core.util.CheckUtil#checkNull(java.lang.Object, java.lang.String)}.
+     */
+    @Test(expected = CheckException.class)
+    public final void testCheckNull() {
+        Object value = new ArrayList<>();
+        checkNull(value, MSG);
     }
+
+    /**
+     * Test method for {@link cn.colg.core.util.CheckUtil#throwFail(java.lang.String)}.
+     */
+    @Test(expected = CheckException.class)
+    public final void testThrowFail() {
+        throwFail(MSG);
+    }
+
 }
