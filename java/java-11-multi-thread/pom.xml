@@ -10,12 +10,12 @@
         <dependency>
             <groupId>cn.colg</groupId>
             <artifactId>colg-dependencies</artifactId>
-            <version>0.0.1</version>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
-    
+
     <modules>
         <module>java-11-multi-thread-01-helloworld</module>
     </modules>
-    
+
 </project>

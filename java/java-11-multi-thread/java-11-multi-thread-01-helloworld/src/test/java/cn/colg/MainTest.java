@@ -13,7 +13,7 @@ public class MainTest {
     public static void main(String[] args) {
         method2("colg");
     }
-    
+
     public static void method1(String str) {
         log.info("MainTest.method1() >> method1");
         log.info("MainTest.method1() >> str : {}", str);
