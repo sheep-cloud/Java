@@ -1,6 +1,6 @@
-#### 打包
+# 打包
 
-```shell
+```properties
 mvn install
 mvn source:jar
 mvn javadoc:jar

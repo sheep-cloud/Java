@@ -16,49 +16,52 @@ public final class ValidUtil {
     private ValidUtil() {}
 
     /** 数字 */
-    public final static Pattern NUMBERS = Pattern.compile("^([+-]?)\\d*\\.?\\d+$");
+    private final static Pattern NUMBERS = Pattern.compile("^([+-]?)\\d*\\.?\\d+$");
     /** 整数 */
-    public final static Pattern INTEGER = Pattern.compile("^-?\\d+$");
+    private final static Pattern INTEGER = Pattern.compile("^-?\\d+$");
     /** 正整数 */
-    public final static Pattern INTEGER_POSITIVE = Pattern.compile("^[1-9]\\d*$");
+    private final static Pattern INTEGER_POSITIVE = Pattern.compile("^[1-9]\\d*$");
     /** 英文字母 、数字和下划线 */
-    public final static Pattern GENERAL = Pattern.compile("^\\w+$");
+    private final static Pattern GENERAL = Pattern.compile("^\\w+$");
     /** 单个中文汉字 */
-    public final static Pattern CHINESE = Pattern.compile("[\u4E00-\u9FFF]");
+    private final static Pattern CHINESE = Pattern.compile("[\u4E00-\u9FFF]");
     /** 中文汉字 */
-    public final static Pattern CHINESES = Pattern.compile("[\u4E00-\u9FFF]+");
+    private final static Pattern CHINESES = Pattern.compile("[\u4E00-\u9FFF]+");
     /** 中文字、英文字母、数字和下划线 */
-    public final static Pattern GENERAL_WITH_CHINESE = Pattern.compile("^[\u4E00-\u9FFF\\w]+$");
+    private final static Pattern GENERAL_WITH_CHINESE = Pattern.compile("^[\u4E00-\u9FFF\\w]+$");
     /** 用户名 */
-    public final static Pattern ACCOUNT = Pattern.compile("^[a-z0-9]{3,16}$");
+    private final static Pattern ACCOUNT = Pattern.compile("^[a-z0-9]{3,16}$");
     /** 密码 */
-    public final static Pattern PASSWORD = Pattern.compile("^.{6,18}$");
+    private final static Pattern PASSWORD = Pattern.compile("^.{6,18}$");
     /** IP v4 */
-    public final static Pattern IPV4 = Pattern.compile("\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
+    private final static Pattern IPV4 = Pattern.compile(
+        "\\b((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\.((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\b");
     /** 货币 */
-    public final static Pattern MONEY = Pattern.compile("^(\\d+(?:\\.\\d+)?)$");
+    private final static Pattern MONEY = Pattern.compile("^(\\d+(?:\\.\\d+)?)$");
     /** 邮箱 */
-    public final static Pattern EMAIL = Pattern.compile("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
+    private final static Pattern EMAIL = Pattern.compile(
+        "(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
     /** 移动电话/手机号码 */
-    public final static Pattern MOBILE_PHONE = Pattern.compile("^134[0-8]\\d{7}$|^13[^4]\\d{8}$|^14[5-9]\\d{8}$|^15[^4]\\d{8}$|^16[6]\\d{8}$|^17[0-8]\\d{8}$|^18[\\d]{9}$|^19[8,9]\\d{8}$");
+    private final static Pattern MOBILE_PHONE =
+        Pattern.compile("^134[0-8]\\d{7}$|^13[^4]\\d{8}$|^14[5-9]\\d{8}$|^15[^4]\\d{8}$|^16[6]\\d{8}$|^17[0-8]\\d{8}$|^18[\\d]{9}$|^19[8,9]\\d{8}$");
     /** 固定电话/座机 */
-    public final static Pattern PHONE = Pattern.compile("^(\\d{3,4}-?)?\\d{7,9}$");
+    private final static Pattern PHONE = Pattern.compile("^(\\d{3,4}-?)?\\d{7,9}$");
     /** 18 位身份证号码 */
-    public final static Pattern CITIZEN_ID = Pattern.compile("[1-9]\\d{5}[1-2]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}(\\d|X|x)");
+    private final static Pattern CITIZEN_ID = Pattern.compile("[1-9]\\d{5}[1-2]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}(\\d|X|x)");
     /** 邮编 */
-    public final static Pattern ZIP_CODE = Pattern.compile("\\d{6}");
+    private final static Pattern ZIP_CODE = Pattern.compile("\\d{6}");
     /** 生日 */
-    public final static Pattern BIRTHDAY = Pattern.compile("^(\\d{2,4})([/\\-\\.年]?)(\\d{1,2})([/\\-\\.月]?)(\\d{1,2})日?$");
+    private final static Pattern BIRTHDAY = Pattern.compile("^(\\d{2,4})([/\\-\\.年]?)(\\d{1,2})([/\\-\\.月]?)(\\d{1,2})日?$");
     /** URL */
-    public final static Pattern URL = Pattern.compile("(https://|http://)?([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?");
+    private final static Pattern URL = Pattern.compile("(https://|http://)?([\\w-]+\\.)+[\\w-]+(/[\\w- ./?%&=]*)?");
     /** UUID */
-    public final static Pattern UUID = Pattern.compile("^[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}$");
+    private final static Pattern UUID = Pattern.compile("^[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}$");
     /** 不带横线的 UUID */
-    public final static Pattern UUID_SIMPLE = Pattern.compile("^[0-9a-z]{32}$");
+    private final static Pattern UUID_SIMPLE = Pattern.compile("^[0-9a-z]{32}$");
     /** 中国车牌号码 */
-    public final static Pattern PLATE_NUMBER = Pattern.compile("^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}$");
+    private final static Pattern PLATE_NUMBER = Pattern.compile("^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-Z0-9]{4,5}[A-Z0-9挂学警港澳]{1}$");
     /** MAC地址 格式如： 00-01-6C-06-A6-29 或 00:01:6C:06:A6:29 */
-    public static final Pattern MAC = Pattern.compile("((?:[A-F0-9]{1,2}[:-]){5}[A-F0-9]{1,2})|(?:0x)(\\d{12})(?:.+ETHER)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern MAC = Pattern.compile("((?:[A-F0-9]{1,2}[:-]){5}[A-F0-9]{1,2})|(?:0x)(\\d{12})(?:.+ETHER)", Pattern.CASE_INSENSITIVE);
 
     /// ----------------------------------------------------------------------------------------------------
     /// ----------------------------------------------------------------------------------------------------
