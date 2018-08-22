@@ -1,49 +1,49 @@
 package cn.colg.core.util;
 
-import static cn.colg.core.util.ValidUtil.isAccount;
-import static cn.colg.core.util.ValidUtil.isBirthday;
-import static cn.colg.core.util.ValidUtil.isChinese;
-import static cn.colg.core.util.ValidUtil.isChineses;
-import static cn.colg.core.util.ValidUtil.isCitizenId;
-import static cn.colg.core.util.ValidUtil.isEmail;
-import static cn.colg.core.util.ValidUtil.isGeneral;
-import static cn.colg.core.util.ValidUtil.isGeneralWithChinese;
-import static cn.colg.core.util.ValidUtil.isIPv4;
-import static cn.colg.core.util.ValidUtil.isInteger;
-import static cn.colg.core.util.ValidUtil.isIntegerPositive;
-import static cn.colg.core.util.ValidUtil.isMAC;
-import static cn.colg.core.util.ValidUtil.isMatch;
-import static cn.colg.core.util.ValidUtil.isMoblePhone;
-import static cn.colg.core.util.ValidUtil.isMoney;
-import static cn.colg.core.util.ValidUtil.isNotAccount;
-import static cn.colg.core.util.ValidUtil.isNotBirthday;
-import static cn.colg.core.util.ValidUtil.isNotChinese;
-import static cn.colg.core.util.ValidUtil.isNotChineses;
-import static cn.colg.core.util.ValidUtil.isNotCitizenId;
-import static cn.colg.core.util.ValidUtil.isNotEmail;
-import static cn.colg.core.util.ValidUtil.isNotGeneral;
-import static cn.colg.core.util.ValidUtil.isNotGeneralWithChinese;
-import static cn.colg.core.util.ValidUtil.isNotIPv4;
-import static cn.colg.core.util.ValidUtil.isNotInteger;
-import static cn.colg.core.util.ValidUtil.isNotIntegerPositive;
-import static cn.colg.core.util.ValidUtil.isNotMAC;
-import static cn.colg.core.util.ValidUtil.isNotMatch;
-import static cn.colg.core.util.ValidUtil.isNotMoblePhone;
-import static cn.colg.core.util.ValidUtil.isNotMoney;
-import static cn.colg.core.util.ValidUtil.isNotNumber;
-import static cn.colg.core.util.ValidUtil.isNotPassword;
-import static cn.colg.core.util.ValidUtil.isNotPhone;
-import static cn.colg.core.util.ValidUtil.isNotPlateNumber;
-import static cn.colg.core.util.ValidUtil.isNotURL;
-import static cn.colg.core.util.ValidUtil.isNotUUID;
-import static cn.colg.core.util.ValidUtil.isNotZipCode;
-import static cn.colg.core.util.ValidUtil.isNumber;
-import static cn.colg.core.util.ValidUtil.isPassword;
-import static cn.colg.core.util.ValidUtil.isPhone;
-import static cn.colg.core.util.ValidUtil.isPlateNumber;
-import static cn.colg.core.util.ValidUtil.isURL;
-import static cn.colg.core.util.ValidUtil.isUUID;
-import static cn.colg.core.util.ValidUtil.isZipCode;
+import static cn.colg.util.ValidUtil.isAccount;
+import static cn.colg.util.ValidUtil.isBirthday;
+import static cn.colg.util.ValidUtil.isChinese;
+import static cn.colg.util.ValidUtil.isChineses;
+import static cn.colg.util.ValidUtil.isCitizenId;
+import static cn.colg.util.ValidUtil.isEmail;
+import static cn.colg.util.ValidUtil.isGeneral;
+import static cn.colg.util.ValidUtil.isGeneralWithChinese;
+import static cn.colg.util.ValidUtil.isIPv4;
+import static cn.colg.util.ValidUtil.isInteger;
+import static cn.colg.util.ValidUtil.isIntegerPositive;
+import static cn.colg.util.ValidUtil.isMAC;
+import static cn.colg.util.ValidUtil.isMatch;
+import static cn.colg.util.ValidUtil.isMoblePhone;
+import static cn.colg.util.ValidUtil.isMoney;
+import static cn.colg.util.ValidUtil.isNotAccount;
+import static cn.colg.util.ValidUtil.isNotBirthday;
+import static cn.colg.util.ValidUtil.isNotChinese;
+import static cn.colg.util.ValidUtil.isNotChineses;
+import static cn.colg.util.ValidUtil.isNotCitizenId;
+import static cn.colg.util.ValidUtil.isNotEmail;
+import static cn.colg.util.ValidUtil.isNotGeneral;
+import static cn.colg.util.ValidUtil.isNotGeneralWithChinese;
+import static cn.colg.util.ValidUtil.isNotIPv4;
+import static cn.colg.util.ValidUtil.isNotInteger;
+import static cn.colg.util.ValidUtil.isNotIntegerPositive;
+import static cn.colg.util.ValidUtil.isNotMAC;
+import static cn.colg.util.ValidUtil.isNotMatch;
+import static cn.colg.util.ValidUtil.isNotMoblePhone;
+import static cn.colg.util.ValidUtil.isNotMoney;
+import static cn.colg.util.ValidUtil.isNotNumber;
+import static cn.colg.util.ValidUtil.isNotPassword;
+import static cn.colg.util.ValidUtil.isNotPhone;
+import static cn.colg.util.ValidUtil.isNotPlateNumber;
+import static cn.colg.util.ValidUtil.isNotURL;
+import static cn.colg.util.ValidUtil.isNotUUID;
+import static cn.colg.util.ValidUtil.isNotZipCode;
+import static cn.colg.util.ValidUtil.isNumber;
+import static cn.colg.util.ValidUtil.isPassword;
+import static cn.colg.util.ValidUtil.isPhone;
+import static cn.colg.util.ValidUtil.isPlateNumber;
+import static cn.colg.util.ValidUtil.isURL;
+import static cn.colg.util.ValidUtil.isUUID;
+import static cn.colg.util.ValidUtil.isZipCode;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -54,7 +54,7 @@ import org.junit.Test;
 import cn.hutool.core.util.RandomUtil;
 
 /**
- * 字段验证工具 测试 {@link cn.colg.core.util.ValidUtil}
+ * 字段验证工具 测试 {@link cn.colg.util.ValidUtil}
  *
  * @author colg
  */
@@ -63,7 +63,7 @@ public final class ValidUtilTest {
     private Pattern pattern = Pattern.compile("^[1-2][0-9][0-9][0-9]-[0-1]{0,1}[0-9]-[0-3]{0,1}[0-9]$");;
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isMatch(java.util.regex.Pattern, java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isMatch(java.util.regex.Pattern, java.lang.String)}.
      */
     @Test
     public void testIsMatchPatternString() {
@@ -72,7 +72,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotMatch(java.util.regex.Pattern, java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotMatch(java.util.regex.Pattern, java.lang.String)}.
      */
     @Test
     public void testIsNotMatchPatternString() {
@@ -81,7 +81,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isMatch(java.lang.String, java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isMatch(java.lang.String, java.lang.String)}.
      */
     @Test
     public void testIsMatchStringString() {
@@ -92,7 +92,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotMatch(java.lang.String, java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotMatch(java.lang.String, java.lang.String)}.
      */
     @Test
     public void testIsNotMatchStringString() {
@@ -102,7 +102,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNumber(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNumber(java.lang.String)}.
      */
     @Test
     public void testIsNumber() {
@@ -111,7 +111,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotNumber(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotNumber(java.lang.String)}.
      */
     @Test
     public void testIsNotNumber() {
@@ -120,7 +120,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isInteger(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isInteger(java.lang.String)}.
      */
     @Test
     public void testIsInteger() {
@@ -131,7 +131,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotInteger(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotInteger(java.lang.String)}.
      */
     @Test
     public void testIsNotInteger() {
@@ -142,7 +142,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isIntegerPositive(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isIntegerPositive(java.lang.String)}.
      */
     @Test
     public void testIsIntegerPositive() {
@@ -151,7 +151,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotIntegerPositive(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotIntegerPositive(java.lang.String)}.
      */
     @Test
     public void testIsNotIntegerPositive() {
@@ -160,7 +160,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isGeneral(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isGeneral(java.lang.String)}.
      */
     @Test
     public void testIsGeneral() {
@@ -169,7 +169,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotGeneral(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotGeneral(java.lang.String)}.
      */
     @Test
     public void testIsNotGeneral() {
@@ -178,7 +178,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isChinese(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isChinese(java.lang.String)}.
      */
     @Test
     public void testIsChinese() {
@@ -187,7 +187,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotChinese(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotChinese(java.lang.String)}.
      */
     @Test
     public void testIsNotChinese() {
@@ -196,7 +196,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isChineses(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isChineses(java.lang.String)}.
      */
     @Test
     public void testIsChineses() {
@@ -205,7 +205,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotChineses(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotChineses(java.lang.String)}.
      */
     @Test
     public void testIsNotChineses() {
@@ -214,7 +214,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isGeneralWithChinese(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isGeneralWithChinese(java.lang.String)}.
      */
     @Test
     public void testIsGeneralWithChinese() {
@@ -223,7 +223,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotGeneralWithChinese(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotGeneralWithChinese(java.lang.String)}.
      */
     @Test
     public void testIsNotGeneralWithChinese() {
@@ -232,7 +232,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isAccount(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isAccount(java.lang.String)}.
      */
     @Test
     public void testIsAccount() {
@@ -241,7 +241,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotAccount(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotAccount(java.lang.String)}.
      */
     @Test
     public void testIsNotAccount() {
@@ -250,7 +250,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isPassword(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isPassword(java.lang.String)}.
      */
     @Test
     public void testIsPassword() {
@@ -259,7 +259,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotPassword(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotPassword(java.lang.String)}.
      */
     @Test
     public void testIsNotPassword() {
@@ -268,7 +268,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isIPv4(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isIPv4(java.lang.String)}.
      */
     @Test
     public void testIsIPv4() {
@@ -277,7 +277,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotIPv4(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotIPv4(java.lang.String)}.
      */
     @Test
     public void testIsNotIPv4() {
@@ -286,7 +286,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isMoney(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isMoney(java.lang.String)}.
      */
     @Test
     public void testIsMoney() {
@@ -295,7 +295,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotMoney(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotMoney(java.lang.String)}.
      */
     @Test
     public void testIsNotMoney() {
@@ -304,7 +304,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isEmail(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isEmail(java.lang.String)}.
      */
     @Test
     public void testIsEmail() {
@@ -313,7 +313,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotEmail(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotEmail(java.lang.String)}.
      */
     @Test
     public void testIsNotEmail() {
@@ -322,7 +322,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isMoblePhone(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isMoblePhone(java.lang.String)}.
      */
     @Test
     public void testIsMoblePhone() {
@@ -331,7 +331,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotMoblePhone(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotMoblePhone(java.lang.String)}.
      */
     @Test
     public void testIsNotMoblePhone() {
@@ -340,7 +340,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isPhone(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isPhone(java.lang.String)}.
      */
     @Test
     public void testIsPhone() {
@@ -349,7 +349,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotPhone(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotPhone(java.lang.String)}.
      */
     @Test
     public void testIsNotPhone() {
@@ -358,7 +358,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isCitizenId(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isCitizenId(java.lang.String)}.
      */
     @Test
     public void testIsCitizenId() {
@@ -367,7 +367,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotCitizenId(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotCitizenId(java.lang.String)}.
      */
     @Test
     public void testIsNotCitizenId() {
@@ -376,7 +376,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isZipCode(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isZipCode(java.lang.String)}.
      */
     @Test
     public void testIsZipCode() {
@@ -385,7 +385,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotZipCode(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotZipCode(java.lang.String)}.
      */
     @Test
     public void testIsNotZipCode() {
@@ -394,7 +394,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isBirthday(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isBirthday(java.lang.String)}.
      */
     @Test
     public void testIsBirthday() {
@@ -403,7 +403,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotBirthday(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotBirthday(java.lang.String)}.
      */
     @Test
     public void testIsNotBirthday() {
@@ -412,7 +412,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isURL(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isURL(java.lang.String)}.
      */
     @Test
     public void testIsURL() {
@@ -421,7 +421,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotURL(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotURL(java.lang.String)}.
      */
     @Test
     public void testIsNotURL() {
@@ -430,7 +430,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isUUID(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isUUID(java.lang.String)}.
      */
     @Test
     public void testIsUUID() {
@@ -439,7 +439,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotUUID(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotUUID(java.lang.String)}.
      */
     @Test
     public void testIsNotUUID() {
@@ -448,7 +448,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isPlateNumber(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isPlateNumber(java.lang.String)}.
      */
     @Test
     public void testIsPlateNumber() {
@@ -457,7 +457,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotPlateNumber(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotPlateNumber(java.lang.String)}.
      */
     @Test
     public void testIsNotPlateNumber() {
@@ -466,7 +466,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isMAC(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isMAC(java.lang.String)}.
      */
     @Test
     public void testIsMAC() {
@@ -475,7 +475,7 @@ public final class ValidUtilTest {
     }
 
     /**
-     * Test method for {@link cn.colg.core.util.ValidUtil#isNotMAC(java.lang.String)}.
+     * Test method for {@link cn.colg.util.ValidUtil#isNotMAC(java.lang.String)}.
      */
     @Test
     public void testIsNotMAC() {

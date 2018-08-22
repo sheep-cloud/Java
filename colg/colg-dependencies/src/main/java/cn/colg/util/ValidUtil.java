@@ -1,4 +1,4 @@
-package cn.colg.core.util;
+package cn.colg.util;
 
 import java.util.regex.Pattern;
 

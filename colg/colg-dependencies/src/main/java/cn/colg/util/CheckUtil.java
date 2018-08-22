@@ -1,9 +1,9 @@
-package cn.colg.core.util;
+package cn.colg.util;
 
 import java.util.Collection;
 import java.util.Map;
 
-import cn.colg.core.exception.CheckException;
+import cn.colg.exception.CheckException;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
