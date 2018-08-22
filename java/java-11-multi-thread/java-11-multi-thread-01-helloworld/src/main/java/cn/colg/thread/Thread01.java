@@ -17,8 +17,7 @@ public class Thread01 {
 
         Thread thread = Thread.currentThread();
         thread.setName("主线程");
-        int length = 100;
-        for (int i = 1; i <= length; i++) {
+        for (int i = 1, length = 100; i <= length; i++) {
             log.info("Thread01.main() >> 线程名 : {}, 自然数 : {}", Thread.currentThread().getName(), i);
         }
     }
