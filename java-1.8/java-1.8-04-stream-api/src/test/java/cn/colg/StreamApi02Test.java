@@ -26,7 +26,7 @@ public class StreamApi02Test {
             new Employee("Luo", 8, 7777.99),
             new Employee("Luo", 8, 7777.99)
         );
-
+    
     /*
      * 筛选与切片：
      *  filter：     接收Lambda，从流中排除某些元素。
@@ -95,6 +95,21 @@ public class StreamApi02Test {
     }
     
     /**
+     * SkipLimit：集合分页，skip((页码-1) * 每页显示的条数).limit(每页显示的条数)
+     *
+     * @throws Exception
+     * @author colg
+     */
+    @Test
+    public void testSkipLimit() throws Exception {
+        Console.log("cn.colg.StreamApi02Test.testSkipLimit()");
+        employees.stream()
+                 .skip(2)
+                 .limit(2)
+                 .forEach(Console::log);
+    }
+    
+    /**
      * distinct： 筛选，通过流所生成元素的hashCode()和equals去除重复元素
      *
      * @throws Exception
@@ -119,6 +134,7 @@ public class StreamApi02Test {
         list.stream()
             .map(str -> str.toUpperCase())
             .forEach(Console::log);
+        Console.log("----------------------------------------------------------------------------------------------------");
         
         employees.stream()
                  .map(Employee::getName)
@@ -148,6 +164,5 @@ public class StreamApi02Test {
                     }
                  }).forEach(Console::log);
     }
-    
     
 }

@@ -43,4 +43,5 @@ public final class Lambda01Test {
         TreeSet<Integer> treeSet = new TreeSet<>(comparator);
         Console.log(treeSet);
     }
+
 }

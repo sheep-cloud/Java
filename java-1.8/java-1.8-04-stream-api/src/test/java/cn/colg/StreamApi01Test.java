@@ -63,6 +63,5 @@ public class StreamApi01Test {
         list.stream()
             .filter(str -> (str != null && str.contains("o")))
             .forEach(Console::log);
-        ;
     }
 }
