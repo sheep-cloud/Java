@@ -12,7 +12,7 @@ public class ResultVoUtil {
     /**
      * 成功时默认响应
      *
-     * @return {code: 0, msg: "SUCCESS"}
+     * @return {code: 0, msg: "success"}
      * @author colg
      */
     public static ResultVo success() {
@@ -23,7 +23,7 @@ public class ResultVoUtil {
      * 成功时默认响应
      *
      * @param data 数据
-     * @return {code: 0, msg: "SUCCESS", data: data}
+     * @return {code: 0, msg: "success", data: data}
      * @author colg
      */
     public static ResultVo success(Object data) {
