@@ -22,7 +22,7 @@ public final class ForEachTest extends BaseTest{
         // 新建一个Array
         String[] strings = {"Jack", "Rose", "Tom", "Jax"};
         
-        CollUtil.newArrayList(strings).forEach(e -> Console.log(e));
+        CollUtil.newArrayList(strings).forEach(Console::log);
     }
 
     /**
@@ -37,11 +37,11 @@ public final class ForEachTest extends BaseTest{
         List<String> list = CollUtil.newArrayList("Jack", "Rose", "Tom", "Jax");
 
         // 1. 推荐
-        list.forEach(str -> Console.log(str));
+        list.forEach(Console::log);
 
         // 2. 过滤
         list.stream().filter(str -> !"Jack".equals(str))
-                     .forEach(str -> Console.log(str));
+                     .forEach(Console::log);
     }
 
     /**
@@ -62,9 +62,7 @@ public final class ForEachTest extends BaseTest{
                                .set("Tom", 22)
                                .set("Jax", 25);
 
-        dict.forEach((key, value) -> {
-            Console.log(key + ": " + value);
-        });
+        dict.forEach((key, value) -> Console.log(key + ": " + value));
     }
     
 }

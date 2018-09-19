@@ -45,13 +45,13 @@ public class StreamApi01Test {
 
         // 4. 创建无限流
         //  1) 迭代
-        Stream<Integer> stream4 = Stream.iterate(0, (x) -> x + 1);
+        Stream<Integer> stream4 = Stream.iterate(0, x -> x + 1);
         stream4.limit(10)
                .forEach(Console::log);
         
         // 4. 创建无限流
         //  2) 生成
-        Stream<Integer> stream5 = Stream.generate(() -> RandomUtil.randomInt());
+        Stream<Integer> stream5 = Stream.generate(() -> RandomUtil.randomInt(100, 1000));
         stream5.limit(10)
                .forEach(Console::log);
     }

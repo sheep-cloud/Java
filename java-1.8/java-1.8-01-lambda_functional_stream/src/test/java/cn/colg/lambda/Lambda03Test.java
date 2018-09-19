@@ -26,20 +26,18 @@ public class Lambda03Test {
     @Test
     public void test01() throws Exception {
         Console.log("cn.colg.lambda.Lambda03Test.test01()");
-        MyFun<Integer> mf = new MyFun<Integer>() {
-
+        Console.log(operation(10, new MyFun<Integer>() {
+            
             @Override
             public Integer getValue(Integer num) {
                 return num * 10;
             }
-        };
-        Console.log(operation(10, mf));
-
+        }));
+        
         // 参数列表：(x)
         // 方法体：x * x
-        Integer result = operation(100, (x) -> x * x);
-        Console.log(result);
+        Console.log(operation(10, (x) -> x * 10));
 
-        Console.log(operation(200, (x) -> x + 200));
+        Console.log(operation(200, x -> x + 200));
     }
 }

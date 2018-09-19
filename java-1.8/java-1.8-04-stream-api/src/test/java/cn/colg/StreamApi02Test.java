@@ -22,14 +22,14 @@ public class StreamApi02Test {
             new Employee("Rose", 28, 5555.99),
             new Employee("Tom", 50, 4444.99),
             new Employee("Jax", 16, 3333.99),
-            new Employee("Luo", 8, 7777.99),
+            new Employee("Luo", 40, 7777.99),
             new Employee("Luo", 8, 7777.99),
             new Employee("Luo", 8, 7777.99)
         );
     
     /*
      * 筛选与切片：
-     *  filter：     接收Lambda，从流中排除某些元素。
+     *  filter：       接收Lambda，从流中排除某些元素。
      *  limit：          截断流，使其元素不超过给定数量。  
      *  skip(n)：    跳过元素，返回一个扔掉前n个元素的流。若流中元素不是n个，则返回一个空流。与limit(n)互补
      *  distinct： 筛选，通过流所生成元素的hashCode()和equals去除重复元素

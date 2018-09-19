@@ -1,6 +1,5 @@
 package cn.colg;
 
-import java.io.PrintStream;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -31,16 +30,15 @@ public class MethodRefTest {
     @Test
     public void test01() throws Exception {
         Console.log("cn.colg.MethodRefTest.test01()");
-        String value = "colg-cloud";
+        String value = "colg";
 
-        PrintStream out = System.out;
-        Consumer<String> consumer = x -> out.println(x);
+        Consumer<String> consumer = x -> System.out.println(x);
         consumer.accept(value);
         Consumer<String> consumer2 = x -> Console.log(x);
         consumer2.accept(value);
 
         // 类::实例方法名
-        Consumer<String> consumer3 = out::println;
+        Consumer<String> consumer3 = System.out::println;
         consumer3.accept(value);
         // 类::静态方法名
         Consumer<String> consumer4 = Console::log;

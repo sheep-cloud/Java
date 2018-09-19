@@ -5,13 +5,14 @@ package cn.colg.functional;
  *
  * @author colg
  */
+@FunctionalInterface
 public interface MyFun<T> {
 
     /**
-     * 根据num执行运算
+     * 根据传入的num执行运算
      *
      * @param num
      * @return
      */
-    Integer getValue(Integer num);
+    Integer getValue(Integer t);
 }

@@ -4,44 +4,238 @@
 - 代码更少（增加了新的语法Lambda表达式）
 - 强大的Stream API
 - 便于并行
-- 最大化减少空指针异常
+- 最大化减少空指针异常 Optional
 
 ## 1. Lambda 表达式
 
 ### 1.1. 为什么使用 Lambda 表达式
 
-Lambda 是一个匿名函数，我们可以把 Lambda 表达式理解为是一段可以传递的代码（将代码 像数据一样进行传递）。可以写出更简洁、更 灵活的代码。作为一种更紧凑的代码风格，使 Java的语言表达能力得到了提升。
+Lambda 是一个**匿名函数**，我们可以把 Lambda 表达式理解为是**一段可以传递的代码**（将代码 像数据一样进行传递）。可以写出更简洁、更 灵活的代码。作为一种更紧凑的代码风格，使 Java的语言表达能力得到了提升。
 
 ### 1.2. 从匿名类到 Labmbda 的转换
 
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqtuf5ajpfj30w409mglr.jpg)
+```java
+    @Test
+    public void test01() throws Exception {
+        Console.log("cn.colg.lambda.Lambda02Test.test01()");
+        // jdk 1.7之前，必须是final，jdk 1.8默认在变量前加了 final
+        String value = "jdk 新特性";
+        ThreadUtil.execute(new Runnable() {
+
+            @Override
+            public void run() {
+                Console.log("colg: {}", value);
+            }
+        });
+
+        Console.log("------------------------------------------------------------");
+
+        // Lamdba 表达式
+        ThreadUtil.execute(() -> Console.log("colg: {}", value));
+    }
+```
 
 ### 1.3. Lambda 表达式语法
 
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqqgp1789oj30np0l7gm7.jpg)
+```java
+/**
+ * Lambda 表达式语法
+ * 
+ * <pre>
+ * 一、Lambda 表达式的基础语法：Java8中引入了一个新的操作符 "->" 该操作符称为箭头操作符或Lambda操作符
+ *  箭头操作符将Lambda表达式拆分成都那个两部分：
+ *      左侧：Lambda表达式的参数列表
+ *      右侧：Lambda表达式中所需要执行的功能，即Lambda体
+ *      
+ *  语法格式一：无参数，无返回值
+ *      Runnable r1 = () -> Const.log("Hello Lambda!);
+ *      
+ *  语法格式二：有一个参数，无返回值
+ *      Consumer<String> con = (x) -> Const.log(x);
+ *      
+ *  语法格式三：若只有一个参数，小括号可以省略不写（不推荐）
+ *      Consumer<String> con = x -> Const.log(x);
+ *      
+ *  语法格式四：有两个以上的参数，有返回值，并且Lambda体中有多条语句
+ *      Comparator<Integer> com = (x, y) -> {
+ *           Const.log("函数式结构);
+ *           return ...;
+ *      }
+ *      
+ *  语法格式五：若Lambda体中只有一条语句，return和大括号都可以省略不写（不推荐）
+ *      Comparator<Integer> com = (x, y) -> Integer.compare(x, y);
+ *      
+ *  语法格式六：Lamdba表达式的参数列表的数据类型可以省略不写因为JVM编译器通过上下文推断出，数据类型，即"类型推断"
+ *  
+ *  上联：左右遇一括号省
+ *  下联：左侧推断类型省
+ *  横批：能省则省
+ *  
+ *  二、Lamdba 表达式需要"函数式接口"的支持
+ *  函数式接口：接口中只有一个抽象方法的接口，称为函数式接口。可以使用注解@FuncationlInterface修饰
+ *      可以检查是否是函数式接口。
+ * </pre>
+ *
+ * @author colg
+ */
+```
+
+
 
 ### 1.4. Lambda 常用方法
 
 #### 1.4.1. ForEach
 
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqsy7xkap4j30pw0nsq3k.jpg)
+```java
+/**
+ * Java1.8 ForEach 测试
+ *
+ * @author colg
+ */
+public final class ForEachTest extends BaseTest{
+    
+    @Test
+    public void testArray() throws Exception {
+        Console.log("cn.colg.foreach.ForEachTest.testArray()");
+        // 新建一个Array
+        String[] strings = {"Jack", "Rose", "Tom", "Jax"};
+        
+        CollUtil.newArrayList(strings).forEach(Console::log);
+    }
+
+    /**
+     * ForEach 遍历集合
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testForEachCollection() throws Exception {
+        Console.log("cn.colg.foreach.ForEachTest.testForEachCollection()");
+        // 新建一个ArrayList
+        List<String> list = CollUtil.newArrayList("Jack", "Rose", "Tom", "Jax");
+
+        // 1. 推荐
+        list.forEach(Console::log);
+
+        // 2. 过滤
+        list.stream().filter(str -> !"Jack".equals(str))
+                     .forEach(Console::log);
+    }
+
+    /**
+     * 遍历Map，Dict（字典对象，扩充了HashMap中的方法）
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testDict() throws Exception {
+        Console.log("cn.colg.foreach.ForEachTest.testDict()");
+        /*
+         * 构造时必须指定初始容量：
+         *  负载因子：static final float DEFAULT_LOAD_FACTOR = 0.75f;
+         *  存储个数：(存储的元素个数 / 负载因子) + 1
+         */
+        Dict dict = new Dict(6).set("Jack", 18)
+                               .set("Rose", 20)
+                               .set("Tom", 22)
+                               .set("Jax", 25);
+
+        dict.forEach((key, value) -> Console.log(key + ": " + value));
+    }
+    
+}
+```
 
 ## 2. 函数式接口
 
 ### 2.1. 什么是函数式接口
 
 - 只包含一个抽象方法的接口，称为**函数式接口**。
-- 可以通过 Lambda 表达式来创建该接口的对象。（弱Lambda表达式抛出一个受检异常，那么该异常需要在目标接口的抽象方法上进行声明）。
+- 可以通过 Lambda 表达式来创建该接口的对象。（若Lambda表达式抛出一个受检异常，那么该异常需要在目标接口的抽象方法上进行声明）。
 - 可以在任意函数式接口上使用`@FunctionalInterface`注解，这样做可以检查它是否是一个函数式接口，同时javadoc也会包含一条声明，说明这个接口是一个函数式接口。
 
 ### 2.2. 自定义函数式接口
 
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqqh3289qbj30fu0anglm.jpg)
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqqh3f3n4vj30az08it8m.jpg)
+```java
+/**
+ * 过滤对象信息的接口
+ * 
+ * <pre>
+ * 函数式接口：
+ *  接口中只有一个抽象方法的接口，称为函数式接口。
+ *  '@FunctionalInterface'： 检查是否是函数式接口。
+ * </pre>
+ *
+ * @author colg
+ * @param <T>
+ */
+@FunctionalInterface
+public interface MyStrategy<T> {
+
+    /**
+     * 返回比较后的结果
+     *
+     * @param t
+     * @return
+     */
+    boolean compartor(T t);
+}
+```
+
+```java
+/**
+ * 函数式接口
+ *
+ * @author colg
+ */
+@FunctionalInterface
+public interface MyFun<T> {
+
+    /**
+     * 根据传入的num执行运算
+     *
+     * @param num
+     * @return
+     */
+    Integer getValue(Integer num);
+}
+```
 
 ### 2.3. 作为参数传递
 
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqqh581fr9j30he0fuwer.jpg)
+```java
+public class Lambda03Test {
+
+    /**
+     * 对一个数进行运算
+     *
+     * @param num
+     * @param mf
+     * @return
+     */
+    private <T> Integer operation(Integer num, MyFun<T> mf) {
+        return mf.getValue(num);
+    }
+
+    @Test
+    public void test01() throws Exception {
+        Console.log("cn.colg.lambda.Lambda03Test.test01()");
+        Console.log(operation(10, new MyFun<Integer>() {
+            
+            @Override
+            public Integer getValue(Integer num) {
+                return num * 10;
+            }
+        }));
+        
+        // 参数列表：(x)
+        // 方法体：x * x
+        Console.log(operation(10, (x) -> x * 10));
+
+        Console.log(operation(200, x -> x + 200));
+    }
+}
+```
 
 ### 2.4. java内置四大核心函数式接口
 
@@ -52,17 +246,98 @@ Lambda 是一个匿名函数，我们可以把 Lambda 表达式理解为是一�
 ### 3.1. 方法引用
 
 ![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqtxzl28poj30oq0dpwg8.jpg)
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqty0grv1lj30js0n9t9d.jpg)
+
+```java
+/**
+ * 方法引用：若Lambda体的内容有方法已经实现了，我们可以使用"方法引用"（可以理解为方法引用是Lambda表达式的另外一种表现形式）
+ * 
+ * <pre>
+ * 主要有三种语法格式：
+ *  对象::实例方法名
+ *  类::静态方法名
+ *  类::实例方法名
+ * </pre>
+ *
+ * @author colg
+ */
+public class MethodRefTest {
+
+    /**
+     * 方法引用
+     *
+     * @throws Exception
+     */
+    @Test
+    public void test01() throws Exception {
+        Console.log("cn.colg.MethodRefTest.test01()");
+        String value = "colg";
+
+        Consumer<String> consumer = x -> System.out.println(x);
+        consumer.accept(value);
+        Consumer<String> consumer2 = x -> Console.log(x);
+        consumer2.accept(value);
+
+        // 类::实例方法名
+        Consumer<String> consumer3 = System.out::println;
+        consumer3.accept(value);
+        // 类::静态方法名
+        Consumer<String> consumer4 = Console::log;
+        consumer4.accept(value);
+    }
+
+    /**
+     * 对象::实例方法名
+     *
+     * @throws Exception
+     */
+    @Test
+    public void test02() throws Exception {
+        Console.log("cn.colg.MethodRefTest.test02()");
+        Employee employee = new Employee("colg", 28, 9999.99);
+
+        Supplier<String> supplier = () -> employee.getName();
+        Console.log(supplier.get());
+
+        // 方法引用
+        Supplier<String> supplier2 = employee::getName;
+        Console.log(supplier2.get());
+    }
+}
+```
 
 ### 3.2. 构造器引用
 
-![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqty9obdntj30pi0c6jrm.jpg)
+```java
+/**
+ * 构造器引用：与函数式接口相结合，自动与函数式接口中方法兼容。可以把构造器引用赋值给定义的方法，与构造器参数列表要与接口中抽象方法的参数列表一致！
+ * 
+ * <pre>
+ * 语法格式：
+ *  ClassName::new
+ * </pre>
+ *
+ * @author colg
+ */
+public class ConstructorRefTest {
+
+    @Test
+    public void test01() throws Exception {
+        Console.log("cn.colg.ConstructorRefTest.test01()");
+        Supplier<Employee> supplier = () -> new Employee();
+        Console.log(supplier.get());
+
+        // 构造器引用
+        Supplier<Employee> supplier2 = Employee::new;
+        Console.log(supplier2.get());
+    }
+}
+```
 
 ## 4. Stream API
 
 ### 4.1. 了解 Stream
 
-Java8中有两大最为重要的改变。第一个是 Lambda 表达式；另外一个则是 Stream API(java.util.stream.*)。
+Java8中有两大最为重要的改变。第一个是 **Lambda 表达式**；另外一个则是 **Stream API(java.util.stream.*)**。
 
 Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望对集合进行的操作，可以执行非常复杂的查找、过滤和映射数据等操作。
 
@@ -85,10 +360,267 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
 
 ### 4.3. Stream 操作的三个步骤
 
-1. 创建Stream：	一个数据源（如：集合、数组），获取一个流
-2. 中间操作：      一个中间操作链，对数据源的数据进行处理
-3. 终止操作（终端操作）：一个终止操作，执行中间操作链，并产生结果
-  ![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqtynso36mj30pi04jwet.jpg)
+- 创建Stream
+  -  一个数据源（如：集合、数组），获取一个流
+
+- 中间操作
+  -   一个中间操作链，对数据源的数据进行处理
+
+- 终止操作（终端操作）
+  - 一个终止操作，执行中间操作链，并产生结果
+    ![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqtynso36mj30pi04jwet.jpg)
+
+#### 4.3.1. 创建Stream
+
+```java
+    @SuppressWarnings("unused")
+    @Test
+    public void test01() throws Exception {
+        Console.log("cn.colg.StreamApiTest.test01()");
+        // 1. 可以通过Collection系列集合提供的stream()或parallelStream()
+        List<Employee> list = new ArrayList<>();
+        Stream<Employee> stream = list.stream();
+
+        // 2. 通过Arrays中的静态方法stream(...)获取数组流
+        Employee[] employees = new Employee[10];
+        Stream<Employee> stream2 = Arrays.stream(employees);
+
+        // 3. 通过Stream的静态方法of()
+        Stream<String> stream3 = Stream.of("colg", "cloud", "java");
+
+        // 4. 创建无限流
+        //  1) 迭代
+        Stream<Integer> stream4 = Stream.iterate(0, x -> x + 1);
+        stream4.limit(10)
+               .forEach(Console::log);
+        
+        // 4. 创建无限流
+        //  2) 生成
+        Stream<Integer> stream5 = Stream.generate(() -> RandomUtil.randomInt(100, 1000));
+        stream5.limit(10)
+               .forEach(Console::log);
+    }
+```
+
+#### 4.3.2. 中间操作
+
+```java
+    /** 初始化员工信息 */
+    private List<Employee> employees = CollUtil.newArrayList(
+            new Employee("Jack", 18, 2222.99),
+            new Employee("Rose", 28, 5555.99),
+            new Employee("Tom", 50, 4444.99),
+            new Employee("Jax", 16, 3333.99),
+            new Employee("Luo", 40, 7777.99),
+            new Employee("Luo", 8, 7777.99),
+            new Employee("Luo", 8, 7777.99)
+        );
+    
+    /*
+     * 筛选与切片：
+     *  filter：       接收Lambda，从流中排除某些元素。
+     *  limit：          截断流，使其元素不超过给定数量。  
+     *  skip(n)：    跳过元素，返回一个扔掉前n个元素的流。若流中元素不是n个，则返回一个空流。与limit(n)互补
+     *  distinct： 筛选，通过流所生成元素的hashCode()和equals去除重复元素
+     *  
+     * 映射：
+     *  map：                接收Lambda，将元素转换成其他形式或提取信息。接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。
+     *  flatMap：    接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流
+     *  
+     * 排序：
+     *  sorted()：   自然排序
+     *  sorted(Comparator comparator)：  定制排序
+     */
+    
+    /// ---------------------------------------------------------------------------
+
+    
+    /**
+     * filter： 接收Lambda，从流中排除某些元素。
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testFilter() throws Exception {
+        Console.log("cn.colg.StreamApi02Test.testFilter()");
+        // 创建 stream
+        Stream<Employee> stream = employees.stream();
+        
+        // 中间操作：不会执行任何操作
+        stream = stream.filter(e -> {
+            Console.log("Stream API的中间操作");
+            return e.getAge() > 35;
+        });
+        
+        // 终止操作：一次性执行全部内容，即"惰性求职"
+        // 内部迭代：迭代操作由Stream API完成
+        stream.forEach(Console::log);
+    }
+    
+    /**
+     * limit：    截断流，使其元素不超过给定数量。
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testLimit() throws Exception {
+        Console.log("cn.colg.StreamApi02Test.testLimit()");
+        employees.stream()
+                 .limit(2)
+                 .forEach(Console::log);
+    }
+    
+    /**
+     * skip(n)：    跳过元素，返回一个扔掉前n个元素的流。若流中元素不是n个，则返回一个空流。与limit(n)互补
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSkip() throws Exception {
+        Console.log("cn.colg.StreamApi02Test.testSkip()");
+        employees.stream()
+                 .skip(2L)
+                 .forEach(Console::log);
+    }
+    
+    /**
+     * SkipLimit：集合分页，skip((页码-1) * 每页显示的条数).limit(每页显示的条数)
+     *
+     * @throws Exception
+     * @author colg
+     */
+    @Test
+    public void testSkipLimit() throws Exception {
+        Console.log("cn.colg.StreamApi02Test.testSkipLimit()");
+        employees.stream()
+                 .skip(2)
+                 .limit(2)
+                 .forEach(Console::log);
+    }
+    
+    /**
+     * distinct： 筛选，通过流所生成元素的hashCode()和equals去除重复元素
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testDistinct() throws Exception {
+        Console.log("cn.colg.StreamApi02Test.testDistinct()");
+        employees.stream()
+                 .distinct()
+                 .forEach(Console::log);
+    }
+    
+    /**
+     * map：                接收Lambda，将元素转换成其他形式或提取信息。接收一个函数作为参数，该函数会被应用到每个元素上，并将其映射成一个新的元素。
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testMap() throws Exception {
+        Console.log("cn.colg.StreamApi02Test.testMap()");
+        List<String> list = CollUtil.newArrayList("colg", "cloud", "java");
+        list.stream()
+            .map(str -> str.toUpperCase())
+            .forEach(Console::log);
+        Console.log("-----------------------------------------------------------");
+        
+        employees.stream()
+                 .map(Employee::getName)
+                 .forEach(Console::log);
+    }
+    
+    /**
+     * sorted()：   自然排序</br>
+     * sorted(Comparator comparator)：  定制排序
+     *
+     * @throws Exception
+     */
+    @Test
+    public void testSorted() throws Exception {
+        Console.log("cn.colg.StreamApi02Test.testSorted()");
+        List<String> list = CollUtil.newArrayList("colg", "cloud", "java");
+        list.stream()
+            .sorted()
+            .forEach(Console::log);
+        
+        employees.stream()
+                 .sorted((e1, e2) -> {
+                     if (e1.getAge() == e2.getAge()) {
+                        return e1.getName().compareTo(e2.getName());
+                    } else {
+                        return e1.getAge().compareTo(e2.getAge());
+                    }
+                 }).forEach(Console::log);
+    }
+```
+
+#### 4.3.3. 终止操作
+
+```java
+    /** 初始化员工信息 */
+    private List<Employee> employees = CollUtil.newArrayList(
+            new Employee("Jack", 18, 2222.99, Status.FREE),
+            new Employee("Rose", 28, 5555.99, Status.BUSY),
+            new Employee("Tom", 50, 4444.99, Status.VOCATION),
+            new Employee("Jax", 16, 3333.99, Status.FREE),
+            new Employee("Luo", 8, 7777.99, Status.BUSY)
+        );
+    
+    /*
+     * 查找与匹配：
+     *  allMatch：     检查是否匹配所有元素
+     *  anyMatch：     检查是否至少匹配一个元素
+     *  noneMatch：    检查是否没有匹配所有元素
+     *  findFirst：    返回第一个元素
+     *  findAny：      返回当前流中的任意元素
+     *  count：        返回流中元素的总个数
+     *  max：          返回流中最大值
+     *  min：          返回流中最小值
+     *  collect：      收集，将流转换为其他形式。接收一个Collector接口的实现，用于给Stream中元素做汇总的方法
+     */
+    
+    /// ----------------------------------------------------------------------------
+
+    @Test
+    public void testMatchFind() throws Exception {
+        Console.log("cn.colg.StreamApi03Test.testAllMatch()");
+        Set<Employee> set = employees.stream()
+                                     .collect(Collectors.toSet());
+        Console.log(set);
+        
+        boolean allMatch = employees.stream()
+                                    .allMatch(e -> e.getStatus().equals(Status.BUSY));
+        Console.log(allMatch);
+        
+        Console.log("------------------------------------------------------------");
+        
+        boolean anyMatch = employees.stream()
+                                    .anyMatch(e -> e.getStatus().equals(Status.BUSY));
+        Console.log(anyMatch);
+        
+        Console.log("------------------------------------------------------------");
+        
+        boolean noneMatch = employees.stream()
+                                     .noneMatch(e -> e.getStatus().equals(Status.BUSY));
+        Console.log(noneMatch);
+        
+        Console.log("----------------------------------------------------------------------------------------------------");
+        
+        Optional<Employee> findFirst = employees.stream()
+                                                .findFirst();
+        Employee employee = findFirst.orElse(new Employee());
+        Console.log(employee);
+        
+        Console.log("------------------------------------------------------------");
+        
+        Optional<Employee> findAny = employees.parallelStream()
+                                              .filter(e -> e.getStatus().equals(Status.FREE))
+                                              .findAny();
+        Employee orElse = findAny.orElse(new Employee());
+        Console.log(orElse);
+    }
+```
 
 ## 5. 接口中的默认方法与静态方法
 

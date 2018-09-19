@@ -2,6 +2,8 @@ package cn.colg;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -35,7 +37,8 @@ public class StreamApi03Test {
      *  findAny：          返回当前流中的任意元素
      *  count：                返回流中元素的总个数
      *  max：                      返回流中最大值
-     *  min：                      返回流中最小只
+     *  min：                      返回流中最小值
+     *  collect：          收集，将流转换为其他形式。接收一个Collector接口的实现，用于给Stream中元素做汇总的方法
      */
     
     /// ----------------------------------------------------------------------------------------------------
@@ -43,6 +46,10 @@ public class StreamApi03Test {
     @Test
     public void testMatchFind() throws Exception {
         Console.log("cn.colg.StreamApi03Test.testAllMatch()");
+        Set<Employee> set = employees.stream()
+                                     .collect(Collectors.toSet());
+        Console.log(set);
+        
         boolean allMatch = employees.stream()
                                     .allMatch(e -> e.getStatus().equals(Status.BUSY));
         Console.log(allMatch);
@@ -63,14 +70,16 @@ public class StreamApi03Test {
         
         Optional<Employee> findFirst = employees.stream()
                                                 .findFirst();
-        Console.log(findFirst.orElse(new Employee()));
+        Employee employee = findFirst.orElse(new Employee());
+        Console.log(employee);
         
         Console.log("----------------------------------------------------------------------------------------------------");
         
         Optional<Employee> findAny = employees.parallelStream()
                                               .filter(e -> e.getStatus().equals(Status.FREE))
                                               .findAny();
-        Console.log(findAny.orElse(new Employee()));
+        Employee orElse = findAny.orElse(new Employee());
+        Console.log(orElse);
     }
     
 }
