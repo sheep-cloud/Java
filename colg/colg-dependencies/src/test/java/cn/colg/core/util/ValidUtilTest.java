@@ -51,7 +51,7 @@ import java.util.regex.Pattern;
 
 import org.junit.Test;
 
-import cn.hutool.core.util.RandomUtil;
+import cn.hutool.core.util.IdUtil;
 
 /**
  * 字段验证工具 测试 {@link cn.colg.util.ValidUtil}
@@ -434,7 +434,7 @@ public final class ValidUtilTest {
      */
     @Test
     public void testIsUUID() {
-        String value = RandomUtil.randomUUID();
+        String value = IdUtil.randomUUID();
         assertTrue(isUUID(value));
     }
 
@@ -443,7 +443,7 @@ public final class ValidUtilTest {
      */
     @Test
     public void testIsNotUUID() {
-        String value = RandomUtil.randomUUID();
+        String value = IdUtil.simpleUUID();
         assertFalse(isNotUUID(value));
     }
 
