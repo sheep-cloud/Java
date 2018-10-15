@@ -19,7 +19,7 @@
         <skipTests>true</skipTests>
         <junit.version>4.12</junit.version>
         <lombok.version>1.18.2</lombok.version>
-        <hutool.version>4.1.14</hutool.version>
+        <hutool.version>4.1.17</hutool.version>
         <fastjson.version>1.2.49</fastjson.version>
         <logback.version>1.2.3</logback.version>
         <commons-lang3.version>3.8</commons-lang3.version>
