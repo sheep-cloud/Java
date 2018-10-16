@@ -39,23 +39,21 @@ SQL的优点:
 ## 4.3. 启动和停止MySQL服务
 
 ```ini
-启动:net start 服务名
-停止:net stop 服务名
+启动: net start 服务名
+停止: net stop 服务名
 ```
 
 ## 4.4. 数据库的使用
 
 ```ini
-登录:mysql [-h主机 -P端口] -u用户名 -p密码
-查看MySQL中有哪些数据库:SHOW DATABASES;
-使用一个数据库:USE 数据库名;
-查看数据库中有哪些表:SHOW TABLES [FROM 数据库名];
-查看表中字段信息:SHOW FULL COLUMNS FROM 表名;
-删除表:DROP TABLE 表名;
-退出:quit;
+登录: mysql [-h主机 -P端口] -u用户名 -p密码
+查看MySQL中有哪些数据库: SHOW DATABASES;
+使用一个数据库: USE 数据库名;
+查看数据库中有哪些表: SHOW TABLES [FROM 数据库名];
+查看表中字段信息: SHOW FULL COLUMNS FROM 表名;
+删除表: DROP TABLE 表名;
+退出: quit;
 ```
-
-
 
 # 5. DQL语言的学习
 
