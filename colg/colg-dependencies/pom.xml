@@ -3,7 +3,7 @@
     <groupId>cn.colg</groupId>
     <artifactId>colg-dependencies</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>colg-dependencies :: 包含（hutool-all、junit、lombok、fastjson、logback-classic）</name>
+    <name>colg-dependencies :: 包含（hutool-all、junit、lombok、fastjson、logback-classic、commons-lang3）</name>
     
     <!-- 
         ! Centralized definition of dependent versions
@@ -14,15 +14,15 @@
         <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <maven-resources-plugin.version>3.0.2</maven-resources-plugin.version>
-        <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
         <skipTests>true</skipTests>
         <junit.version>4.12</junit.version>
         <lombok.version>1.18.2</lombok.version>
         <hutool.version>4.1.17</hutool.version>
-        <fastjson.version>1.2.49</fastjson.version>
+        <fastjson.version>1.2.51</fastjson.version>
         <logback.version>1.2.3</logback.version>
-        <commons-lang3.version>3.8</commons-lang3.version>
+        <commons-lang3.version>3.8.1</commons-lang3.version>
     </properties>
 
     <!-- 
