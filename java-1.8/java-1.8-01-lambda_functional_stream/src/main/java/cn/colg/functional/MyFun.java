@@ -11,8 +11,9 @@ public interface MyFun<T> {
     /**
      * 根据传入的num执行运算
      *
-     * @param num
+     * @param t 数字
      * @return
+     * @author colg
      */
     Integer getValue(Integer t);
 }
