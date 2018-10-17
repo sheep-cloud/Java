@@ -34,4 +34,5 @@ public enum WeekEnum {
     private int value;
     /** 星期的中文名 */
     private String chinese;
+    
 }

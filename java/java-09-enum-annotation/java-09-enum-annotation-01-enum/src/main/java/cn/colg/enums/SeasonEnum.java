@@ -65,10 +65,7 @@ public enum SeasonEnum implements Info {
         return seasonDesc;
     }
 
-    @Override
-    public String toString() {
-        return "{\"seasonName\":\"" + seasonName + "\",\"seasonDesc\":\"" + seasonDesc + "\"}";
-    }
+    /// ----------------------------------------------------------------------------------------------------
 
     @Override
     public void show() {

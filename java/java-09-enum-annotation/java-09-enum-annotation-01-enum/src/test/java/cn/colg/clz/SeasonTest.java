@@ -2,7 +2,6 @@ package cn.colg.clz;
 
 import org.junit.Test;
 
-import cn.colg.BaseTest;
 import cn.hutool.core.lang.Console;
 
 /**
@@ -10,18 +9,17 @@ import cn.hutool.core.lang.Console;
  *
  * @author colg
  */
-public class SeasonTest extends BaseTest {
+public class SeasonTest {
 
     /**
-     * Test method for {@link cn.colg.clz.Season#toString()}.
+     * Test method for {@link cn.colg.core.BaseEntity#toString()}.
      */
     @Test
     public void testToString() {
-        Console.log("cn.colg.clz.SeasonTest.testToString()");
         Season spring = Season.SPRING;
         Console.log(spring);
-        String seasonName = spring.getSeasonName();
-        Console.log(seasonName);
+
+        Console.log(spring.getSeasonName() + ": " + spring.getSeasonDesc());
     }
 
 }

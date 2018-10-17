@@ -17,7 +17,6 @@ public class WeekEnumTest extends BaseTest{
      */
     @Test
     public void testGetChinese() {
-        Console.log("cn.colg.enums.WeekEnumTest.testGetChinese()");
         WeekEnum[] weekEnums = WeekEnum.values();
         Console.log(weekEnums);
     }

@@ -19,7 +19,6 @@ public class SeasonEnumTest extends BaseTest {
      */
     @Test
     public void testToString() {
-        Console.log("cn.colg.enums.SeasonEnumTest.testToString()");
         // 1. values();
         SeasonEnum[] seasonEnums = SeasonEnum.values();
         Console.log(seasonEnums);
@@ -32,14 +31,16 @@ public class SeasonEnumTest extends BaseTest {
         Console.log(seasonEnum);
         Console.log("----------------------------------------------------------------------------------------------------");
 
-        // 3.
+        // 3. values();
         State[] states = Thread.State.values();
         Console.log(states);
     }
 
+    /**
+     * Test method for {@link cn.colg.enums.SeasonEnum#show()}.
+     */
     @Test
-    public void testOverride() throws Exception {
-        Console.log("cn.colg.enums.SeasonEnumTest.testOverride()");
+    public void testShow() throws Exception {
         SeasonEnum.SPRING.show();
         SeasonEnum.SUMMER.show();
         SeasonEnum.FALL.show();

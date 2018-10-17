@@ -1,11 +1,13 @@
 package cn.colg.clz;
 
+import cn.colg.core.BaseEntity;
+
 /**
  * 季节枚举类 - 自定义实现
  *
  * @author colg
  */
-public class Season {
+public class Season extends BaseEntity {
 
     /*
      * colg [自定义实现枚举类]
@@ -31,11 +33,6 @@ public class Season {
 
     public String getSeasonDesc() {
         return seasonDesc;
-    }
-
-    @Override
-    public String toString() {
-        return "{\"seasonName\":\"" + seasonName + "\",\"seasonDesc\":\"" + seasonDesc + "\"}";
     }
 
     /// ----------------------------------------------------------------------------------------------------
