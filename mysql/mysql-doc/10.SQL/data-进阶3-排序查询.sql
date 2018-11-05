@@ -15,7 +15,6 @@
 		1. ASC 升序，DESC 降序；如果不写，默认是升序
 		2. ORDER BY 字句中可以支持单个字段、多个字段、表达式、函数、别名
 		3. ORDER BY 字句一般是放在查询语句的最后面，LIMIT 字句除外
-		
 */
 
 USE myemployees;

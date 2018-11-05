@@ -54,7 +54,7 @@ SELECT * FROM employees
 WHERE department_id < 90 OR department_id > 110 OR salary > 15000;
 
 SELECT * FROM employees
-WHERE NOT(department_id	>= 90 AND department_id <= 110) OR salary > 15000;
+WHERE NOT(department_id >= 90 AND department_id <= 110) OR salary > 15000;
 
 -- 3. 模糊查询
 -- 3.1. LIKE
