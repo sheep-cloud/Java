@@ -17,8 +17,6 @@
 		3. ORDER BY 字句一般是放在查询语句的最后面，LIMIT 字句除外
 */
 
-USE myemployees;
-
 -- 案例1：查询员工信息，要求工资从高到低排序
 SELECT * FROM employees
 ORDER BY salary DESC;

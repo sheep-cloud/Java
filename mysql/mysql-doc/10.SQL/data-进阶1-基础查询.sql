@@ -14,8 +14,6 @@
 		2. 查询的结果是一个虚拟的表格
 */
 
-USE myemployees;
-
 -- 1. 查询表中的单个字段
 SELECT last_name FROM employees;
 

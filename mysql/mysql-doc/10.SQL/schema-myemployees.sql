@@ -21,18 +21,18 @@ USE `myemployees`;
 DROP TABLE IF EXISTS `departments`;
 
 CREATE TABLE `departments` (
-  `department_id` INT(4) NOT NULL AUTO_INCREMENT COMMENT '部门编号',
-  `department_name` VARCHAR(3) DEFAULT NULL COMMENT '部门名称',
-  `manager_id` INT(6) DEFAULT NULL COMMENT '部门领导的员工编号',
-  `location_id` INT(11) DEFAULT NULL COMMENT '位置编号',
+  `department_id` int(4) NOT NULL AUTO_INCREMENT COMMENT '部门编号',
+  `department_name` varchar(3) DEFAULT NULL COMMENT '部门名称',
+  `manager_id` int(6) DEFAULT NULL COMMENT '部门领导的员工编号',
+  `location_id` int(11) DEFAULT NULL COMMENT '位置编号',
   PRIMARY KEY (`department_id`),
   KEY `loc_id_fk` (`location_id`),
   CONSTRAINT `loc_id_fk` FOREIGN KEY (`location_id`) REFERENCES `locations` (`location_id`)
-) ENGINE=INNODB AUTO_INCREMENT=271 DEFAULT CHARSET=gb2312 COMMENT='部门表';
+) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=utf8 COMMENT='部门表';
 
 /*Data for the table `departments` */
 
-INSERT  INTO `departments`(`department_id`,`department_name`,`manager_id`,`location_id`) VALUES 
+insert  into `departments`(`department_id`,`department_name`,`manager_id`,`location_id`) values 
 (10,'Adm',200,1700),
 (20,'Mar',201,1800),
 (30,'Pur',114,1700),
@@ -66,27 +66,27 @@ INSERT  INTO `departments`(`department_id`,`department_name`,`manager_id`,`locat
 DROP TABLE IF EXISTS `employees`;
 
 CREATE TABLE `employees` (
-  `employee_id` INT(6) NOT NULL COMMENT '员工编号',
-  `first_name` VARCHAR(25) DEFAULT NULL COMMENT '名',
-  `last_name` VARCHAR(25) DEFAULT NULL COMMENT '姓',
-  `email` VARCHAR(25) DEFAULT NULL COMMENT '邮箱',
-  `phone_number` VARCHAR(20) DEFAULT NULL COMMENT '电话号码',
-  `job_id` VARCHAR(10) DEFAULT NULL COMMENT '工种编号',
-  `salary` DOUBLE(10,2) DEFAULT NULL COMMENT '月薪',
-  `commission_pct` DOUBLE(4,2) DEFAULT NULL COMMENT '奖金率',
-  `manager_id` INT(6) DEFAULT NULL COMMENT '上级领导的员工编号',
-  `department_id` INT(4) DEFAULT NULL COMMENT '部门编号',
-  `hiredate` DATETIME DEFAULT NULL COMMENT '入职日期',
+  `employee_id` int(6) NOT NULL COMMENT '员工编号',
+  `first_name` varchar(25) DEFAULT NULL COMMENT '名',
+  `last_name` varchar(25) DEFAULT NULL COMMENT '姓',
+  `email` varchar(25) DEFAULT NULL COMMENT '邮箱',
+  `phone_number` varchar(20) DEFAULT NULL COMMENT '电话号码',
+  `job_id` varchar(10) DEFAULT NULL COMMENT '工种编号',
+  `salary` double(10,2) DEFAULT NULL COMMENT '月薪',
+  `commission_pct` double(4,2) DEFAULT NULL COMMENT '奖金率',
+  `manager_id` int(6) DEFAULT NULL COMMENT '上级领导的员工编号',
+  `department_id` int(4) DEFAULT NULL COMMENT '部门编号',
+  `hiredate` datetime DEFAULT NULL COMMENT '入职日期',
   PRIMARY KEY (`employee_id`),
   KEY `dept_id_fk` (`department_id`),
   KEY `job_id_fk` (`job_id`),
   CONSTRAINT `dept_id_fk` FOREIGN KEY (`department_id`) REFERENCES `departments` (`department_id`),
   CONSTRAINT `job_id_fk` FOREIGN KEY (`job_id`) REFERENCES `jobs` (`job_id`)
-) ENGINE=INNODB DEFAULT CHARSET=gb2312 COMMENT='员工表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工表';
 
 /*Data for the table `employees` */
 
-INSERT  INTO `employees`(`employee_id`,`first_name`,`last_name`,`email`,`phone_number`,`job_id`,`salary`,`commission_pct`,`manager_id`,`department_id`,`hiredate`) VALUES 
+insert  into `employees`(`employee_id`,`first_name`,`last_name`,`email`,`phone_number`,`job_id`,`salary`,`commission_pct`,`manager_id`,`department_id`,`hiredate`) values 
 (100,'Steven','K_ing','SKING','515.123.4567','AD_PRES',24000.00,NULL,NULL,90,'1992-04-03 00:00:00'),
 (101,'Neena','Kochhar','NKOCHHAR','515.123.4568','AD_VP',17000.00,NULL,100,90,'1992-04-03 00:00:00'),
 (102,'Lex','De Haan','LDEHAAN','515.123.4569','AD_VP',17000.00,NULL,100,90,'1992-04-03 00:00:00'),
@@ -195,21 +195,41 @@ INSERT  INTO `employees`(`employee_id`,`first_name`,`last_name`,`email`,`phone_n
 (205,'Shelley','Higgins','SHIGGINS','515.123.8080','AC_MGR',12000.00,NULL,101,110,'2016-03-03 00:00:00'),
 (206,'William','Gietz','WGIETZ','515.123.8181','AC_ACCOUNT',8300.00,NULL,205,110,'2016-03-03 00:00:00');
 
+/*Table structure for table `job_grades` */
+
+DROP TABLE IF EXISTS `job_grades`;
+
+CREATE TABLE `job_grades` (
+  `grade_level` varchar(3) DEFAULT NULL COMMENT '工资级别编号',
+  `lowest_sal` int(11) DEFAULT NULL COMMENT '最低工资',
+  `highest_sal` int(11) DEFAULT NULL COMMENT '最高工资'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工资级别';
+
+/*Data for the table `job_grades` */
+
+insert  into `job_grades`(`grade_level`,`lowest_sal`,`highest_sal`) values 
+('A',1000,2999),
+('B',3000,5999),
+('C',6000,9999),
+('D',10000,14999),
+('E',15000,24999),
+('F',25000,40000);
+
 /*Table structure for table `jobs` */
 
 DROP TABLE IF EXISTS `jobs`;
 
 CREATE TABLE `jobs` (
-  `job_id` VARCHAR(10) NOT NULL COMMENT '工种编号',
-  `job_title` VARCHAR(35) DEFAULT NULL COMMENT '工种名称',
-  `min_salary` INT(6) DEFAULT NULL COMMENT '最低工资',
-  `max_salary` INT(6) DEFAULT NULL COMMENT '最高工资',
+  `job_id` varchar(10) NOT NULL COMMENT '工种编号',
+  `job_title` varchar(35) DEFAULT NULL COMMENT '工种名称',
+  `min_salary` int(6) DEFAULT NULL COMMENT '最低工资',
+  `max_salary` int(6) DEFAULT NULL COMMENT '最高工资',
   PRIMARY KEY (`job_id`)
-) ENGINE=INNODB DEFAULT CHARSET=gb2312 COMMENT='工种表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='工种表';
 
 /*Data for the table `jobs` */
 
-INSERT  INTO `jobs`(`job_id`,`job_title`,`min_salary`,`max_salary`) VALUES 
+insert  into `jobs`(`job_id`,`job_title`,`min_salary`,`max_salary`) values 
 ('AC_ACCOUNT','Public Accountant',4200,9000),
 ('AC_MGR','Accounting Manager',8200,16000),
 ('AD_ASST','Administration Assistant',3000,6000),
@@ -235,18 +255,18 @@ INSERT  INTO `jobs`(`job_id`,`job_title`,`min_salary`,`max_salary`) VALUES
 DROP TABLE IF EXISTS `locations`;
 
 CREATE TABLE `locations` (
-  `location_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '位置编号',
-  `street_address` VARCHAR(40) DEFAULT NULL COMMENT '街道',
-  `postal_code` VARCHAR(12) DEFAULT NULL COMMENT '邮编',
-  `city` VARCHAR(30) DEFAULT NULL COMMENT '城市',
-  `state_province` VARCHAR(25) DEFAULT NULL COMMENT '州/省',
-  `country_id` VARCHAR(2) DEFAULT NULL COMMENT '国家编号',
+  `location_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '位置编号',
+  `street_address` varchar(40) DEFAULT NULL COMMENT '街道',
+  `postal_code` varchar(12) DEFAULT NULL COMMENT '邮编',
+  `city` varchar(30) DEFAULT NULL COMMENT '城市',
+  `state_province` varchar(25) DEFAULT NULL COMMENT '州/省',
+  `country_id` varchar(2) DEFAULT NULL COMMENT '国家编号',
   PRIMARY KEY (`location_id`)
-) ENGINE=INNODB AUTO_INCREMENT=3201 DEFAULT CHARSET=gb2312 COMMENT='位置表';
+) ENGINE=InnoDB AUTO_INCREMENT=3201 DEFAULT CHARSET=utf8 COMMENT='位置表';
 
 /*Data for the table `locations` */
 
-INSERT  INTO `locations`(`location_id`,`street_address`,`postal_code`,`city`,`state_province`,`country_id`) VALUES 
+insert  into `locations`(`location_id`,`street_address`,`postal_code`,`city`,`state_province`,`country_id`) values 
 (1000,'1297 Via Cola di Rie','00989','Roma',NULL,'IT'),
 (1100,'93091 Calle della Testa','10934','Venice',NULL,'IT'),
 (1200,'2017 Shinjuku-ku','1689','Tokyo','Tokyo Prefecture','JP'),

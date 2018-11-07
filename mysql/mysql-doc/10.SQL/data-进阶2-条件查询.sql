@@ -33,8 +33,6 @@
 			IS NULL, IS NOT NULL
 */
 
-USE myemployees;
-
 -- 1. 按条件表达式筛选
 -- 案例1：查询工资大于12000的员工信息
 SELECT * FROM employees
