@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS `boys`;
 CREATE TABLE `boys` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '男生编号',
   `boyName` varchar(20) DEFAULT NULL COMMENT '姓名',
-  `userCP` int(11) DEFAULT NULL COMMENT 'xx',
+  `userCP` int(11) DEFAULT NULL COMMENT '魅力值',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='男生表';
 

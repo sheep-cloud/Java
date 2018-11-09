@@ -25,7 +25,7 @@ SELECT * FROM employees
 LIMIT 5;
 
 -- 案例2：查询第11条到第25条
-SELECT * FROM employees
+SELECT * FROM employees   
 LIMIT 10, 15;
 
 -- 案例3：查询有奖金的员工信息，显示工资较高的前10名

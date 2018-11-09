@@ -2,6 +2,7 @@
  /*
 	含义：
 		出现在其他语句中的SELECT语句，成为子查询或内查询
+		外部的语句可以是INSERT, UPDATE, DELETE, SELECT等，一般SELECT作为外面语句较多
 		外部的查询语句，成为主查询或外查询
 		
 	分类：
@@ -43,10 +44,7 @@ SELECT salary FROM employees
 WHERE last_name = 'Abel';
 
 -- 1.2. 查询员工的信息，满足 salary > 1.1
-SELECT
-    *
-FROM
-    employees
+SELECT * FROM employees
 WHERE salary > (
     SELECT salary FROM employees
     WHERE last_name = 'Abel'
@@ -289,4 +287,85 @@ WHERE e.manager_id IN (
 SELECT e.*, CONCAT(e.first_name, '.', e.last_name) '姓.名' FROM employees e
 WHERE e.salary = (
     SELECT MAX(salary) FROM employees
+);
+
+-- 8. 查询工资最低的员工信息
+SELECT * FROM employees
+WHERE salary = (
+    SELECT MIN(salary) FROM employees
+);
+
+-- 9. 查询平均工资最低的部门信息
+SELECT * FROM departments
+WHERE department_id = (
+    SELECT department_id FROM employees
+    GROUP BY department_id
+    ORDER BY AVG(salary)
+    LIMIT 1
+);
+
+-- 10. 查询平均工资最低的部门信息和该部门的平均工资
+SELECT d.*, (
+    SELECT AVG(salary) FROM employees e
+    WHERE e.department_id = d.department_id
+) 平均工资 FROM departments d
+WHERE d.department_id = (
+    SELECT department_id FROM employees
+    GROUP BY department_id
+    ORDER BY AVG(salary)
+    LIMIT 1
+);
+
+SELECT d.*, ag_dep.ag 平均工资 FROM departments d
+INNER JOIN (
+    SELECT department_id, AVG(salary) ag FROM employees
+    GROUP BY department_id
+    ORDER BY ag
+    LIMIT 1
+) ag_dep ON d.department_id = ag_dep.department_id;
+
+-- 11. 查询平均工资最高的 job 信息
+SELECT * FROM jobs
+WHERE job_id = (
+    SELECT job_id FROM employees
+    GROUP BY job_id
+    ORDER BY AVG(salary) DESC
+    LIMIT 1
+);
+
+-- 12. 查询平均工资高于公司平均工资的部门有哪些
+SELECT * FROM departments
+WHERE department_id IN (
+    SELECT department_id FROM employees
+    GROUP BY department_id
+    HAVING AVG(salary) > (
+        SELECT AVG(salary) FROM employees
+    )
+);
+
+-- 13. 查询公司中所有 manager 的详细信息
+SELECT * FROM employees
+WHERE employee_id IN (
+    SELECT manager_id FROM employees
+);
+
+-- 14. 查询各个部门中 最高工资中最低的那个部门的最低工资
+SELECT MIN(salary) FROM employees
+WHERE department_id = (
+    SELECT department_id FROM employees
+    GROUP BY department_id
+    ORDER BY MAX(salary)
+    LIMIT 1
+);
+
+-- 15. 查询平均工资最高的部门的 manager 的相信信息
+SELECT * FROM employees
+WHERE employee_id IN (
+    SELECT DISTINCT manager_id FROM employees
+    WHERE department_id = (
+        SELECT department_id FROM employees
+        GROUP BY department_id
+        ORDER BY MAX(salary) DESC
+        LIMIT 1
+    )
 );
