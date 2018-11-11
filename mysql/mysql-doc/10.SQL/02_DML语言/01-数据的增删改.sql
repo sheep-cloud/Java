@@ -133,7 +133,7 @@ WHERE b.id IS NULL;
 	DELETE, TRUNCATE pk
 		1. DELETE 可以加WHERE条件，TRUNCATE不能加
 		2. TRUNCATE 删除，效率高
-		3. 加入要删除的表中有自增长列，如果用DELETE删除后，再插入数据，自增长的列的值从断开开始，
+		3. 加入要删除的表中有自增长列，如果用DELETE删除后，再插入数据，自增长的列的值从断点开始，
 			而TRUNCATE删除后，再插入数据，自增长列的值从1开始
 		4. DELETE 删除有返回值，TRUNCATE 删除无返回值
 		5. DELETE 删除可以回滚，TRUNCATE 删除不能回滚
