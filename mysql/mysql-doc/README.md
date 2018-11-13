@@ -1,10 +1,12 @@
-# 1.  为什么要学习数据库
+# MySQL 入门
+
+## 1.  为什么要学习数据库
 
 - 数据库的好处
   - 持久化数据到本地
   - 可以实现结构化查询，方便管理
 
-# 2. 数据库的相关概念
+## 2. 数据库的相关概念
 
 - DB：数据库（database）：存储数据的容器。它保存了一系列有组织的数据。
 - DBMS：数据库管理系统（DatabaseManagementSystem）：又称为数据库软件或数据库产品，用于创建或管理DB。
@@ -17,35 +19,35 @@ SQL的优点:
 	3. 虽然简单，但实际上是一种强有力的语言，灵活使用其语言元素，可以进行非常复杂和高级的数据库操作。
 ```
 
-# 3. 数据库存储数据的特点
+## 3. 数据库存储数据的特点
 
 - 数据存放到表中，然后表再放到库中
 - 一个库中可以有多张表，每张表具有唯一的表名用来标识自己
 - 表中有一个或多个列，列又称为"字段"，相当于java中"属性"
 - 表中的每一个行数据，相当于java中"对象"
 
-# 4. 初识MySQL
+## 4. 初识MySQL
 
-## 4.1. MySQL的背景
+### 4.1. MySQL的背景
 
 - 前身属于瑞典的一家公司，MySQL AB
 - 08年被sun公司收购
 - 09年被oracle收购
 
-## 4.2. MySQL的优点
+### 4.2. MySQL的优点
 
 - 开源、免费、成本低
 - 性能高、移植性也好
 - 体积小，便于安装
 
-## 4.3. 启动和停止MySQL服务
+### 4.3. 启动和停止MySQL服务
 
 ```ini
 启动: net start 服务名
 停止: net stop 服务名
 ```
 
-## 4.4. 数据库的使用
+### 4.4. 数据库的使用
 
 ```ini
 登录: mysql [-h主机 -P端口] -u用户名 -p密码
@@ -57,11 +59,11 @@ SQL的优点:
 退出: quit;
 ```
 
-# 5. DQL语言
+## 5. DQL语言
 
 - 数据查询语言
 
-## 5.1. 基础查询
+### 5.1. 基础查询
 
 ```sql
 -- 进阶1：基础查询
@@ -129,7 +131,7 @@ SELECT last_name + first_name AS 姓名 FROM employees;
 SELECT CONCAT(IFNULL(last_name, ''), IFNULL(first_name, '')) AS 姓名 FROM employees;
 ```
 
-## 5.2. 条件查询
+### 5.2. 条件查询
 
 ```sql
 -- 进阶2：条件查询
@@ -222,7 +224,7 @@ SELECT last_name, commission_pct FROM employees
 WHERE commission_pct <=> NULL;
 ```
 
-## 5.3. 排序查询
+### 5.3. 排序查询
 
 ```sql
 -- 进阶3：排序查询
@@ -270,9 +272,9 @@ SELECT * FROM employees
 ORDER BY salary DESC, employee_id ASC;
 ```
 
-## 5.4. 常见函数
+### 5.4. 常见函数
 
-### 5.4.1. 单行函数
+#### 5.4.1. 单行函数
 
 ```sql
 -- 进阶4：常见函数_单行函数
@@ -482,7 +484,7 @@ SELECT salary, department_id,
 FROM employees;
 ```
 
-### 5.4.2. 分组函数
+#### 5.4.2. 分组函数
 
 ```sql
 -- 进阶4：常见函数_分组函数
@@ -535,7 +537,7 @@ FROM employees;
  SELECT AVG(salary), employee_id FROM employees;
 ```
 
-## 5.5. 分组查询
+### 5.5. 分组查询
 
 ```sql
 -- 进阶5：分组查询
@@ -657,9 +659,9 @@ GROUP BY department_id, job_id
 ORDER BY 平均工资 DESC;
 ```
 
-## 5.6. 连接查询
+### 5.6. 连接查询
 
-### 5.6.1. sql92标准
+#### 5.6.1. sql92标准
 
 ```sql
 -- 进阶6：连接查询_sql92标准
@@ -760,7 +762,7 @@ SELECT e1.employee_id, e1.last_name, e2.employee_id, e2.last_name FROM employees
 WHERE e1.manager_id = e2.employee_id;
 ```
 
-### 5.6.2. sql99标准
+#### 5.6.2. sql99标准
 
 ```sql
 -- 进阶6：连接查询_sql99标准
@@ -951,7 +953,7 @@ FROM
 WHERE d.department_name IN ('SAL', 'IT');
 ```
 
-## 5.7. 子查询
+### 5.7. 子查询
 
 ```sql
 -- 进阶：子查询
@@ -1327,7 +1329,7 @@ WHERE employee_id IN (
 );
 ```
 
-## 5.8. 分页查询
+### 5.8. 分页查询
 
 ```sql
 -- 进阶8：分页查询
@@ -1367,7 +1369,7 @@ ORDER BY salary DESC
 LIMIT 10;
 ```
 
-## 5.9. 联合查询
+### 5.9. 联合查询
 
 ```sql
 -- 进阶9：联合查询
@@ -1396,7 +1398,7 @@ UNION ALL
 SELECT t_id, t_name FROM t_ua WHERE t_gender = 'male';
 ```
 
-## 5.10. 查询总结
+### 5.10. 查询总结
 
 ```sql
 -- 进阶10：查询总结
@@ -1416,11 +1418,11 @@ SELECT t_id, t_name FROM t_ua WHERE t_gender = 'male';
 */
 ```
 
-# 6. DML语言
+## 6. DML语言
 
 - 数据操作语言
 
-## 6.1. 数据的增删改
+### 6.1. 数据的增删改
 
 ```sql
 -- DML 语言
@@ -1587,11 +1589,11 @@ WHERE b.boyName = '黄晓明';
 TRUNCATE TABLE boys;
 ```
 
-# 7. DDL语言的学习
+## 7. DDL语言的学习
 
 - 数据定义语言
 
-## 7.1. 库和表的管理
+### 7.1. 库和表的管理
 
 ```sql
 -- DDL 语言
@@ -1671,7 +1673,6 @@ ALTER TABLE book CHANGE COLUMN publish_date pub_date DATETIME;
 ALTER TABLE book MODIFY COLUMN pub_date TIMESTAMP;
 
 -- 2.3. 添加新列
--- ALTER TABLE 表名 ADD COLUMN 列名 [新列名, 列类型, 约束] [FIRST|AFTER 字段名];
 ALTER TABLE author ADD COLUMN annal DOUBLE;
 
 -- 2.4. 删除列
@@ -1716,7 +1717,7 @@ SELECT id, au_name FROM author
 WHERE 0;
 ```
 
-## 7.2. 常见的数据类型
+### 7.2. 常见的数据类型
 
 ```sql
 -- 常见的数据类型
@@ -1810,7 +1811,7 @@ INSERT INTO tab_float(f1, f2, f3, f4) VALUES(1234.45, 123.45, 123.45, 123.4);
 */
 ```
 
-## 7.3. 常见约束
+### 7.3. 常见约束
 
 ```sql
 -- 常见约束
@@ -1979,7 +1980,7 @@ ALTER TABLE stu_info DROP major_id;
 SHOW CREATE TABLE stu_info;
 ```
 
-## 7.4. 标识列
+### 7.4. 标识列
 
 ```sql
 -- 标识列
@@ -2016,9 +2017,9 @@ ALTER TABLE tab_identity MODIFY COLUMN id INT AUTO_INCREMENT;
 ALTER TABLE tab_identity MODIFY COLUMN id INT;
 ```
 
-# 8. TCL语言
+## 8. TCL语言
 
-## 8.1. 事务控制
+### 8.1. 事务控制
 
 ```sql
 -- TCL：事务控制语言
@@ -2114,124 +2115,9 @@ ROLLBACK; -- 回滚事务
 SELECT * FROM account;
 ```
 
-# 9. 视图
+## 9. 视图
 
-## 9.1. 视图
-
-```sql
--- 视图
-/*
-	含义：虚拟表，和普通表一样使用
-	mysql5.1版本出现的新特性，是通过表动态生成的数据
-	
-	比如：舞蹈班和普通班级的对比
-	
-	作用：
-		1. 重用sql语句
-		2. 简化复杂的sql操作，不必知道它的查询细节
-		3. 保护数据，提高安全性
-		
-	视图和表的对比：
-			创建语法的关键字	是否实际占用物理空间	使用
-		视图	CREATE VIEW		只是保存了sql逻辑	增删改查，只是一般不能使用增删改
-		表	CREATE TABLE		保存了数据		增删改查
-*/
-
--- 案例：查询姓张的学生名和专业名
-USE students;
-SELECT si.id, si.stu_name, si.major_id, m.major_name FROM stu_info si
-INNER JOIN major m ON si.major_id = m.id
-WHERE si.stu_name LIKE '张%';
-
-CREATE VIEW v1
-AS
-SELECT si.id, si.stu_name, si.major_id, m.major_name FROM stu_info si
-INNER JOIN major m ON si.major_id = m.id
-WHERE si.stu_name LIKE '张%';
-
--- 查询视图
-SELECT * FROM v1;
-DROP VIEW v1;
-
-
--- 一、创建视图
-/*
-	语法：
-		CREATE VIEW 视图名
-		AS
-		查询语句;
-*/
-USE myemployees;
--- 1. 查询姓名中包含a字符的员工名、部门名、工种信息
--- 1.1. 创建视图
-CREATE VIEW myv1
-AS
-SELECT e.employee_id, e.last_name, d.department_id, d.department_name, j.* FROM employees e
-INNER JOIN departments d ON d.department_id = e.department_id
-INNER JOIN jobs j ON j.job_id = e.job_id;
-
--- 1.2. 使用视图
-SELECT m1.* FROM myv1 m1
-WHERE m1.last_name LIKE '%a%';
-
--- 2. 查询各部门的平均工资级别
--- 2.1. 创建视图；查看每个部门的平均工资
-CREATE VIEW myv2
-AS
-SELECT e.department_id, AVG(e.salary) ag FROM employees e
-GROUP BY e.department_id;
-
--- 2.2. 使用视图
-SELECT m2.*, jg.grade_level FROM myv2 m2
-INNER JOIN job_grades jg ON m2.ag BETWEEN jg.lowest_sal AND jg.highest_sal;
-
--- 3. 查询平均工资最低的部门信息
-SELECT m2.* FROM myv2 m2
-ORDER BY m2.ag
-LIMIT 1;
-
--- 4. 查询平均工资最低的部门名和工资
--- 4.1. 创建视图
-CREATE VIEW myv3
-AS
-SELECT m2.* FROM myv2 m2
-ORDER BY m2.ag
-LIMIT 1;
-
--- 4.2. 使用视图
-SELECT d.*, m3.ag FROM myv3 m3
-INNER JOIN departments d ON d.department_id = m3.department_id;
-
-
--- 二、视图的修改
-/*
-	方式一：
-		CREATE OR REPLACE VIEW 视图名
-		AS
-		查询语句;
-	方式二：
-		ALTER VIEW 视图名
-		AS
-		查询语句;
-*/
-
-
--- 三、删除视图
-/*
-	语法：
-		DROP VIEW 视图名, 视图名,...;
-*/
-
-
--- 四、查看视图
-DESC myv3;
-SHOW FULL COLUMNS FROM myv3;
-SHOW CREATE VIEW myv3;
-```
-
-# 10. 其他
-
-## 10.1. 视图
+### 9.1. 视图
 
 ```sql
 -- 视图
@@ -2344,7 +2230,122 @@ SHOW FULL COLUMNS FROM myv3;
 SHOW CREATE VIEW myv3;
 ```
 
-## 10.2. 变量
+## 10. 其他
+
+### 10.1. 视图
+
+```sql
+-- 视图
+/*
+	含义：虚拟表，和普通表一样使用
+	mysql5.1版本出现的新特性，是通过表动态生成的数据
+	
+	比如：舞蹈班和普通班级的对比
+	
+	作用：
+		1. 重用sql语句
+		2. 简化复杂的sql操作，不必知道它的查询细节
+		3. 保护数据，提高安全性
+		
+	视图和表的对比：
+			创建语法的关键字	是否实际占用物理空间	使用
+		视图	CREATE VIEW		只是保存了sql逻辑	增删改查，只是一般不能使用增删改
+		表	CREATE TABLE		保存了数据		增删改查
+*/
+
+-- 案例：查询姓张的学生名和专业名
+USE students;
+SELECT si.id, si.stu_name, si.major_id, m.major_name FROM stu_info si
+INNER JOIN major m ON si.major_id = m.id
+WHERE si.stu_name LIKE '张%';
+
+CREATE VIEW v1
+AS
+SELECT si.id, si.stu_name, si.major_id, m.major_name FROM stu_info si
+INNER JOIN major m ON si.major_id = m.id
+WHERE si.stu_name LIKE '张%';
+
+-- 查询视图
+SELECT * FROM v1;
+DROP VIEW v1;
+
+
+-- 一、创建视图
+/*
+	语法：
+		CREATE VIEW 视图名
+		AS
+		查询语句;
+*/
+USE myemployees;
+-- 1. 查询姓名中包含a字符的员工名、部门名、工种信息
+-- 1.1. 创建视图
+CREATE VIEW myv1
+AS
+SELECT e.employee_id, e.last_name, d.department_id, d.department_name, j.* FROM employees e
+INNER JOIN departments d ON d.department_id = e.department_id
+INNER JOIN jobs j ON j.job_id = e.job_id;
+
+-- 1.2. 使用视图
+SELECT m1.* FROM myv1 m1
+WHERE m1.last_name LIKE '%a%';
+
+-- 2. 查询各部门的平均工资级别
+-- 2.1. 创建视图；查看每个部门的平均工资
+CREATE VIEW myv2
+AS
+SELECT e.department_id, AVG(e.salary) ag FROM employees e
+GROUP BY e.department_id;
+
+-- 2.2. 使用视图
+SELECT m2.*, jg.grade_level FROM myv2 m2
+INNER JOIN job_grades jg ON m2.ag BETWEEN jg.lowest_sal AND jg.highest_sal;
+
+-- 3. 查询平均工资最低的部门信息
+SELECT m2.* FROM myv2 m2
+ORDER BY m2.ag
+LIMIT 1;
+
+-- 4. 查询平均工资最低的部门名和工资
+-- 4.1. 创建视图
+CREATE VIEW myv3
+AS
+SELECT m2.* FROM myv2 m2
+ORDER BY m2.ag
+LIMIT 1;
+
+-- 4.2. 使用视图
+SELECT d.*, m3.ag FROM myv3 m3
+INNER JOIN departments d ON d.department_id = m3.department_id;
+
+
+-- 二、视图的修改
+/*
+	方式一：
+		CREATE OR REPLACE VIEW 视图名
+		AS
+		查询语句;
+	方式二：
+		ALTER VIEW 视图名
+		AS
+		查询语句;
+*/
+
+
+-- 三、删除视图
+/*
+	语法：
+		DROP VIEW 视图名, 视图名,...;
+*/
+
+
+-- 四、查看视图
+DESC myv3;
+SHOW FULL COLUMNS FROM myv3;
+SHOW CREATE VIEW myv3;
+```
+
+### 10.2. 变量
 
 ```sql
 -- 变量
@@ -2501,7 +2502,7 @@ SELECT SUM;
 END $
 ```
 
-## 10.3. 存储过程
+### 10.3. 存储过程
 
 ```sql
 -- 存储过程和函数
@@ -2728,7 +2729,7 @@ END $;
 CALL test_pro6(3, 5);
 ```
 
-## 10.4. 函数
+### 10.4. 函数
 
 ```sql
 -- 函数
@@ -2821,7 +2822,7 @@ SELECT myf4(5.1, 5.2) result;
 DROP FUNCTION myf4;
 ```
 
-## 10.5. 流程控制结构
+### 10.5. 流程控制结构
 
 ```sql
 -- 流程控制结构

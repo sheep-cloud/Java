@@ -57,8 +57,8 @@ WHERE e.last_name LIKE '%e%';
 -- 案例3：查询部门个数>3的城市名和部门个数；添加分组、筛选
 -- 3.1. 查询每个城市的部门个数
 -- 3.2. 在3.1.的结果上筛选满足条件
- SELECT
-    l.city, COUNT(*) 部门个数
+SELECT
+    l.location_id, l.city, COUNT(*) 部门个数
 FROM
     departments d
     INNER JOIN locations l ON d.location_id = l.location_id
@@ -67,7 +67,7 @@ HAVING 部门个数 > 3;
 
 -- 案例4：查询哪个部门的员工个数>3的部门名和员工个数，并按个数降序；添加排序
 SELECT
-    d.department_name, COUNT(*) 员工个数
+    d.department_id, d.department_name, COUNT(*) 员工个数
 FROM
     employees e
     INNER JOIN departments d ON e.department_id = d.department_id
@@ -136,6 +136,7 @@ WHERE e1.last_name LIKE '%k%';
 
 -- 左外连接
 -- 案例1：查询男朋友不在男生表的女生名
+USE girls;
 SELECT * FROM beauty;
 SELECT * FROM boys;
 SELECT
@@ -146,6 +147,7 @@ FROM
 WHERE b.id IS NULL;
 
 -- 案例2：查询哪个部门没有员工
+USE myemployees;
 SELECT
     d.department_id, d.department_name, e.department_id
 FROM
@@ -179,7 +181,7 @@ WHERE d.department_id IS NULL;
 
 -- 3. 查询部门名为SAL或IT的员工信息
 SELECT
-    d.department_id, d.department_name, e.*
+    d.department_name, e.*
 FROM
     departments d
     LEFT JOIN employees e ON d.department_id = e.department_id

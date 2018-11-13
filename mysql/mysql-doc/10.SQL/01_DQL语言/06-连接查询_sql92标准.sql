@@ -55,7 +55,7 @@
 						表1 别名, 表2 别名
 					WHERE 等值的连接条件;
 */
-
+USE girls;
 SELECT * FROM beauty;
 SELECT * FROM boys;
 
@@ -68,6 +68,7 @@ SELECT boyName, beautyName FROM boys, beauty
 WHERE boys.id = beauty.boyfriend_id;
 
 -- 案例2：查询员工名和对应的部门名
+USE myemployees;
 SELECT last_name, department_name FROM employees, departments
 WHERE departments.department_id = employees.department_id;
 

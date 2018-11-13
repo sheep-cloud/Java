@@ -20,10 +20,10 @@
 				EXISTS(完整的查询)，结果：1或0
 			
 		按结果集的行列书不同：
-			标量子查询（结果集：一行一列）
-			列子查询（结果集：多行一列）
-			行子查询（结果集：多行多列）
-			表子查询（结果集：随意，一般为多行多列）
+			标量子查询	（结果集：一行一列）
+			列子查询	（结果集：多行一列）
+			行子查询	（结果集：多行多列）
+			表子查询	（结果集：随意，一般为多行多列）
 			
 	特点：
 		1. 子查询放在小括号内
@@ -186,7 +186,7 @@ SELECT d.*, (
 
 -- 案例2：查询员工号=102的部门名
 SELECT (
-    SELECT d.department_name, FROM departments d
+    SELECT d.department_name FROM departments d
     INNER JOIN employees e ON d.department_id = e.department_id
     WHERE e.employee_id = 102
 ) 部门名;

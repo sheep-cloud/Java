@@ -18,12 +18,12 @@
 		
 	特点：
 		1. 分组查询中的筛选条件可以分为两类
-					数据源			位置					关键字
-			分组前筛选	原始表			GROUP BY 子句的前面		WHERE
-			分组后筛选	分组后的结果集		GROUP BY 子句的后面		HAVING
-			
 			1.1. 分组函数作为条件肯定是放在HAVING子句中
 			1.2. 能用分组前筛选的，就优先考虑使用分组前筛选
+			
+						数据源			位置				关键字
+				分组前筛选	原始表			GROUP BY 子句的前面		WHERE
+				分组后筛选	分组后的结果集		GROUP BY 子句的后面		HAVING
 			
 		2. GROUP BY 子句支持单个字段分组，多个字段分组（多个字段之间用逗号分开没有顺序要求），表达式或函数（用的较少）
 		3. 也可以添加排序（排序放在整个分组查询的最后）
@@ -95,11 +95,11 @@ HAVING MIN(salary) < 5000;
 
 -- 案例1：按员工姓名的长度分组，查询每一组的员工个数，筛选员工个数>5的有哪些
 -- 1.1. 查询每个长度的员工个数
-SELECT COUNT(*), LENGTH(last_name) len_name FROM employees
+SELECT COUNT(*), LENGTH(last_name) len_name, last_name FROM employees
 GROUP BY len_name;
 
 -- 1.2. 添加筛选条件
-SELECT COUNT(*), LENGTH(last_name) len_name FROM employees
+SELECT COUNT(*), LENGTH(last_name) len_name, last_name FROM employees
 GROUP BY len_name
 HAVING COUNT(*) > 5;
 

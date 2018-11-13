@@ -47,6 +47,9 @@ WHERE department_id <> 90;
 SELECT last_name, salary, commission_pct FROM employees
 WHERE salary >= 10000 AND salary <= 20000;
 
+SELECT last_name, salary, commission_pct FROM employees
+WHERE salary BETWEEN 10000 AND 20000;
+
 -- 案例2：查询部门编号不是在90到110之间，或者工资高于15000的员工信息
 SELECT * FROM employees
 WHERE department_id < 90 OR department_id > 110 OR salary > 15000;
