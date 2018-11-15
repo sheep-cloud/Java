@@ -115,7 +115,7 @@ SELECT test_if(90.5);
 -- 3. repeat
 /*
 	语法：
-		[标签：]repeat
+		[标签：]REPEAT
 			循环体;
 		UNTIL 结束循环的条件
 		END REPEAT [标签];

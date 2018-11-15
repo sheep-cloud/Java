@@ -65,7 +65,7 @@ SQL的优点:
 
 ### 5.1. 基础查询
 
-```sql
+```mysql
 -- 进阶1：基础查询
  /*
 	语法：
@@ -133,7 +133,7 @@ SELECT CONCAT(IFNULL(last_name, ''), IFNULL(first_name, '')) AS 姓名 FROM empl
 
 ### 5.2. 条件查询
 
-```sql
+```mysql
 -- 进阶2：条件查询
 /*
 	语法：
@@ -226,7 +226,7 @@ WHERE commission_pct <=> NULL;
 
 ### 5.3. 排序查询
 
-```sql
+```mysql
 -- 进阶3：排序查询
 /*
 	语法：
@@ -276,7 +276,7 @@ ORDER BY salary DESC, employee_id ASC;
 
 #### 5.4.1. 单行函数
 
-```sql
+```mysql
 -- 进阶4：常见函数_单行函数
 /*
 	概念：类似于java的方法，将一组逻辑语句封装在方法中，对外暴露方法名
@@ -486,7 +486,7 @@ FROM employees;
 
 #### 5.4.2. 分组函数
 
-```sql
+```mysql
 -- 进阶4：常见函数_分组函数
 /*
 	功能：用于统计使用，又称为聚合函数或统计函数
@@ -539,7 +539,7 @@ FROM employees;
 
 ### 5.5. 分组查询
 
-```sql
+```mysql
 -- 进阶5：分组查询
 /*
 	语法：
@@ -663,7 +663,7 @@ ORDER BY 平均工资 DESC;
 
 #### 5.6.1. sql92标准
 
-```sql
+```mysql
 -- 进阶6：连接查询_sql92标准
 /*
 	含义：又称多表查询，当查询的字段来自于多个表时，就会用到连接查询
@@ -764,7 +764,7 @@ WHERE e1.manager_id = e2.employee_id;
 
 #### 5.6.2. sql99标准
 
-```sql
+```mysql
 -- 进阶6：连接查询_sql99标准
  /*
 	语法：
@@ -955,7 +955,7 @@ WHERE d.department_name IN ('SAL', 'IT');
 
 ### 5.7. 子查询
 
-```sql
+```mysql
 -- 进阶：子查询
  /*
 	含义：
@@ -1331,7 +1331,7 @@ WHERE employee_id IN (
 
 ### 5.8. 分页查询
 
-```sql
+```mysql
 -- 进阶8：分页查询
 /*
 	应用场景：当要显示的数据，一页显示不全，需要分页提交sql请求
@@ -1371,7 +1371,7 @@ LIMIT 10;
 
 ### 5.9. 联合查询
 
-```sql
+```mysql
 -- 进阶9：联合查询
 /*
 	UNION 联合，合并：将多条查询语句的结果合并成一个结果
@@ -1400,7 +1400,7 @@ SELECT t_id, t_name FROM t_ua WHERE t_gender = 'male';
 
 ### 5.10. 查询总结
 
-```sql
+```mysql
 -- 进阶10：查询总结
 /*
 	语法：
@@ -1424,7 +1424,7 @@ SELECT t_id, t_name FROM t_ua WHERE t_gender = 'male';
 
 ### 6.1. 数据的增删改
 
-```sql
+```mysql
 -- DML 语言
 /*
 	数据操作语言：
@@ -1595,7 +1595,7 @@ TRUNCATE TABLE boys;
 
 ### 7.1. 库和表的管理
 
-```sql
+```mysql
 -- DDL 语言
 /*
 	数据定义语言；库和表的管理
@@ -1719,7 +1719,7 @@ WHERE 0;
 
 ### 7.2. 常见的数据类型
 
-```sql
+```mysql
 -- 常见的数据类型
 /*
 	数值型：
@@ -1813,7 +1813,7 @@ INSERT INTO tab_float(f1, f2, f3, f4) VALUES(1234.45, 123.45, 123.45, 123.4);
 
 ### 7.3. 常见约束
 
-```sql
+```mysql
 -- 常见约束
 /*
 	含义：一种限制，用于限制表中的数据，为了保证表中的数据的准确和可靠性
@@ -1982,7 +1982,7 @@ SHOW CREATE TABLE stu_info;
 
 ### 7.4. 标识列
 
-```sql
+```mysql
 -- 标识列
 /*
 	又称为自增长列
@@ -2021,7 +2021,7 @@ ALTER TABLE tab_identity MODIFY COLUMN id INT;
 
 ### 8.1. 事务控制
 
-```sql
+```mysql
 -- TCL：事务控制语言
 /*
 	Transaction Control Language 事务控制语言
@@ -2115,11 +2115,11 @@ ROLLBACK; -- 回滚事务
 SELECT * FROM account;
 ```
 
-## 9. 视图
+## 9. 其他
 
 ### 9.1. 视图
 
-```sql
+```mysql
 -- 视图
 /*
 	含义：虚拟表，和普通表一样使用
@@ -2230,124 +2230,9 @@ SHOW FULL COLUMNS FROM myv3;
 SHOW CREATE VIEW myv3;
 ```
 
-## 10. 其他
+### 9.2. 变量
 
-### 10.1. 视图
-
-```sql
--- 视图
-/*
-	含义：虚拟表，和普通表一样使用
-	mysql5.1版本出现的新特性，是通过表动态生成的数据
-	
-	比如：舞蹈班和普通班级的对比
-	
-	作用：
-		1. 重用sql语句
-		2. 简化复杂的sql操作，不必知道它的查询细节
-		3. 保护数据，提高安全性
-		
-	视图和表的对比：
-			创建语法的关键字	是否实际占用物理空间	使用
-		视图	CREATE VIEW		只是保存了sql逻辑	增删改查，只是一般不能使用增删改
-		表	CREATE TABLE		保存了数据		增删改查
-*/
-
--- 案例：查询姓张的学生名和专业名
-USE students;
-SELECT si.id, si.stu_name, si.major_id, m.major_name FROM stu_info si
-INNER JOIN major m ON si.major_id = m.id
-WHERE si.stu_name LIKE '张%';
-
-CREATE VIEW v1
-AS
-SELECT si.id, si.stu_name, si.major_id, m.major_name FROM stu_info si
-INNER JOIN major m ON si.major_id = m.id
-WHERE si.stu_name LIKE '张%';
-
--- 查询视图
-SELECT * FROM v1;
-DROP VIEW v1;
-
-
--- 一、创建视图
-/*
-	语法：
-		CREATE VIEW 视图名
-		AS
-		查询语句;
-*/
-USE myemployees;
--- 1. 查询姓名中包含a字符的员工名、部门名、工种信息
--- 1.1. 创建视图
-CREATE VIEW myv1
-AS
-SELECT e.employee_id, e.last_name, d.department_id, d.department_name, j.* FROM employees e
-INNER JOIN departments d ON d.department_id = e.department_id
-INNER JOIN jobs j ON j.job_id = e.job_id;
-
--- 1.2. 使用视图
-SELECT m1.* FROM myv1 m1
-WHERE m1.last_name LIKE '%a%';
-
--- 2. 查询各部门的平均工资级别
--- 2.1. 创建视图；查看每个部门的平均工资
-CREATE VIEW myv2
-AS
-SELECT e.department_id, AVG(e.salary) ag FROM employees e
-GROUP BY e.department_id;
-
--- 2.2. 使用视图
-SELECT m2.*, jg.grade_level FROM myv2 m2
-INNER JOIN job_grades jg ON m2.ag BETWEEN jg.lowest_sal AND jg.highest_sal;
-
--- 3. 查询平均工资最低的部门信息
-SELECT m2.* FROM myv2 m2
-ORDER BY m2.ag
-LIMIT 1;
-
--- 4. 查询平均工资最低的部门名和工资
--- 4.1. 创建视图
-CREATE VIEW myv3
-AS
-SELECT m2.* FROM myv2 m2
-ORDER BY m2.ag
-LIMIT 1;
-
--- 4.2. 使用视图
-SELECT d.*, m3.ag FROM myv3 m3
-INNER JOIN departments d ON d.department_id = m3.department_id;
-
-
--- 二、视图的修改
-/*
-	方式一：
-		CREATE OR REPLACE VIEW 视图名
-		AS
-		查询语句;
-	方式二：
-		ALTER VIEW 视图名
-		AS
-		查询语句;
-*/
-
-
--- 三、删除视图
-/*
-	语法：
-		DROP VIEW 视图名, 视图名,...;
-*/
-
-
--- 四、查看视图
-DESC myv3;
-SHOW FULL COLUMNS FROM myv3;
-SHOW CREATE VIEW myv3;
-```
-
-### 10.2. 变量
-
-```sql
+```mysql
 -- 变量
 /*
 	分类：
@@ -2502,9 +2387,9 @@ SELECT SUM;
 END $
 ```
 
-### 10.3. 存储过程
+### 9.3. 存储过程
 
-```sql
+```mysql
 -- 存储过程和函数
 /*
 	存储过程和函数：类似于java中的方法
@@ -2729,9 +2614,9 @@ END $;
 CALL test_pro6(3, 5);
 ```
 
-### 10.4. 函数
+### 9.4. 函数
 
-```sql
+```mysql
 -- 函数
  /*
 	含义：一组预先编译好的sql语句的集合，理解成批处理语句
@@ -2822,9 +2707,9 @@ SELECT myf4(5.1, 5.2) result;
 DROP FUNCTION myf4;
 ```
 
-### 10.5. 流程控制结构
+### 9.5. 流程控制结构
 
-```sql
+```mysql
 -- 流程控制结构
 /*
 	顺序结构：程序从上往下依次执行
