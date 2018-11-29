@@ -16,33 +16,33 @@
 		5. 和分组函数一同查询的字段要求是GROUP BY后的字段
 */
  
- -- 1. 简单的使用
- SELECT SUM(salary) FROM employees;
- SELECT AVG(salary) FROM employees;
- SELECT MAX(salary) FROM employees;
- SELECT MIN(salary) FROM employees;
- SELECT COUNT(salary) FROM employees;
+-- 1. 简单的使用
+SELECT SUM(salary) FROM employees;
+SELECT AVG(salary) FROM employees;
+SELECT MAX(salary) FROM employees;
+SELECT MIN(salary) FROM employees;
+SELECT COUNT(salary) FROM employees;
  
- SELECT SUM(salary) 工资总和, ROUND(AVG(salary), 2) 平均工资, MAX(salary) 最高工资, MIN(salary) 最低工资, COUNT(salary) 工资个数 FROM employees;
+SELECT SUM(salary) 工资总和, ROUND(AVG(salary), 2) 平均工资, MAX(salary) 最高工资, MIN(salary) 最低工资, COUNT(salary) 工资个数 FROM employees;
  
- -- 2. 参数支持哪些类型
- SELECT SUM(last_name), AVG(last_name) FROM employees;
- SELECT MAX(last_name), MIN(last_name) FROM employees;
- SELECT MAX(hiredate), MIN(hiredate) FROM employees;
- SELECT COUNT(last_name) FROM employees;
- 
- -- 3. 是否忽略NULL
- SELECT commission_pct FROM employees;
- SELECT SUM(commission_pct), AVG(commission_pct) FROM employees;
- 
- -- 4. 和DISTINCT搭配
- SELECT SUM(DISTINCT salary), SUM(salary) FROM employees;
- SELECT COUNT(DISTINCT salary), COUNT(salary) FROM employees;
- 
- -- 5. COUNT函数的详细介绍
- SELECT COUNT(salary) FROM employees;
- SELECT COUNT(*) FROM employees;
- SELECT COUNT(1) FROM employees;
- 
- -- 6. 和分组函数一同查询的字段有限制
- SELECT AVG(salary), employee_id FROM employees;
+-- 2. 参数支持哪些类型
+SELECT SUM(last_name), AVG(last_name) FROM employees;
+SELECT MAX(last_name), MIN(last_name) FROM employees;
+SELECT MAX(hiredate), MIN(hiredate) FROM employees;
+SELECT COUNT(last_name) FROM employees;
+
+-- 3. 是否忽略NULL
+SELECT commission_pct FROM employees;
+SELECT SUM(commission_pct), AVG(commission_pct) FROM employees;
+
+-- 4. 和DISTINCT搭配
+SELECT SUM(DISTINCT salary), SUM(salary) FROM employees;
+SELECT COUNT(DISTINCT salary), COUNT(salary) FROM employees;
+
+-- 5. COUNT函数的详细介绍
+SELECT COUNT(salary) FROM employees;
+SELECT COUNT(*) FROM employees;
+SELECT COUNT(1) FROM employees;
+
+-- 6. 和分组函数一同查询的字段有限制
+SELECT AVG(salary), employee_id FROM employees;

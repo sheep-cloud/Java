@@ -108,11 +108,11 @@ SELECT CURTIME();
 SELECT CONCAT(YEAR(hiredate), '年', LPAD(MONTH(hiredate), 2, '0'), '月', LPAD(DAY(hiredate), 2, '0'), '日') 入职日期 FROM employees;
 
 -- 3.5. STR_TO_DATE 将字符通过指定的格式转换成日期
-SELECT STR_TO_DATE('04/03/1992', '%m/%d/%Y') out_put;
+SELECT STR_TO_DATE('01/20/2015', '%m/%d/%Y') out_put;
 
--- 案例：查询入职日期04/03/1992的员工信息
+-- 案例：查询入职日期01/20/2015的员工信息
 SELECT * FROM employees
-WHERE hiredate = STR_TO_DATE('04/03/1992', '%m/%d/%Y');
+WHERE DATE(hiredate) = STR_TO_DATE('01/20/2015', '%m/%d/%Y');
 
 -- 3.6. DATE_FORMAT 将日期转换成字符串
 SELECT DATE_FORMAT(NOW(), '%y年%m月%d日') out_put;
@@ -120,7 +120,6 @@ SELECT DATE_FORMAT(NOW(), '%y年%m月%d日') out_put;
 -- 案例：查询有奖金的员工名和入职日期（xx月/xx日 xxxx年）
 SELECT last_name, DATE_FORMAT(hiredate, '%m月/%d日 %Y年') 入职日期 FROM employees
 WHERE commission_pct IS NOT NULL;
-
 
 -- 4. 其他函数
 SELECT VERSION();
