@@ -4,17 +4,19 @@ import java.util.List;
 
 import org.junit.Test;
 
+import cn.colg.BaseTest;
 import cn.colg.entity.Employee;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.StrUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Lambda 表达式练习 
  *
  * @author colg
  */
-public class LamdbaExerciseTest {
+@Slf4j
+public class LamdbaExerciseTest extends BaseTest{
     
     /** 初始化员工信息 */
     private List<Employee> employees = CollUtil.newArrayList(
@@ -32,7 +34,6 @@ public class LamdbaExerciseTest {
      */
     @Test
     public void test01() throws Exception {
-        Console.log("cn.colg.exercise.LamdbaExerciseTest.test01()");
         CollUtil.sort(employees, (e1, e2) -> {
             if (e1.getAge() == e2.getAge()) {
                 // 年龄相等，比较姓名（升序）
@@ -42,8 +43,7 @@ public class LamdbaExerciseTest {
                 return Integer.compare(e1.getAge(), e2.getAge());
             }
         });
-        
-        Console.log(employees);
+        log.info("employees : {}", employees);
     }
     
     /**
@@ -55,13 +55,12 @@ public class LamdbaExerciseTest {
      */
     @Test
     public void test02() throws Exception {
-        Console.log("cn.colg.exercise.LamdbaExerciseTest.test02()");
         String value = "colg-cloud!";
         String result = TestLambda.strHandler(value, str -> StrUtil.upperFirst(str));
-        Console.log(result);
+        log.info("result {}", result);
         
-        String result2 = TestLambda.strHandler(value, str -> StrUtil.sub(str, 2, 5));
-        Console.log(result2);
+        result = TestLambda.strHandler(value, str -> StrUtil.sub(str, 2, 4));
+        log.info("result {}", result);
     }
     
     /**
@@ -74,13 +73,12 @@ public class LamdbaExerciseTest {
      */
     @Test
     public void test03() throws Exception {
-        Console.log("cn.colg.exercise.LamdbaExerciseTest.test03()");
         long t1 = 100L;
         long t2 = 200L;
         long result = TestLambda.getValue(t1, t2, (x, y) -> x + y);
-        Console.log(result);
+        log.info("result {}", result);
         
-        long result2 = TestLambda.getValue(t1, t2, (x, y) -> x * y);
-        Console.log(result2);
+        result = TestLambda.getValue(t1, t2, (x, y) -> x * y);
+        log.info("result {}", result);
     }
 }

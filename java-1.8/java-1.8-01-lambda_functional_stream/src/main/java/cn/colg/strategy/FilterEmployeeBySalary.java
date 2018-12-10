@@ -19,5 +19,4 @@ public class FilterEmployeeBySalary implements MyStrategy<Employee> {
     public boolean compartor(Employee t) {
         return t.getSalary() > 5000;
     }
-
 }

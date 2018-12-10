@@ -19,5 +19,4 @@ public class FilterEmployeeByAge implements MyStrategy<Employee> {
     public boolean compartor(Employee t) {
         return t.getAge() > 35;
     }
-
 }

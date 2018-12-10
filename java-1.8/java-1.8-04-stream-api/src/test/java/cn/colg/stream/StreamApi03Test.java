@@ -1,4 +1,4 @@
-package cn.colg;
+package cn.colg.stream;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,17 +7,19 @@ import java.util.stream.Collectors;
 
 import org.junit.Test;
 
+import cn.colg.BaseTest;
 import cn.colg.entity.Employee;
 import cn.colg.enums.Status;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.lang.Console;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Stream API 3.终止操作（终端操作） 测试
  *
  * @author colg
  */
-public class StreamApi03Test {
+@Slf4j
+public class StreamApi03Test extends BaseTest{
 
     /** 初始化员工信息 */
     private List<Employee> employees = CollUtil.newArrayList(
@@ -45,41 +47,41 @@ public class StreamApi03Test {
 
     @Test
     public void testMatchFind() throws Exception {
-        Console.log("cn.colg.StreamApi03Test.testAllMatch()");
         Set<Employee> set = employees.stream()
                                      .collect(Collectors.toSet());
-        Console.log(set);
+        log.info("set : {}", set);
+        
+        log.info("------------------------------------------------------------------------------------------");
         
         boolean allMatch = employees.stream()
                                     .allMatch(e -> e.getStatus().equals(Status.BUSY));
-        Console.log(allMatch);
+        log.info("allMatch : {}", allMatch);
         
-        Console.log("----------------------------------------------------------------------------------------------------");
+        log.info("------------------------------------------------------------------------------------------");
         
         boolean anyMatch = employees.stream()
                                     .anyMatch(e -> e.getStatus().equals(Status.BUSY));
-        Console.log(anyMatch);
+        log.info("anyMatch : {}", anyMatch);
         
-        Console.log("----------------------------------------------------------------------------------------------------");
+        log.info("------------------------------------------------------------------------------------------");
         
         boolean noneMatch = employees.stream()
                                      .noneMatch(e -> e.getStatus().equals(Status.BUSY));
-        Console.log(noneMatch);
+        log.info("noneMatch : {}", noneMatch);
         
-        Console.log("----------------------------------------------------------------------------------------------------");
+        log.info("------------------------------------------------------------------------------------------");
         
         Optional<Employee> findFirst = employees.stream()
                                                 .findFirst();
         Employee employee = findFirst.orElse(new Employee());
-        Console.log(employee);
+        log.info("employee : {}", employee);
         
-        Console.log("----------------------------------------------------------------------------------------------------");
+        log.info("------------------------------------------------------------------------------------------");
         
         Optional<Employee> findAny = employees.parallelStream()
                                               .filter(e -> e.getStatus().equals(Status.FREE))
                                               .findAny();
-        Employee orElse = findAny.orElse(new Employee());
-        Console.log(orElse);
+        employee = findAny.orElse(new Employee());
+        log.info("employee : {}", employee);
     }
-    
 }

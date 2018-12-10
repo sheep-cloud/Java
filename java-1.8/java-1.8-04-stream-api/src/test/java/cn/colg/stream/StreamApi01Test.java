@@ -1,4 +1,4 @@
-package cn.colg;
+package cn.colg.stream;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,8 +7,8 @@ import java.util.stream.Stream;
 
 import org.junit.Test;
 
+import cn.colg.BaseTest;
 import cn.colg.entity.Employee;
-import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.util.RandomUtil;
 
@@ -26,12 +26,11 @@ import cn.hutool.core.util.RandomUtil;
  *
  * @author colg
  */
-public class StreamApi01Test {
+public class StreamApi01Test extends BaseTest{
 
     @SuppressWarnings("unused")
     @Test
     public void test01() throws Exception {
-        Console.log("cn.colg.StreamApiTest.test01()");
         // 1. 可以通过Collection系列集合提供的stream()或parallelStream()
         List<Employee> list = new ArrayList<>();
         Stream<Employee> stream = list.stream();
@@ -54,14 +53,5 @@ public class StreamApi01Test {
         Stream<Integer> stream5 = Stream.generate(() -> RandomUtil.randomInt(100, 1000));
         stream5.limit(10)
                .forEach(Console::log);
-    }
-    
-    @Test
-    public void test02() throws Exception {
-        Console.log("cn.colg.StreamApiTest.test02()");
-        List<String> list = CollUtil.newArrayList("Jack", "Rose", "Tom", null);
-        list.stream()
-            .filter(str -> (str != null && str.contains("o")))
-            .forEach(Console::log);
     }
 }

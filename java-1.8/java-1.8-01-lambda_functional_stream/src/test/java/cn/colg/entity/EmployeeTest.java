@@ -2,21 +2,24 @@ package cn.colg.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
+import cn.colg.BaseTest;
 import cn.colg.strategy.FilterEmployeeByAge;
 import cn.colg.strategy.FilterEmployeeBySalary;
 import cn.colg.strategy.MyStrategy;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.lang.Console;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 员工Entity 测试
  *
  * @author colg
  */
-public final class EmployeeTest {
+@Slf4j
+public final class EmployeeTest extends BaseTest{
     
     /** 初始化员工信息 */
     private List<Employee> employees = CollUtil.newArrayList(
@@ -61,16 +64,11 @@ public final class EmployeeTest {
     
     @Test
     public void test01() throws Exception {
-        Console.log("cn.colg.entity.EmployeeTest.test01()");
         List<Employee> list = filterEmployeesByAge(employees);
-        Console.log(list);
-    }
-    
-    @Test
-    public void test02() throws Exception {
-        Console.log("cn.colg.entity.EmployeeTest.test02()");
-        List<Employee> list = filterEmployeesBySalary(employees);
-        Console.log(list);
+        log.info("list : {}", list);
+        
+        list = filterEmployeesBySalary(employees);
+        log.info("list : {}", list);
     }
     
     /// ----------------------------------------------------------------------------------------------------
@@ -98,13 +96,12 @@ public final class EmployeeTest {
      * @throws Exception
      */
     @Test
-    public void test03() throws Exception {
-        Console.log("cn.colg.entity.EmployeeTest.test03()");
+    public void test02() throws Exception {
         List<Employee> list = filterEmployeesByStrategy(employees, new FilterEmployeeByAge());
-        Console.log(list);
+        log.info("list : {}", list);
         
-        List<Employee> list2 = filterEmployeesByStrategy(employees, new FilterEmployeeBySalary());
-        Console.log(list2);
+        list = filterEmployeesByStrategy(employees, new FilterEmployeeBySalary());
+        log.info("list : {}", list);
     }
     
     /**
@@ -113,8 +110,7 @@ public final class EmployeeTest {
      * @throws Exception
      */
     @Test
-    public void test04() throws Exception {
-        Console.log("cn.colg.entity.EmployeeTest.test04()");
+    public void test03() throws Exception {
         List<Employee> list = filterEmployeesByStrategy(employees, new MyStrategy<Employee>() {
 
             @Override
@@ -122,16 +118,16 @@ public final class EmployeeTest {
                 return t.getAge() > 35;
             }
         });
-        Console.log(list);
+        log.info("list : {}", list);
         
-        List<Employee> list2 = filterEmployeesByStrategy(employees, new MyStrategy<Employee>() {
+        list = filterEmployeesByStrategy(employees, new MyStrategy<Employee>() {
 
             @Override
             public boolean compartor(Employee t) {
                 return t.getSalary() > 5000;
             }
         });
-        Console.log(list2);
+        log.info("list : {}", list);
     }
     
     /**
@@ -140,14 +136,13 @@ public final class EmployeeTest {
      * @throws Exception
      */
     @Test
-    public void test05() throws Exception {
-        Console.log("cn.colg.entity.EmployeeTest.test05()");
+    public void test04() throws Exception {
         MyStrategy<Employee> myStrategy = employee -> employee.getAge() > 35;
         List<Employee> list = filterEmployeesByStrategy(employees, myStrategy);
-        Console.log(list);
+        log.info("list : {}", list);
         
-        List<Employee> list2 = filterEmployeesByStrategy(employees, employee -> employee.getSalary() > 5000);
-        Console.log(list2);
+        list = filterEmployeesByStrategy(employees, employee -> employee.getSalary() > 5000);
+        log.info("list : {}", list);
     }
     
     /**
@@ -156,13 +151,11 @@ public final class EmployeeTest {
      * @throws Exception
      */
     @Test
-    public void test06() throws Exception {
-        Console.log("cn.colg.entity.EmployeeTest.test06()");
-        Object[] objects = employees.stream().filter(employee -> employee.getAge() > 35).toArray();
+    public void test05() throws Exception {
+        List<Employee> list = employees.stream().filter(employee -> employee.getAge() > 35).collect(Collectors.toList());
+        log.info("list : {}", list);
         
-        Console.log(objects);
-        
-        Object[] objects2 = employees.stream().filter(employee -> employee.getSalary() > 5000).toArray();
-        Console.log(objects2);
+        list = employees.stream().filter(employee -> employee.getSalary() > 5000).collect(Collectors.toList());
+        log.info("list : {}", list);
     }
 }

@@ -11,9 +11,9 @@ import lombok.experimental.Accessors;
  *
  * @author colg
  */
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Accessors(chain = true)
 public class Employee {
 

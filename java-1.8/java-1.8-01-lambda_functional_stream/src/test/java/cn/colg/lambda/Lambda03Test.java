@@ -2,15 +2,17 @@ package cn.colg.lambda;
 
 import org.junit.Test;
 
+import cn.colg.BaseTest;
 import cn.colg.functional.MyFun;
-import cn.hutool.core.lang.Console;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Lambda 表达式测试
  *
  * @author colg
  */
-public class Lambda03Test {
+@Slf4j
+public class Lambda03Test extends BaseTest{
 
     /**
      * 对一个数进行运算
@@ -25,19 +27,21 @@ public class Lambda03Test {
 
     @Test
     public void test01() throws Exception {
-        Console.log("cn.colg.lambda.Lambda03Test.test01()");
-        Console.log(operation(10, new MyFun<Integer>() {
+        Integer result = operation(10, new MyFun<Integer>() {
             
             @Override
             public Integer getValue(Integer num) {
                 return num * 10;
             }
-        }));
+        });
+        log.info("result : {}", result);
         
         // 参数列表：(x)
         // 方法体：x * x
-        Console.log(operation(10, (x) -> x * 10));
+        result = operation(10, (x) -> x * 10);
+        log.info("result : {}", result);
 
-        Console.log(operation(200, x -> x + 200));
+        result = operation(200, x -> x + 200);
+        log.info("result : {}", result);
     }
 }

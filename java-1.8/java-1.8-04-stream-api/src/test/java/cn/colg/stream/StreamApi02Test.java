@@ -1,20 +1,23 @@
-package cn.colg;
+package cn.colg.stream;
 
 import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.Test;
 
+import cn.colg.BaseTest;
 import cn.colg.entity.Employee;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Console;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Stream API 2.中间操作 测试
  *
  * @author colg
  */
-public class StreamApi02Test {
+@Slf4j
+public class StreamApi02Test extends BaseTest{
     
     /** 初始化员工信息 */
     private List<Employee> employees = CollUtil.newArrayList(
@@ -75,7 +78,6 @@ public class StreamApi02Test {
      */
     @Test
     public void testLimit() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testLimit()");
         employees.stream()
                  .limit(2)
                  .forEach(Console::log);
@@ -88,7 +90,6 @@ public class StreamApi02Test {
      */
     @Test
     public void testSkip() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testSkip()");
         employees.stream()
                  .skip(2L)
                  .forEach(Console::log);
@@ -102,7 +103,6 @@ public class StreamApi02Test {
      */
     @Test
     public void testSkipLimit() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testSkipLimit()");
         employees.stream()
                  .skip(2)
                  .limit(2)
@@ -116,7 +116,6 @@ public class StreamApi02Test {
      */
     @Test
     public void testDistinct() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testDistinct()");
         employees.stream()
                  .distinct()
                  .forEach(Console::log);
@@ -129,12 +128,11 @@ public class StreamApi02Test {
      */
     @Test
     public void testMap() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testMap()");
         List<String> list = CollUtil.newArrayList("colg", "cloud", "java");
         list.stream()
             .map(str -> str.toUpperCase())
             .forEach(Console::log);
-        Console.log("----------------------------------------------------------------------------------------------------");
+        log.info("------------------------------------------------------------------------------------------");
         
         employees.stream()
                  .map(Employee::getName)
@@ -149,7 +147,6 @@ public class StreamApi02Test {
      */
     @Test
     public void testSorted() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testSorted()");
         List<String> list = CollUtil.newArrayList("colg", "cloud", "java");
         list.stream()
             .sorted()
@@ -164,5 +161,4 @@ public class StreamApi02Test {
                     }
                  }).forEach(Console::log);
     }
-    
 }

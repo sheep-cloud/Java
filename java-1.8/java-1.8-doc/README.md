@@ -10,29 +10,34 @@
 
 ### 1.1. 为什么使用 Lambda 表达式
 
-Lambda 是一个**匿名函数**，我们可以把 Lambda 表达式理解为是**一段可以传递的代码**（将代码 像数据一样进行传递）。可以写出更简洁、更 灵活的代码。作为一种更紧凑的代码风格，使 Java的语言表达能力得到了提升。
+Lambda 是一个**匿名函数**，我们可以把 Lambda 表达式理解为是**一段可以传递的代码**（将代码像数据一样进行传递）。可以写出更简洁、更 灵活的代码。作为一种更紧凑的代码风格，使 Java的语言表达能力得到了提升。
 
 ### 1.2. 从匿名类到 Labmbda 的转换
 
 ```java
+package cn.colg.lambda;
+
     @Test
     public void test01() throws Exception {
-        Console.log("cn.colg.lambda.Lambda02Test.test01()");
         // jdk 1.7之前，必须是final，jdk 1.8默认在变量前加了 final
         String value = "jdk 新特性";
         ThreadUtil.execute(new Runnable() {
 
             @Override
             public void run() {
-                Console.log("colg: {}", value);
+                log.info("colg : {}", value);
             }
         });
-
-        Console.log("------------------------------------------------------------");
-
+        
         // Lamdba 表达式
-        ThreadUtil.execute(() -> Console.log("colg: {}", value));
+        ThreadUtil.execute(() -> log.info("colg : {}", value));
     }
+```
+
+```java
+2018-12-10 09:57:42.014 - INFO [pool-2-thread-1] cn.colg.lambda.Lambda02Test              : colg : jdk 新特性
+2018-12-10 09:57:42.057 - INFO [pool-2-thread-1] cn.colg.lambda.Lambda02Test              : colg : jdk 新特性
+2018-12-10 09:57:42.057 - INFO [           main] cn.colg.BaseTest                         : ------------------------------------------------------------------------------------------
 ```
 
 ### 1.3. Lambda 表达式语法
@@ -48,17 +53,17 @@ Lambda 是一个**匿名函数**，我们可以把 Lambda 表达式理解为是*
  *      右侧：Lambda表达式中所需要执行的功能，即Lambda体
  *      
  *  语法格式一：无参数，无返回值
- *      Runnable r1 = () -> Const.log("Hello Lambda!);
+ *      Runnable r1 = () -> log.info("Hello Lambda!");
  *      
  *  语法格式二：有一个参数，无返回值
- *      Consumer<String> con = (x) -> Const.log(x);
+ *      Consumer<String> con = (x) -> log.info(x);
  *      
  *  语法格式三：若只有一个参数，小括号可以省略不写（不推荐）
- *      Consumer<String> con = x -> Const.log(x);
+ *      Consumer<String> con = x -> log.info(x);
  *      
  *  语法格式四：有两个以上的参数，有返回值，并且Lambda体中有多条语句
  *      Comparator<Integer> com = (x, y) -> {
- *           Const.log("函数式结构);
+ *           log.info("函数式结构");
  *           return ...;
  *      }
  *      
@@ -80,27 +85,37 @@ Lambda 是一个**匿名函数**，我们可以把 Lambda 表达式理解为是*
  */
 ```
 
-
-
 ### 1.4. Lambda 常用方法
 
 #### 1.4.1. ForEach
 
 ```java
+package cn.colg.foreach;
+
+import java.util.List;
+
+import org.junit.Test;
+
+import cn.colg.BaseTest;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Console;
+import cn.hutool.core.lang.Dict;
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Java1.8 ForEach 测试
  *
  * @author colg
  */
+@Slf4j
 public final class ForEachTest extends BaseTest{
     
     @Test
     public void testArray() throws Exception {
-        Console.log("cn.colg.foreach.ForEachTest.testArray()");
         // 新建一个Array
         String[] strings = {"Jack", "Rose", "Tom", "Jax"};
-        
-        CollUtil.newArrayList(strings).forEach(Console::log);
+        List<String> list = CollUtil.newArrayList(strings);
+        list.forEach(Console::log);
     }
 
     /**
@@ -110,13 +125,11 @@ public final class ForEachTest extends BaseTest{
      */
     @Test
     public void testForEachCollection() throws Exception {
-        Console.log("cn.colg.foreach.ForEachTest.testForEachCollection()");
         // 新建一个ArrayList
         List<String> list = CollUtil.newArrayList("Jack", "Rose", "Tom", "Jax");
-
         // 1. 推荐
         list.forEach(Console::log);
-
+        log.info("---------------------------------------------------------------------");
         // 2. 过滤
         list.stream().filter(str -> !"Jack".equals(str))
                      .forEach(Console::log);
@@ -129,7 +142,6 @@ public final class ForEachTest extends BaseTest{
      */
     @Test
     public void testDict() throws Exception {
-        Console.log("cn.colg.foreach.ForEachTest.testDict()");
         /*
          * 构造时必须指定初始容量：
          *  负载因子：static final float DEFAULT_LOAD_FACTOR = 0.75f;
@@ -140,10 +152,31 @@ public final class ForEachTest extends BaseTest{
                                .set("Tom", 22)
                                .set("Jax", 25);
 
-        dict.forEach((key, value) -> Console.log(key + ": " + value));
+        dict.forEach((key, value) -> Console.log(key + ": {}", value));
     }
-    
 }
+```
+
+```java
+Jack
+Rose
+Tom
+Jax
+2018-12-10 10:06:03.894 - INFO [           main] cn.colg.BaseTest                         : ----------------------------------------------------------------------------------------
+Jack: 18
+Rose: 20
+Tom: 22
+Jax: 25
+2018-12-10 10:06:03.899 - INFO [           main] cn.colg.BaseTest                         : ----------------------------------------------------------------------------------------
+Jack
+Rose
+Tom
+Jax
+2018-12-10 10:06:03.901 - INFO [           main] cn.colg.foreach.ForEachTest              : ----------------------------------------------------------------------------------------
+Rose
+Tom
+Jax
+2018-12-10 10:06:03.905 - INFO [           main] cn.colg.BaseTest                         : ----------------------------------------------------------------------------------------
 ```
 
 ## 2. 函数式接口
@@ -204,7 +237,21 @@ public interface MyFun<T> {
 ### 2.3. 作为参数传递
 
 ```java
-public class Lambda03Test {
+package cn.colg.lambda;
+
+import org.junit.Test;
+
+import cn.colg.BaseTest;
+import cn.colg.functional.MyFun;
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * Lambda 表达式测试
+ *
+ * @author colg
+ */
+@Slf4j
+public class Lambda03Test extends BaseTest{
 
     /**
      * 对一个数进行运算
@@ -219,22 +266,31 @@ public class Lambda03Test {
 
     @Test
     public void test01() throws Exception {
-        Console.log("cn.colg.lambda.Lambda03Test.test01()");
-        Console.log(operation(10, new MyFun<Integer>() {
+        Integer result = operation(10, new MyFun<Integer>() {
             
             @Override
             public Integer getValue(Integer num) {
                 return num * 10;
             }
-        }));
+        });
+        log.info("result : {}", result);
         
         // 参数列表：(x)
         // 方法体：x * x
-        Console.log(operation(10, (x) -> x * 10));
+        result = operation(10, (x) -> x * 10);
+        log.info("result : {}", result);
 
-        Console.log(operation(200, x -> x + 200));
+        result = operation(200, x -> x + 200);
+        log.info("result : {}", result);
     }
 }
+```
+
+```java
+2018-12-10 10:54:41.288 - INFO [           main] cn.colg.lambda.Lambda03Test              : result : 100
+2018-12-10 10:54:41.347 - INFO [           main] cn.colg.lambda.Lambda03Test              : result : 100
+2018-12-10 10:54:41.348 - INFO [           main] cn.colg.lambda.Lambda03Test              : result : 400
+2018-12-10 10:54:41.348 - INFO [           main] cn.colg.BaseTest                         : ------------------------------------------------------------------------------------------
 ```
 
 ### 2.4. java内置四大核心函数式接口
@@ -248,6 +304,17 @@ public class Lambda03Test {
 ![](http://ww1.sinaimg.cn/large/005PjuVtgy1fqtxzl28poj30oq0dpwg8.jpg)
 
 ```java
+package cn.colg.method;
+
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+import org.junit.Test;
+
+import cn.colg.BaseTest;
+import cn.colg.entity.Employee;
+import cn.hutool.core.lang.Console;
+
 /**
  * 方法引用：若Lambda体的内容有方法已经实现了，我们可以使用"方法引用"（可以理解为方法引用是Lambda表达式的另外一种表现形式）
  * 
@@ -260,7 +327,7 @@ public class Lambda03Test {
  *
  * @author colg
  */
-public class MethodRefTest {
+public class MethodRefTest extends BaseTest{
 
     /**
      * 方法引用
@@ -269,7 +336,6 @@ public class MethodRefTest {
      */
     @Test
     public void test01() throws Exception {
-        Console.log("cn.colg.MethodRefTest.test01()");
         String value = "colg";
 
         Consumer<String> consumer = x -> System.out.println(x);
@@ -292,7 +358,6 @@ public class MethodRefTest {
      */
     @Test
     public void test02() throws Exception {
-        Console.log("cn.colg.MethodRefTest.test02()");
         Employee employee = new Employee("colg", 28, 9999.99);
 
         Supplier<String> supplier = () -> employee.getName();
@@ -308,6 +373,16 @@ public class MethodRefTest {
 ### 3.2. 构造器引用
 
 ```java
+package cn.colg.constructor;
+
+import java.util.function.Supplier;
+
+import org.junit.Test;
+
+import cn.colg.BaseTest;
+import cn.colg.entity.Employee;
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 构造器引用：与函数式接口相结合，自动与函数式接口中方法兼容。可以把构造器引用赋值给定义的方法，与构造器参数列表要与接口中抽象方法的参数列表一致！
  * 
@@ -318,17 +393,19 @@ public class MethodRefTest {
  *
  * @author colg
  */
-public class ConstructorRefTest {
+@Slf4j
+public class ConstructorRefTest extends BaseTest{
 
     @Test
     public void test01() throws Exception {
-        Console.log("cn.colg.ConstructorRefTest.test01()");
         Supplier<Employee> supplier = () -> new Employee();
-        Console.log(supplier.get());
+        Employee employee = supplier.get();
+        log.info("employee : {}", employee);
 
         // 构造器引用
-        Supplier<Employee> supplier2 = Employee::new;
-        Console.log(supplier2.get());
+        supplier = Employee::new;
+        employee = supplier.get();
+        log.info("employee : {}", employee);
     }
 }
 ```
@@ -361,7 +438,7 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
 ### 4.3. Stream 操作的三个步骤
 
 - 创建Stream
-  -  一个数据源（如：集合、数组），获取一个流
+  -  一个数据源（如：集合、数组），获取一个流
 
 - 中间操作
   -   一个中间操作链，对数据源的数据进行处理
@@ -373,10 +450,39 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
 #### 4.3.1. 创建Stream
 
 ```java
+package cn.colg.stream;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+import org.junit.Test;
+
+import cn.colg.BaseTest;
+import cn.colg.entity.Employee;
+import cn.hutool.core.lang.Console;
+import cn.hutool.core.util.RandomUtil;
+
+/**
+ * Stream API 1.创建Stream 测试
+ * 
+ * <pre>
+ * 一、Stream 的三个操作步骤：
+ *  1. 创建Stream
+ *  
+ *  2. 中间操作
+ *  
+ *  3. 终止操作（终端操作）
+ * </pre>
+ *
+ * @author colg
+ */
+public class StreamApi01Test extends BaseTest{
+
     @SuppressWarnings("unused")
     @Test
     public void test01() throws Exception {
-        Console.log("cn.colg.StreamApiTest.test01()");
         // 1. 可以通过Collection系列集合提供的stream()或parallelStream()
         List<Employee> list = new ArrayList<>();
         Stream<Employee> stream = list.stream();
@@ -400,11 +506,33 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
         stream5.limit(10)
                .forEach(Console::log);
     }
+}
 ```
 
 #### 4.3.2. 中间操作
 
 ```java
+package cn.colg.stream;
+
+import java.util.List;
+import java.util.stream.Stream;
+
+import org.junit.Test;
+
+import cn.colg.BaseTest;
+import cn.colg.entity.Employee;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.lang.Console;
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * Stream API 2.中间操作 测试
+ *
+ * @author colg
+ */
+@Slf4j
+public class StreamApi02Test extends BaseTest{
+    
     /** 初始化员工信息 */
     private List<Employee> employees = CollUtil.newArrayList(
             new Employee("Jack", 18, 2222.99),
@@ -432,7 +560,7 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
      *  sorted(Comparator comparator)：  定制排序
      */
     
-    /// ---------------------------------------------------------------------------
+    /// ---------------------------------------------------------------------------------
 
     
     /**
@@ -464,7 +592,6 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
      */
     @Test
     public void testLimit() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testLimit()");
         employees.stream()
                  .limit(2)
                  .forEach(Console::log);
@@ -477,7 +604,6 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
      */
     @Test
     public void testSkip() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testSkip()");
         employees.stream()
                  .skip(2L)
                  .forEach(Console::log);
@@ -491,7 +617,6 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
      */
     @Test
     public void testSkipLimit() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testSkipLimit()");
         employees.stream()
                  .skip(2)
                  .limit(2)
@@ -505,7 +630,6 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
      */
     @Test
     public void testDistinct() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testDistinct()");
         employees.stream()
                  .distinct()
                  .forEach(Console::log);
@@ -518,12 +642,11 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
      */
     @Test
     public void testMap() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testMap()");
         List<String> list = CollUtil.newArrayList("colg", "cloud", "java");
         list.stream()
             .map(str -> str.toUpperCase())
             .forEach(Console::log);
-        Console.log("-----------------------------------------------------------");
+        log.info("--------------------------------------------------------------------");
         
         employees.stream()
                  .map(Employee::getName)
@@ -538,7 +661,6 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
      */
     @Test
     public void testSorted() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testSorted()");
         List<String> list = CollUtil.newArrayList("colg", "cloud", "java");
         list.stream()
             .sorted()
@@ -553,11 +675,35 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
                     }
                  }).forEach(Console::log);
     }
+}
 ```
 
 #### 4.3.3. 终止操作
 
 ```java
+package cn.colg.stream;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.junit.Test;
+
+import cn.colg.BaseTest;
+import cn.colg.entity.Employee;
+import cn.colg.enums.Status;
+import cn.hutool.core.collection.CollUtil;
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * Stream API 3.终止操作（终端操作） 测试
+ *
+ * @author colg
+ */
+@Slf4j
+public class StreamApi03Test extends BaseTest{
+
     /** 初始化员工信息 */
     private List<Employee> employees = CollUtil.newArrayList(
             new Employee("Jack", 18, 2222.99, Status.FREE),
@@ -569,57 +715,74 @@ Stream 是 Java8 中处理集合的关键抽象概念，它可以指定你希望
     
     /*
      * 查找与匹配：
-     *  allMatch：     检查是否匹配所有元素
-     *  anyMatch：     检查是否至少匹配一个元素
+     *  allMatch：       检查是否匹配所有元素
+     *  anyMatch：       检查是否至少匹配一个元素
      *  noneMatch：    检查是否没有匹配所有元素
      *  findFirst：    返回第一个元素
-     *  findAny：      返回当前流中的任意元素
-     *  count：        返回流中元素的总个数
-     *  max：          返回流中最大值
-     *  min：          返回流中最小值
-     *  collect：      收集，将流转换为其他形式。接收一个Collector接口的实现，用于给Stream中元素做汇总的方法
+     *  findAny：          返回当前流中的任意元素
+     *  count：                返回流中元素的总个数
+     *  max：                      返回流中最大值
+     *  min：                      返回流中最小值
+     *  collect：          收集，将流转换为其他形式。接收一个Collector接口的实现，用于给Stream中元素做汇总的方法
      */
     
-    /// ----------------------------------------------------------------------------
+    /// ----------------------------------------------------------------------------------------------------
 
     @Test
     public void testMatchFind() throws Exception {
-        Console.log("cn.colg.StreamApi03Test.testAllMatch()");
         Set<Employee> set = employees.stream()
                                      .collect(Collectors.toSet());
-        Console.log(set);
+        log.info("set : {}", set);
+        
+        log.info("---------------------------------------------------------------------");
         
         boolean allMatch = employees.stream()
                                     .allMatch(e -> e.getStatus().equals(Status.BUSY));
-        Console.log(allMatch);
+        log.info("allMatch : {}", allMatch);
         
-        Console.log("------------------------------------------------------------");
+        log.info("---------------------------------------------------------------------");
         
         boolean anyMatch = employees.stream()
                                     .anyMatch(e -> e.getStatus().equals(Status.BUSY));
-        Console.log(anyMatch);
+        log.info("anyMatch : {}", anyMatch);
         
-        Console.log("------------------------------------------------------------");
+        log.info("---------------------------------------------------------------------");
         
         boolean noneMatch = employees.stream()
                                      .noneMatch(e -> e.getStatus().equals(Status.BUSY));
-        Console.log(noneMatch);
+        log.info("noneMatch : {}", noneMatch);
         
-        Console.log("----------------------------------------------------------------------------------------------------");
+        log.info("---------------------------------------------------------------------");
         
         Optional<Employee> findFirst = employees.stream()
                                                 .findFirst();
         Employee employee = findFirst.orElse(new Employee());
-        Console.log(employee);
+        log.info("employee : {}", employee);
         
-        Console.log("------------------------------------------------------------");
+        log.info("---------------------------------------------------------------------");
         
         Optional<Employee> findAny = employees.parallelStream()
                                               .filter(e -> e.getStatus().equals(Status.FREE))
                                               .findAny();
-        Employee orElse = findAny.orElse(new Employee());
-        Console.log(orElse);
+        employee = findAny.orElse(new Employee());
+        log.info("employee : {}", employee);
     }
+}
+```
+
+```java
+2018-12-10 10:58:41.567 - INFO [           main] cn.colg.stream.StreamApi03Test           : set : [Employee(name=Tom, age=50, salary=4444.99, status=VOCATION), Employee(name=Luo, age=8, salary=7777.99, status=BUSY), Employee(name=Rose, age=28, salary=5555.99, status=BUSY), Employee(name=Jack, age=18, salary=2222.99, status=FREE), Employee(name=Jax, age=16, salary=3333.99, status=FREE)]
+2018-12-10 10:58:41.573 - INFO [           main] cn.colg.stream.StreamApi03Test           : ----------------------------------------------------------------------------------------
+2018-12-10 10:58:41.575 - INFO [           main] cn.colg.stream.StreamApi03Test           : allMatch : false
+2018-12-10 10:58:41.575 - INFO [           main] cn.colg.stream.StreamApi03Test           : ----------------------------------------------------------------------------------------
+2018-12-10 10:58:41.575 - INFO [           main] cn.colg.stream.StreamApi03Test           : anyMatch : true
+2018-12-10 10:58:41.576 - INFO [           main] cn.colg.stream.StreamApi03Test           : ----------------------------------------------------------------------------------------
+2018-12-10 10:58:41.576 - INFO [           main] cn.colg.stream.StreamApi03Test           : noneMatch : false
+2018-12-10 10:58:41.576 - INFO [           main] cn.colg.stream.StreamApi03Test           : ----------------------------------------------------------------------------------------
+2018-12-10 10:58:41.578 - INFO [           main] cn.colg.stream.StreamApi03Test           : employee : Employee(name=Jack, age=18, salary=2222.99, status=FREE)
+2018-12-10 10:58:41.579 - INFO [           main] cn.colg.stream.StreamApi03Test           : ----------------------------------------------------------------------------------------
+2018-12-10 10:58:41.582 - INFO [           main] cn.colg.stream.StreamApi03Test           : employee : Employee(name=Jack, age=18, salary=2222.99, status=FREE)
+2018-12-10 10:58:41.582 - INFO [           main] cn.colg.BaseTest                         : ----------------------------------------------------------------------------------------
 ```
 
 ## 5. 接口中的默认方法与静态方法

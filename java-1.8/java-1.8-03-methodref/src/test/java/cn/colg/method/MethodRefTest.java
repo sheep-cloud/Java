@@ -1,10 +1,11 @@
-package cn.colg;
+package cn.colg.method;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import org.junit.Test;
 
+import cn.colg.BaseTest;
 import cn.colg.entity.Employee;
 import cn.hutool.core.lang.Console;
 
@@ -20,7 +21,7 @@ import cn.hutool.core.lang.Console;
  *
  * @author colg
  */
-public class MethodRefTest {
+public class MethodRefTest extends BaseTest{
 
     /**
      * 方法引用
@@ -29,7 +30,6 @@ public class MethodRefTest {
      */
     @Test
     public void test01() throws Exception {
-        Console.log("cn.colg.MethodRefTest.test01()");
         String value = "colg";
 
         Consumer<String> consumer = x -> System.out.println(x);
@@ -52,7 +52,6 @@ public class MethodRefTest {
      */
     @Test
     public void test02() throws Exception {
-        Console.log("cn.colg.MethodRefTest.test02()");
         Employee employee = new Employee("colg", 28, 9999.99);
 
         Supplier<String> supplier = () -> employee.getName();

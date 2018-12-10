@@ -8,21 +8,22 @@ import cn.colg.BaseTest;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.lang.Dict;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Java1.8 ForEach 测试
  *
  * @author colg
  */
+@Slf4j
 public final class ForEachTest extends BaseTest{
     
     @Test
     public void testArray() throws Exception {
-        Console.log("cn.colg.foreach.ForEachTest.testArray()");
         // 新建一个Array
         String[] strings = {"Jack", "Rose", "Tom", "Jax"};
-        
-        CollUtil.newArrayList(strings).forEach(Console::log);
+        List<String> list = CollUtil.newArrayList(strings);
+        list.forEach(Console::log);
     }
 
     /**
@@ -32,13 +33,11 @@ public final class ForEachTest extends BaseTest{
      */
     @Test
     public void testForEachCollection() throws Exception {
-        Console.log("cn.colg.foreach.ForEachTest.testForEachCollection()");
         // 新建一个ArrayList
         List<String> list = CollUtil.newArrayList("Jack", "Rose", "Tom", "Jax");
-
         // 1. 推荐
         list.forEach(Console::log);
-
+        log.info("------------------------------------------------------------------------------------------");
         // 2. 过滤
         list.stream().filter(str -> !"Jack".equals(str))
                      .forEach(Console::log);
@@ -51,7 +50,6 @@ public final class ForEachTest extends BaseTest{
      */
     @Test
     public void testDict() throws Exception {
-        Console.log("cn.colg.foreach.ForEachTest.testDict()");
         /*
          * 构造时必须指定初始容量：
          *  负载因子：static final float DEFAULT_LOAD_FACTOR = 0.75f;
@@ -62,7 +60,6 @@ public final class ForEachTest extends BaseTest{
                                .set("Tom", 22)
                                .set("Jax", 25);
 
-        dict.forEach((key, value) -> Console.log(key + ": " + value));
+        dict.forEach((key, value) -> Console.log(key + ": {}", value));
     }
-    
 }

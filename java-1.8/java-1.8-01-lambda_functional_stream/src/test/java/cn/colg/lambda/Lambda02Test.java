@@ -5,8 +5,10 @@ import java.util.function.Consumer;
 
 import org.junit.Test;
 
+import cn.colg.BaseTest;
 import cn.hutool.core.lang.Console;
 import cn.hutool.core.thread.ThreadUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Lambda 表达式语法
@@ -18,17 +20,17 @@ import cn.hutool.core.thread.ThreadUtil;
  *      右侧：Lambda表达式中所需要执行的功能，即Lambda体
  *      
  *  语法格式一：无参数，无返回值
- *      Runnable r1 = () -> Const.log("Hello Lambda!);
+ *      Runnable r1 = () -> log.info("Hello Lambda!");
  *      
  *  语法格式二：有一个参数，无返回值
- *      Consumer<String> con = (x) -> Const.log(x);
+ *      Consumer<String> con = (x) -> log.info(x);
  *      
  *  语法格式三：若只有一个参数，小括号可以省略不写（不推荐）
- *      Consumer<String> con = x -> Const.log(x);
+ *      Consumer<String> con = x -> log.info(x);
  *      
  *  语法格式四：有两个以上的参数，有返回值，并且Lambda体中有多条语句
  *      Comparator<Integer> com = (x, y) -> {
- *           Const.log("函数式结构);
+ *           log.info("函数式结构");
  *           return ...;
  *      }
  *      
@@ -48,25 +50,23 @@ import cn.hutool.core.thread.ThreadUtil;
  *
  * @author colg
  */
-public class Lambda02Test {
+@Slf4j
+public class Lambda02Test extends BaseTest{
     
     @Test
     public void test01() throws Exception {
-        Console.log("cn.colg.lambda.Lambda02Test.test01()");
         // jdk 1.7之前，必须是final，jdk 1.8默认在变量前加了 final
         String value = "jdk 新特性";
         ThreadUtil.execute(new Runnable() {
 
             @Override
             public void run() {
-                Console.log("colg: {}", value);
+                log.info("colg : {}", value);
             }
         });
-
-        Console.log("----------------------------------------------------------------------------------------------------");
-
+        
         // Lamdba 表达式
-        ThreadUtil.execute(() -> Console.log("colg: {}", value));
+        ThreadUtil.execute(() -> log.info("colg : {}", value));
     }
 
     @Test
