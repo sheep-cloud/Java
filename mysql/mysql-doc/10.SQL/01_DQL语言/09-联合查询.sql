@@ -19,6 +19,14 @@
 */
 
 -- 案例：查询中国用户中男性的信息以及外国用户中男性的用户信息
-SELECT id, c_name FROM t_ca WHERE c_sex = '男'
+SELECT
+    id, c_name    
+FROM
+    t_ca
+WHERE c_sex = '男'
 UNION ALL
-SELECT t_id, t_name FROM t_ua WHERE t_gender = 'male';
+SELECT
+    t_id, t_name
+FROM
+    t_ua
+WHERE t_gender = 'male';

@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v12.4.1 (64 bit)
-MySQL - 5.7.19 : Database - myemployees
+MySQL - 5.7.19 : Database - mysql_base
 *********************************************************************
 */
 
@@ -12,9 +12,45 @@ MySQL - 5.7.19 : Database - myemployees
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`myemployees` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`mysql_base` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE `myemployees`;
+USE `mysql_base`;
+
+/*Table structure for table `admin` */
+
+DROP TABLE IF EXISTS `admin`;
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '用户编号',
+  `username` varchar(10) NOT NULL COMMENT '用户名称',
+  `password` varchar(10) NOT NULL COMMENT '用户密码',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+/*Data for the table `admin` */
+
+insert  into `admin`(`id`,`username`,`password`) values 
+(1,'john','8888'),
+(2,'lyt','6666');
+
+/*Table structure for table `boys` */
+
+DROP TABLE IF EXISTS `boys`;
+
+CREATE TABLE `boys` (
+  `boy_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '男生编号',
+  `boy_name` varchar(20) DEFAULT NULL COMMENT '姓名',
+  `user_cp` int(11) DEFAULT NULL COMMENT '魅力值',
+  PRIMARY KEY (`boy_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='男生表';
+
+/*Data for the table `boys` */
+
+insert  into `boys`(`boy_id`,`boy_name`,`user_cp`) values 
+(1,'张无忌',100),
+(2,'鹿晗',800),
+(3,'黄晓明',50),
+(4,'段誉',300);
 
 /*Table structure for table `departments` */
 
@@ -195,6 +231,37 @@ insert  into `employees`(`employee_id`,`first_name`,`last_name`,`email`,`phone_n
 (205,'Shelley','Higgins','SHIGGINS','515.123.8080','AC_MGR',12000.00,NULL,101,110,'2018-07-10 17:33:45'),
 (206,'William','Gietz','WGIETZ','515.123.8181','AC_ACCOUNT',8300.00,NULL,205,110,'2015-03-11 01:25:11');
 
+/*Table structure for table `girls` */
+
+DROP TABLE IF EXISTS `girls`;
+
+CREATE TABLE `girls` (
+  `girl_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '女生编号',
+  `girl_name` varchar(50) NOT NULL COMMENT '姓名',
+  `sex` char(1) DEFAULT '女' COMMENT '性别',
+  `borndate` datetime DEFAULT '1987-01-01 00:00:00' COMMENT '出生日期',
+  `phone` varchar(11) NOT NULL COMMENT '手机号码',
+  `photo` blob COMMENT '照片',
+  `boyfriend_id` int(11) DEFAULT NULL COMMENT '男朋友编号',
+  PRIMARY KEY (`girl_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='女生表';
+
+/*Data for the table `girls` */
+
+insert  into `girls`(`girl_id`,`girl_name`,`sex`,`borndate`,`phone`,`photo`,`boyfriend_id`) values 
+(1,'柳岩','女','1988-02-03 00:00:00','18209876577',NULL,8),
+(2,'苍老师','女','1987-12-30 00:00:00','18219876577',NULL,9),
+(3,'Angelababy','女','1989-02-03 00:00:00','18209876567',NULL,3),
+(4,'热巴','女','1993-02-03 00:00:00','18209876579',NULL,2),
+(5,'周冬雨','女','1992-02-03 00:00:00','18209179577',NULL,9),
+(6,'周芷若','女','1988-02-03 00:00:00','18209876577',NULL,1),
+(7,'岳灵珊','女','1987-12-30 00:00:00','18219876577',NULL,9),
+(8,'小昭','女','1989-02-03 00:00:00','18209876567',NULL,1),
+(9,'双儿','女','1993-02-03 00:00:00','18209876579',NULL,9),
+(10,'王语嫣','女','1992-02-03 00:00:00','18209179577',NULL,4),
+(11,'夏雪','女','1993-02-03 00:00:00','18209876579',NULL,9),
+(12,'赵敏','女','1992-02-03 00:00:00','18209179577',NULL,1);
+
 /*Table structure for table `job_grades` */
 
 DROP TABLE IF EXISTS `job_grades`;
@@ -290,197 +357,6 @@ insert  into `locations`(`location_id`,`street_address`,`postal_code`,`city`,`st
 (3000,'Murtenstrasse 921','3095','Bern','BE','CH'),
 (3100,'Pieter Breughelstraat 837','3029SK','Utrecht','Utrecht','NL'),
 (3200,'Mariano Escobedo 9991','11932','Mexico City','Distrito Federal,','MX');
-
-/* Function  structure for function  `myf1` */
-
-/*!50003 DROP FUNCTION IF EXISTS `myf1` */;
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`::1` FUNCTION `myf1`() RETURNS int(11)
-begin
-	declare c int default 0;	-- 定义变量
-	select count(*) into c
-	from employees;
-	return c;
-end */$$
-DELIMITER ;
-
-/* Function  structure for function  `myf2` */
-
-/*!50003 DROP FUNCTION IF EXISTS `myf2` */;
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`::1` FUNCTION `myf2`(empName varchar(20)) RETURNS double
-begin
-	set @sal = 0;			-- 定义用户变量
-	select e.salary into @sal	-- 赋值
-	from employees e
-	where e.last_name = empName;
-	return @sal;
-end */$$
-DELIMITER ;
-
-/* Function  structure for function  `myf3` */
-
-/*!50003 DROP FUNCTION IF EXISTS `myf3` */;
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`::1` FUNCTION `myf3`(departmentName varchar(3)) RETURNS double
-begin
-	declare sal double;		-- 定义局部变量
-	select avg(salary) into sal
-	from employees e
-	inner join departments d on d.department_id = e.department_id
-	where d.department_name = departmentName;
-	return sal;
-end */$$
-DELIMITER ;
-
-/* Function  structure for function  `myf4` */
-
-/*!50003 DROP FUNCTION IF EXISTS `myf4` */;
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`::1` FUNCTION `myf4`(num1 double, num2 double) RETURNS double
-begin
-	set @sum = num1 + num2;
-	return @sum;
-end */$$
-DELIMITER ;
-
-/* Function  structure for function  `random_dateTime` */
-
-/*!50003 DROP FUNCTION IF EXISTS `random_dateTime` */;
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`::1` FUNCTION `random_dateTime`(start_date VARCHAR(32), end_date VARCHAR(32)) RETURNS datetime
-BEGIN
-/*
-	获取随机日期，范围 start_date ~ end_date
-*/
-	DECLARE return_dateTime DATETIME DEFAULT NULL;
-	SET return_dateTime = FROM_UNIXTIME(random_int(UNIX_TIMESTAMP(start_date), UNIX_TIMESTAMP(end_date)));
-	RETURN return_dateTime;
-END */$$
-DELIMITER ;
-
-/* Function  structure for function  `random_int` */
-
-/*!50003 DROP FUNCTION IF EXISTS `random_int` */;
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`::1` FUNCTION `random_int`(start_num INT, end_num INT) RETURNS int(11)
-BEGIN
-/*
-	获得指定范围内的随机数
-	
-	@params start_num 最小数（包含）
-	@params end_num 最大数（包含）
-	@return 随机数
-*/
-	DECLARE i INT DEFAULT 0;
-	# 若要在i ≤ R ≤ j 这个范围得到一个随机整数R ，需要用到表达式 FLOOR(i + RAND() * (j – i + 1))。
-	SET i = FLOOR(start_num + RAND() * (end_num - start_num + 1));
-	RETURN i;
-END */$$
-DELIMITER ;
-
-/* Function  structure for function  `test_if` */
-
-/*!50003 DROP FUNCTION IF EXISTS `test_if` */;
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`::1` FUNCTION `test_if`(score double) RETURNS varchar(32) CHARSET utf8
-begin
-	if score > 100 or score < 0 then return '成绩输入错误，请输入 0-100 的数字';
-	elseif score <= 100 then return 'A';
-	elseif score < 90 then return 'B';
-	elseif score < 80 then return 'C';
-	else return 'D';
-	end if;
-end */$$
-DELIMITER ;
-
-/* Procedure structure for procedure `test_case` */
-
-/*!50003 DROP PROCEDURE IF EXISTS  `test_case` */;
-
-DELIMITER $$
-
-/*!50003 CREATE DEFINER=`root`@`::1` PROCEDURE `test_case`(in score double)
-begin
-	case
-		when score > 100 or score < 0 then select '成绩输入错误，请输入 0-100 的数字';
-		when score <= 100 then select 'A';
-		when score < 90 then select 'B';
-		when score < 80 then select 'C';
-		else select 'D';
-	end case;
-end */$$
-DELIMITER ;
-
-/*Table structure for table `myv1` */
-
-DROP TABLE IF EXISTS `myv1`;
-
-/*!50001 DROP VIEW IF EXISTS `myv1` */;
-/*!50001 DROP TABLE IF EXISTS `myv1` */;
-
-/*!50001 CREATE TABLE  `myv1`(
- `employee_id` int(6) ,
- `last_name` varchar(25) ,
- `department_id` int(4) ,
- `department_name` varchar(3) ,
- `job_id` varchar(10) ,
- `job_title` varchar(35) ,
- `min_salary` int(6) ,
- `max_salary` int(6) 
-)*/;
-
-/*Table structure for table `myv2` */
-
-DROP TABLE IF EXISTS `myv2`;
-
-/*!50001 DROP VIEW IF EXISTS `myv2` */;
-/*!50001 DROP TABLE IF EXISTS `myv2` */;
-
-/*!50001 CREATE TABLE  `myv2`(
- `department_id` int(4) ,
- `ag` double(14,6) 
-)*/;
-
-/*Table structure for table `myv3` */
-
-DROP TABLE IF EXISTS `myv3`;
-
-/*!50001 DROP VIEW IF EXISTS `myv3` */;
-/*!50001 DROP TABLE IF EXISTS `myv3` */;
-
-/*!50001 CREATE TABLE  `myv3`(
- `department_id` int(4) ,
- `ag` double(14,6) 
-)*/;
-
-/*View structure for view myv1 */
-
-/*!50001 DROP TABLE IF EXISTS `myv1` */;
-/*!50001 DROP VIEW IF EXISTS `myv1` */;
-
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`::1` SQL SECURITY DEFINER VIEW `myv1` AS select `e`.`employee_id` AS `employee_id`,`e`.`last_name` AS `last_name`,`d`.`department_id` AS `department_id`,`d`.`department_name` AS `department_name`,`j`.`job_id` AS `job_id`,`j`.`job_title` AS `job_title`,`j`.`min_salary` AS `min_salary`,`j`.`max_salary` AS `max_salary` from ((`employees` `e` join `departments` `d` on((`d`.`department_id` = `e`.`department_id`))) join `jobs` `j` on((`j`.`job_id` = `e`.`job_id`))) */;
-
-/*View structure for view myv2 */
-
-/*!50001 DROP TABLE IF EXISTS `myv2` */;
-/*!50001 DROP VIEW IF EXISTS `myv2` */;
-
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`::1` SQL SECURITY DEFINER VIEW `myv2` AS select `e`.`department_id` AS `department_id`,avg(`e`.`salary`) AS `ag` from `employees` `e` group by `e`.`department_id` */;
-
-/*View structure for view myv3 */
-
-/*!50001 DROP TABLE IF EXISTS `myv3` */;
-/*!50001 DROP VIEW IF EXISTS `myv3` */;
-
-/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`::1` SQL SECURITY DEFINER VIEW `myv3` AS select `m2`.`department_id` AS `department_id`,`m2`.`ag` AS `ag` from `myv2` `m2` order by `m2`.`ag` limit 1 */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

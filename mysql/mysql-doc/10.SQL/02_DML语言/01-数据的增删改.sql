@@ -22,41 +22,41 @@
 		1. 方式一支持插入多行，方式二不支持
 		2. 方式一支持子查询，方式二不支持
 */
+USE mysql_base;
 
-SELECT * FROM beauty;
+SELECT * FROM girls;
 
 -- 1. 插入的值的类型要与列的类型一致或兼容
-INSERT INTO beauty(id, beautyName, sex, borndate, phone, photo, boyfriend_id)
+INSERT INTO girls(girl_id, girl_name, sex, borndate, phone, photo, boyfriend_id)
 VALUES(13, '唐艺昕', '女', '1990-4-23', '18988888888', NULL, 2);
 
 -- 2. 不可以为NULL的列必须插入值，可以为NULL的列如何插入值？
 -- 方式一：插入NULL
-INSERT INTO beauty(id, beautyName, sex, borndate, phone, photo, boyfriend_id)
+INSERT INTO girls(girl_id, girl_name, sex, borndate, phone, photo, boyfriend_id)
 VALUES(13, '唐艺昕', '女', '1990-4-23', '18988888888', NULL, 2);
 -- 方式二：不写该列
-INSERT INTO beauty(id, beautyName, sex, borndate, phone, boyfriend_id)
+INSERT INTO girls(girl_id, girl_name, sex, borndate, phone, boyfriend_id)
 VALUES(14, '金星', '女', '1990-4-23', '18988888888', 9);
 
 -- 3. 列的顺序是否可以调换
-INSERT INTO beauty(beautyName, sex, id, phone)
+INSERT INTO girls(girl_name, sex, girl_id, phone)
 VALUES('蒋欣', '女', 16, '110');
 
 -- 4. 列数和值的个数必须一致
-INSERT INTO beauty(beautyName, sex, id, phone)
+INSERT INTO girls(girl_name, sex, girl_id, phone)
 VALUES('关晓彤', '女', 15, '110');
 
 -- 5. 可以省略列名，默认所有列，而且列的顺序和表中列的顺序一致
-INSERT INTO beauty
+INSERT INTO girls
 VALUES(18, '张飞', '男', NULL, 119, NULL, NULL);
 
 -- 6. 插入子查询
-INSERT INTO beauty(id, beautyName, phone)
+INSERT INTO girls(girl_id, girl_name, phone)
 SELECT 20, '宋茜', '11809866';
 
-
 -- 方式二
-INSERT INTO beauty
-SET id = 19, beautyName = '刘涛', phone = '999';
+INSERT INTO girls
+SET girl_id = 19, girl_name = '刘涛', phone = '999';
 
 
 -- 二、修改语句
@@ -81,32 +81,32 @@ SET id = 19, beautyName = '刘涛', phone = '999';
 
 -- 1. 修改单表的记录
 -- 案例1：修改beauty表中姓唐的女生的电话为13899888899
-UPDATE beauty
+UPDATE girls
 SET phone = '13899888899'
-WHERE beautyName LIKE '唐%';
+WHERE girl_name LIKE '唐%';
 
 -- 案例2：修改boys表中id=2的名称为张飞，魅力值为10
 UPDATE boys
-SET boyName = '张飞', userCP = 10
-WHERE id = 2;
+SET boy_name = '张飞', user_cp = 10
+WHERE boy_id = 2;
 
 -- 2. 修改多表的记录
 -- 案例1：修改张无忌的女朋友的手机号为114
 UPDATE boys b
-INNER JOIN beauty g ON b.id = g.boyfriend_id
+INNER JOIN girls g ON b.boy_id = g.boyfriend_id
 SET g.phone = 114
-WHERE b.boyName = '张无忌';
+WHERE b.boy_name = '张无忌';
 
 -- 案例2：修改没有男朋友的女生的男朋友编号都为2
 UPDATE boys b
-RIGHT JOIN beauty g ON b.id = g.boyfriend_id
+RIGHT JOIN girls g ON b.boy_id = g.boyfriend_id
 SET g.boyfriend_id = 2
-WHERE b.id IS NULL;
+WHERE b.boy_id IS NULL;
 
 -- 查询没有男朋友的女生的男朋友信息
 SELECT * FROM boys b
-RIGHT JOIN beauty g ON b.id = g.boyfriend_id
-WHERE b.id IS NULL;
+RIGHT JOIN girls g ON b.boy_id = g.boyfriend_id
+WHERE b.boy_id IS NULL;
 
 
 -- 三、删除语句
@@ -143,19 +143,19 @@ WHERE b.id IS NULL;
 
 -- 1. 单表的删除
 -- 案例1：删除手机号以9结尾的女生信息
-DELETE FROM beauty
+DELETE FROM girls
 WHERE phone LIKE '%9';
 
 -- 2. 多表的删除
 -- 案例1：删除张无忌的女朋友的信息
-DELETE g FROM beauty g
-INNER JOIN boys b ON b.id = g.boyfriend_id
-WHERE b.boyName = '张无忌';
+DELETE g FROM girls g
+INNER JOIN boys b ON b.boy_id = g.boyfriend_id
+WHERE b.boy_name = '张无忌';
 
 -- 案例2：删除黄晓明的信息以及他女朋友的信息
-DELETE g, b FROM beauty g
-INNER JOIN boys b ON b.id = g.boyfriend_id
-WHERE b.boyName = '黄晓明';
+DELETE g, b FROM girls g
+INNER JOIN boys b ON b.boy_id = g.boyfriend_id
+WHERE b.boy_name = '黄晓明';
 
 -- 方式二：TRUNCATE 语句
 -- 案例1：将魅力值>100的男生删除

@@ -19,17 +19,27 @@
 			SELECT 查询列表 FROM 表
 			LIMIT (page - 1) * size, size;
 */
+USE mysql_base;
 
 -- 案例1：查询前5条员工信息
-SELECT * FROM employees
+SELECT
+    e.*
+FROM
+    employees e
 LIMIT 5;
 
 -- 案例2：查询第11条到第25条
-SELECT * FROM employees   
+SELECT
+    e.*
+FROM
+    employees e
 LIMIT 10, 15;
 
 -- 案例3：查询有奖金的员工信息，显示工资较高的前10名
-SELECT * FROM employees
-WHERE commission_pct IS NOT NULL
-ORDER BY salary DESC
+SELECT
+    e.*
+FROM
+    employees e
+WHERE e.commission_pct IS NOT NULL
+ORDER BY e.salary DESC
 LIMIT 10;

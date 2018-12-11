@@ -55,22 +55,29 @@
 						表1 别名, 表2 别名
 					WHERE 等值的连接条件;
 */
-USE girls;
-SELECT * FROM beauty;
+USE mysql_base;
 SELECT * FROM boys;
+SELECT * FROM girls;
 
 -- 1. sql92标准
 
 -- 1.1. 等值连接
 
 -- 案例1：查询女生名和对应的男生名
-SELECT boyName, beautyName FROM boys, beauty
-WHERE boys.id = beauty.boyfriend_id;
+SELECT
+    b.boy_id, b.boy_name,
+    g.girl_id, g.girl_name
+FROM
+    boys b, girls g
+WHERE b.boy_id = g.boyfriend_id;
 
 -- 案例2：查询员工名和对应的部门名
-USE myemployees;
-SELECT last_name, department_name FROM employees, departments
-WHERE departments.department_id = employees.department_id;
+SELECT
+    e.employee_id, e.last_name,
+    d.department_id, d.department_name
+FROM
+    employees e, departments d
+WHERE e.department_id = d.department_id;
 
 -- 案例3：查询员工名、工种号、工种名
 /*
@@ -80,18 +87,30 @@ WHERE departments.department_id = employees.department_id;
 		
 	注意：如果为表起了别名，则查询的字段就不能使用原来的表名去限定
 */
-SELECT e.last_name, j.job_id, j.job_title FROM employees e, jobs j
-WHERE j.job_id = e.job_id;
+SELECT
+    e.employee_id, e.last_name,
+    j.job_id, j.job_title
+FROM
+    employees e, jobs j
+WHERE e.job_id = j.job_id;
 
 -- 1.2. 非等值连接
 
--- 案例1：查询员工的工资和工资级别
-SELECT e.last_name, e.salary, jg.grade_level FROM employees e, job_grades jg
+-- 案例1：查询员工的工资和工资级别，按工资级别排序
+SELECT
+    e.employee_id, e.last_name, e.salary,
+    jg.grade_level
+FROM
+    employees e, job_grades jg
 WHERE e.salary BETWEEN jg.lowest_sal AND jg.highest_sal
 ORDER BY jg.grade_level;
 
 -- 1.3. 自连接
 
 -- 案例1：查询员工名和上级的名称
-SELECT e1.employee_id, e1.last_name, e2.employee_id, e2.last_name FROM employees e1, employees e2
+SELECT
+    e1.employee_id, e1.last_name,
+    e2.employee_id, e2.last_name
+FROM
+    employees e1, employees e2
 WHERE e1.manager_id = e2.employee_id;

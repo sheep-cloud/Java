@@ -29,6 +29,7 @@
 		控制函数：
 			IF CASE
 */
+USE mysql_base;
 
 -- 1. 字符函数
 
@@ -38,14 +39,20 @@ SELECT LENGTH('杰克jack');
 SHOW VARIABLES LIKE '%char%';
 
 -- 1.2. CONCAT 拼接字符串
-SELECT CONCAT(last_name, '_', first_name) 姓名 FROM employees;
+SELECT
+    e.employee_id, CONCAT(e.last_name, '_', e.first_name) 姓名
+FROM
+    employees e;
 
 -- 1.3. UPPER、LOWER
 SELECT UPPER('john');
 SELECT LOWER('john');
 
 -- 案例：将姓大写，名变小写，然后拼接
-SELECT CONCAT(UPPER(last_name), '_', LOWER(first_name)) 姓名 FROM employees;
+SELECT
+    e.employee_id, CONCAT(UPPER(e.last_name), '_', LOWER(e.first_name)) 姓名
+FROM
+    employees e;
 
 -- 1.4. SUBSTR、SUBSTRING；索引从1开始
 -- 截取从指定索引处后面所有字符
@@ -54,7 +61,10 @@ SELECT SUBSTR('李莫愁爱上了陆展元', 7) out_put;
 SELECT SUBSTR('李莫愁爱上了陆展元', 1, 3) out_put;
 
 -- 案例：姓名中首字母大写、其他字符小写然后用_拼接，显示出来
-SELECT CONCAT(UPPER(SUBSTR(last_name, 1, 1)), '_', SUBSTR(last_name, 2)) FROM employees;
+SELECT
+    e.employee_id, CONCAT(UPPER(SUBSTR(last_name, 1, 1)), '_', SUBSTR(last_name, 2)) 姓名
+FROM
+    employees e;
 
 -- 1.5. INSTR 返回子串第一次出现的索引，如果找不到返回0
 SELECT INSTR('杨不悔爱上了殷六侠', '殷六侠') out_put;
@@ -105,21 +115,30 @@ SELECT CURDATE();
 SELECT CURTIME();
 
 -- 3.4. 获取指定的部分，年、月、日、小时、分钟、秒
-SELECT CONCAT(YEAR(hiredate), '年', LPAD(MONTH(hiredate), 2, '0'), '月', LPAD(DAY(hiredate), 2, '0'), '日') 入职日期 FROM employees;
+SELECT
+    e.employee_id, CONCAT(YEAR(e.hiredate), '年', LPAD(MONTH(e.hiredate), 2, '0'), '月', LPAD(DAY(e.hiredate), 2, '0'), '日') 入职日期
+FROM
+    employees e;
 
 -- 3.5. STR_TO_DATE 将字符通过指定的格式转换成日期
 SELECT STR_TO_DATE('01/20/2015', '%m/%d/%Y') out_put;
 
 -- 案例：查询入职日期01/20/2015的员工信息
-SELECT * FROM employees
-WHERE DATE(hiredate) = STR_TO_DATE('01/20/2015', '%m/%d/%Y');
+SELECT
+    e.*
+FROM
+    employees e
+WHERE DATE(e.hiredate) = STR_TO_DATE('01/20/2015', '%m/%d/%Y');
 
 -- 3.6. DATE_FORMAT 将日期转换成字符串
 SELECT DATE_FORMAT(NOW(), '%y年%m月%d日') out_put;
 
 -- 案例：查询有奖金的员工名和入职日期（xx月/xx日 xxxx年）
-SELECT last_name, DATE_FORMAT(hiredate, '%m月/%d日 %Y年') 入职日期 FROM employees
-WHERE commission_pct IS NOT NULL;
+SELECT
+    e.employee_id, e.last_name, DATE_FORMAT(e.hiredate, '%m月%d日 %Y年') 入职日期
+FROM
+    employees e
+WHERE e.commission_pct IS NOT NULL;
 
 -- 4. 其他函数
 SELECT VERSION();
@@ -132,7 +151,10 @@ SELECT USER();
 -- 5.1. IF函数：IF ELSE 的效果
 SELECT IF(10 < 5, '大', '小');
 
-SELECT last_name, commission_pct, IF(commission_pct IS NULL, '没奖金，呵呵', '有奖金，嘻嘻') 备注 FROM employees;
+SELECT
+    e.department_id, e.last_name, e.commission_pct, IF(e.commission_pct IS NULL, '没奖金，呵呵', '有奖金，嘻嘻') 备注
+FROM
+    employees e;
 
 -- 5.2. CASE 函数
 -- 5.2.1. CASE函数的使用一：类似于 switch case；等值判断
@@ -160,14 +182,16 @@ SELECT last_name, commission_pct, IF(commission_pct IS NULL, '没奖金，呵呵
 		部门编号=50，显示工资为1.3倍
 		其他部门，显示的工资为原工资
 */
-SELECT salary 原始工资, department_id,
-    CASE department_id
-        WHEN 30 THEN salary * 1.1
-        WHEN 40 THEN salary * 1.2
-        WHEN 50 THEN salary * 1.3
-        ELSE salary
+SELECT
+    e.employee_id, e.department_id, e.salary 原始工资,
+    CASE e.department_id
+        WHEN 30 THEN e.salary * 1.1
+        WHEN 40 THEN e.salary * 1.2
+        WHEN 50 THEN e.salary * 1.3
+        ELSE e.salary
     END 新工资
-FROM employees;
+FROM
+    employees e;
 
 -- 5.2.2. CASE函数的使用二：类似于 多重if；区间判断
 /*
@@ -194,11 +218,13 @@ FROM employees;
 		工资>10000，显示C级别
 		否则，显示D级别
 */
-SELECT salary, department_id,
+SELECT
+    e.employee_id, e.department_id, e.salary,
     CASE
-        WHEN salary > 20000 THEN 'A'
-        WHEN salary > 15000 THEN 'B'
-        WHEN salary > 10000 THEN 'C'
+        WHEN e.salary > 20000 THEN 'A'
+        WHEN e.salary > 15000 THEN 'B'
+        WHEN e.salary > 10000 THEN 'C'
         ELSE 'D'
     END 工资级别
-FROM employees;
+FROM
+    employees e;

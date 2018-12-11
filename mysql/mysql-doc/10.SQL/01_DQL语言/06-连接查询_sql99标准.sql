@@ -37,18 +37,21 @@
 		非等值连接
 		自连接
 */
+USE mysql_base;
 
 -- 1.1. 等值连接
 -- 案例1：查询员工名和对应的部门名
 SELECT
-    e.last_name, d.department_name
+    e.employee_id, e.last_name,
+    d.department_id, d.department_name
 FROM
     employees e
     INNER JOIN departments d ON e.department_id = d.department_id;
 
 -- 案例2：查询名字中包含e的员工名和工种名；添加筛选
 SELECT
-    e.last_name, j.job_title
+    e.employee_id, e.last_name,
+    j.job_id, j.job_title
 FROM
     employees e
     INNER JOIN jobs j ON e.job_id = j.job_id
@@ -56,6 +59,13 @@ WHERE e.last_name LIKE '%e%';
 
 -- 案例3：查询部门个数>3的城市名和部门个数；添加分组、筛选
 -- 3.1. 查询每个城市的部门个数
+SELECT
+    l.location_id, l.city, COUNT(*) 部门个数
+FROM
+    departments d
+    INNER JOIN locations l ON d.location_id = l.location_id
+GROUP BY l.city;
+
 -- 3.2. 在3.1.的结果上筛选满足条件
 SELECT
     l.location_id, l.city, COUNT(*) 部门个数
@@ -71,13 +81,15 @@ SELECT
 FROM
     employees e
     INNER JOIN departments d ON e.department_id = d.department_id
-GROUP BY d.department_name
+GROUP BY d.department_id
 HAVING 员工个数 > 3
 ORDER BY 员工个数 DESC;
 
 -- 案例5：查询员工名、部门名、工种名，并按部门名降序
 SELECT
-    e.last_name, d.department_name, j.job_title
+    e.employee_id, e.last_name,
+    d.department_id, d.department_name,
+    j.job_id, j.job_title
 FROM
     employees e
     INNER JOIN departments d ON e.department_id = d.department_id
@@ -85,16 +97,18 @@ FROM
 ORDER BY d.department_name DESC;
 
 -- 1.2. 非等值连接
--- 案例1：查询员工的工资级别
+-- 案例1：查询员工的工资级别；按工资级别排序
 SELECT
-    e.last_name, e.salary, jg.grade_level
+    e.employee_id, e.last_name,
+    jg.grade_level
 FROM
     employees e
-    INNER JOIN job_grades jg ON e.salary BETWEEN jg.lowest_sal AND jg.highest_sal;
+    INNER JOIN job_grades jg ON e.salary BETWEEN jg.lowest_sal AND jg.highest_sal
+ORDER BY jg.grade_level;
     
 -- 案例2：查询员工工资级别的个数>20的个数，按工资级别降序
 SELECT
-    e.last_name, e.salary, jg.grade_level, COUNT(*) 工资级别个数
+    jg.grade_level, COUNT(*) 工资级别个数
 FROM
     employees e
     INNER JOIN job_grades jg ON e.salary BETWEEN jg.lowest_sal AND jg.highest_sal
@@ -105,14 +119,16 @@ ORDER BY jg.grade_level DESC;
 -- 1.3. 自连接
 -- 案例1：查询员工名和上级的名称
 SELECT
-    e1.employee_id, e1.last_name, e2.employee_id, e2.last_name
+    e1.employee_id, e1.last_name,
+    e2.employee_id, e2.last_name
 FROM
     employees e1
     INNER JOIN employees e2 ON e1.manager_id = e2.employee_id;
     
 -- 案例1：查询姓名中包含k的员工名和上级的名称
 SELECT
-    e1.employee_id, e1.last_name, e2.employee_id, e2.last_name
+    e1.employee_id, e1.last_name,
+    e2.employee_id, e2.last_name
 FROM
     employees e1
     INNER JOIN employees e2 ON e1.manager_id = e2.employee_id
@@ -136,44 +152,45 @@ WHERE e1.last_name LIKE '%k%';
 
 -- 左外连接
 -- 案例1：查询男朋友不在男生表的女生名
-USE girls;
-SELECT * FROM beauty;
-SELECT * FROM boys;
 SELECT
-    g.id, g.beautyName, b.id
+    g.girl_id, g.girl_name, g.boyfriend_id,
+    b.boy_id, b.boy_name
 FROM
-    beauty g
-    LEFT JOIN boys b ON g.boyfriend_id = b.id
-WHERE b.id IS NULL;
+    girls g
+    LEFT JOIN boys b ON b.boy_id = g.boyfriend_id
+WHERE b.boy_id IS NULL;
 
 -- 案例2：查询哪个部门没有员工
-USE myemployees;
 SELECT
-    d.department_id, d.department_name, e.department_id
+    d.department_id, d.department_name,
+    e.employee_id, e.last_name, e.department_id
 FROM
     departments d
-    LEFT JOIN employees e ON d.department_id = e.department_id
-WHERE e.department_id IS NULL;
+    LEFT JOIN employees e ON e.department_id = d.department_id
+WHERE e.employee_id IS NULL;
 
 -- 交叉连接
 SELECT
-    g.*, b.*
+    g.*,
+    b.*
 FROM
-    beauty g
+    girls g
     CROSS JOIN boys b;
     
 -- 连接查询案例
 -- 1. 查询编号>3的女生的男朋友信息，如果有则列出详情，如果没有，则NULL填充
 SELECT
-    g.id, g.beautyName, b.*
+    g.girl_id, g.girl_name,
+    b.*
 FROM
-    beauty g
-    LEFT JOIN boys b ON g.boyfriend_id = b.id
-WHERE g.id > 3;
+    girls g
+    LEFT JOIN boys b ON g.boyfriend_id = b.boy_id
+WHERE g.girl_id > 3;
 
 -- 2. 查询哪个城市没有部门
 SELECT
-    l.location_id, l.city, d.location_id
+    l.location_id, l.city,
+    d.department_id, d.department_name, d.location_id
 FROM
     locations l
     LEFT JOIN departments d ON l.location_id = d.location_id
@@ -181,8 +198,9 @@ WHERE d.department_id IS NULL;
 
 -- 3. 查询部门名为SAL或IT的员工信息
 SELECT
-    d.department_name, e.*
+    e.*,
+    d.department_id, d.department_name
 FROM
-    departments d
-    LEFT JOIN employees e ON d.department_id = e.department_id
+    employees e
+    LEFT JOIN departments d ON d.department_id = e.department_id
 WHERE d.department_name IN ('SAL', 'IT');
