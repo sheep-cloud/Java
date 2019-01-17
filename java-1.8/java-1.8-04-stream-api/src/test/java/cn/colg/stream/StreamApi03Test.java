@@ -1,7 +1,6 @@
 package cn.colg.stream;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -49,39 +48,39 @@ public class StreamApi03Test extends BaseTest{
     public void testMatchFind() throws Exception {
         Set<Employee> set = employees.stream()
                                      .collect(Collectors.toSet());
-        log.info("set : {}", set);
-        
+        log.info("set: {}", set);
         log.info("------------------------------------------------------------------------------------------");
         
         boolean allMatch = employees.stream()
                                     .allMatch(e -> e.getStatus().equals(Status.BUSY));
-        log.info("allMatch : {}", allMatch);
-        
+        log.info("allMatch: {}", allMatch);
         log.info("------------------------------------------------------------------------------------------");
         
         boolean anyMatch = employees.stream()
                                     .anyMatch(e -> e.getStatus().equals(Status.BUSY));
-        log.info("anyMatch : {}", anyMatch);
+        log.info("anyMatch: {}", anyMatch);
         
         log.info("------------------------------------------------------------------------------------------");
         
         boolean noneMatch = employees.stream()
                                      .noneMatch(e -> e.getStatus().equals(Status.BUSY));
-        log.info("noneMatch : {}", noneMatch);
-        
+        log.info("noneMatch: {}", noneMatch);
         log.info("------------------------------------------------------------------------------------------");
         
-        Optional<Employee> findFirst = employees.stream()
-                                                .findFirst();
-        Employee employee = findFirst.orElse(new Employee());
-        log.info("employee : {}", employee);
-        
+        Employee employee = employees.stream()
+                                   .findFirst()
+                                   .orElse(new Employee());
+        log.info("employee: {}", employee);
         log.info("------------------------------------------------------------------------------------------");
         
-        Optional<Employee> findAny = employees.parallelStream()
-                                              .filter(e -> e.getStatus().equals(Status.FREE))
-                                              .findAny();
-        employee = findAny.orElse(new Employee());
-        log.info("employee : {}", employee);
+        employee = CollUtil.getFirst(employees);
+        log.info("employee: {}", employee);
+        log.info("------------------------------------------------------------------------------------------");
+        
+        employee = employees.stream()
+                             .filter(e -> e.getStatus().equals(Status.FREE))
+                             .findAny()
+                             .orElse(new Employee());
+        log.info("employee: {}", employee);
     }
 }

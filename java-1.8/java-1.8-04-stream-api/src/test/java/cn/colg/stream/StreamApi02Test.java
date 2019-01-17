@@ -1,5 +1,6 @@
 package cn.colg.stream;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -8,7 +9,7 @@ import org.junit.Test;
 import cn.colg.BaseTest;
 import cn.colg.entity.Employee;
 import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.lang.Console;
+import cn.hutool.core.lang.Filter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -56,19 +57,27 @@ public class StreamApi02Test extends BaseTest{
      */
     @Test
     public void testFilter() throws Exception {
-        Console.log("cn.colg.StreamApi02Test.testFilter()");
         // 创建 stream
         Stream<Employee> stream = employees.stream();
         
         // 中间操作：不会执行任何操作
         stream = stream.filter(e -> {
-            Console.log("Stream API的中间操作");
             return e.getAge() > 35;
         });
         
         // 终止操作：一次性执行全部内容，即"惰性求职"
         // 内部迭代：迭代操作由Stream API完成
-        stream.forEach(Console::log);
+        stream.forEach(e -> log.info("e: {}", e));
+        log.info("------------------------------------------------------------------------------------------");
+
+        // 链式编程
+        employees.stream()
+                 .filter(t -> t.getAge() > 35)
+                 .forEach(e -> log.info("e: {}", e));
+        log.info("------------------------------------------------------------------------------------------");
+        
+        CollUtil.filter(employees, (Filter<Employee>)t -> t.getAge() > 35)
+                .forEach(e -> log.info("e: {}", e));
     }
     
     /**
@@ -80,7 +89,7 @@ public class StreamApi02Test extends BaseTest{
     public void testLimit() throws Exception {
         employees.stream()
                  .limit(2)
-                 .forEach(Console::log);
+                 .forEach(e -> log.info("e: {}", e));
     }
     
     /**
@@ -92,7 +101,7 @@ public class StreamApi02Test extends BaseTest{
     public void testSkip() throws Exception {
         employees.stream()
                  .skip(2L)
-                 .forEach(Console::log);
+                 .forEach(e -> log.info("e: {}", e));
     }
     
     /**
@@ -103,10 +112,12 @@ public class StreamApi02Test extends BaseTest{
      */
     @Test
     public void testSkipLimit() throws Exception {
+        int pageNum = 4;
+        int pageSize = 2;
         employees.stream()
-                 .skip(2)
-                 .limit(2)
-                 .forEach(Console::log);
+                 .skip((pageNum - 1) * pageSize)
+                 .limit(pageSize)
+                 .forEach(e -> log.info("e: {}", e));
     }
     
     /**
@@ -118,7 +129,11 @@ public class StreamApi02Test extends BaseTest{
     public void testDistinct() throws Exception {
         employees.stream()
                  .distinct()
-                 .forEach(Console::log);
+                 .forEach(e -> log.info("e: {}", e));
+        log.info("------------------------------------------------------------------------------------------");
+        
+        CollUtil.distinct(employees)
+                .forEach(e -> log.info("e: {}", e));
     }
     
     /**
@@ -131,12 +146,12 @@ public class StreamApi02Test extends BaseTest{
         List<String> list = CollUtil.newArrayList("colg", "cloud", "java");
         list.stream()
             .map(str -> str.toUpperCase())
-            .forEach(Console::log);
+            .forEach(e -> log.info("e: {}", e));
         log.info("------------------------------------------------------------------------------------------");
         
         employees.stream()
-                 .map(Employee::getName)
-                 .forEach(Console::log);
+                 .map(e -> e.getName())
+                 .forEach(e -> log.info("e: {}", e));
     }
     
     /**
@@ -150,15 +165,31 @@ public class StreamApi02Test extends BaseTest{
         List<String> list = CollUtil.newArrayList("colg", "cloud", "java");
         list.stream()
             .sorted()
-            .forEach(Console::log);
+            .forEach(e -> log.info("e: {}", e));
+        log.info("------------------------------------------------------------------------------------------");
+        
+        CollUtil.sort(list, (o1, o2) -> o1.compareTo(o2))
+                .forEach(e -> log.info("e: {}", e));
+        log.info("------------------------------------------------------------------------------------------");
         
         employees.stream()
-                 .sorted((e1, e2) -> {
-                     if (e1.getAge() == e2.getAge()) {
-                        return e1.getName().compareTo(e2.getName());
+                 .sorted((o1, o2) -> {
+                     if (o1.getAge() == o2.getAge()) {
+                        return o1.getName().compareTo(o2.getName());
                     } else {
-                        return e1.getAge().compareTo(e2.getAge());
+                        return o1.getAge().compareTo(o2.getAge());
                     }
-                 }).forEach(Console::log);
+                 })
+                 .forEach(e -> log.info("e: {}", e));
+        log.info("------------------------------------------------------------------------------------------");
+        
+        CollUtil.sort(employees, (Comparator<Employee>)(o1, o2) -> {
+                    if (o1.getAge() == o2.getAge()) {
+                        return o1.getName().compareTo(o2.getName());
+                    } else {
+                        return o1.getAge().compareTo(o2.getAge());
+                    }
+                })
+                .forEach(e -> log.info("e: {}", e));
     }
 }

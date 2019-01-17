@@ -71,21 +71,18 @@ public class Lambda02Test extends BaseTest{
 
     @Test
     public void test02() throws Exception {
-        Console.log("cn.colg.lambda.Lambda02Test.test02()");
         Consumer<String> con = (x) -> Console.log(x);
         con.accept("Lambda 表达式威武！");
     }
 
     @Test
     public void test03() throws Exception {
-        Console.log("cn.colg.lambda.Lambda02Test.test03()");
         Consumer<String> con = x -> Console.log(x);
         Console.log(con);
     }
 
     @Test
     public void test04() throws Exception {
-        Console.log("cn.colg.lambda.Lambda02Test.test04()");
         Comparator<Integer> com = (x, y) -> {
             Console.log("函数式接口");
             return Integer.compare(x, y);
@@ -95,7 +92,6 @@ public class Lambda02Test extends BaseTest{
 
     @Test
     public void test05() throws Exception {
-        Console.log("cn.colg.lambda.Lambda02Test.test05()");
         Comparator<Integer> com = (x, y) -> Integer.compare(x, y);
         Console.log(com);
     }
