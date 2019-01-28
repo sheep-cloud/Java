@@ -28,18 +28,19 @@ public class LamdbaExerciseTest extends BaseTest{
         );
 
     /**
-     * 调用CollUtil.sort()方法，通过定制排序比较两个Employee（先按年龄比，年龄相同按姓名比），使用Lambda作为参数传递。
+     * 调用CollUtil.sort()方法, 通过定制排序比较两个Employee(先按年龄比, 年龄相同按姓名比), 使用Lambda作为参数传递.
      *
      * @throws Exception
+     * @author colg
      */
     @Test
     public void test01() throws Exception {
         CollUtil.sort(employees, (e1, e2) -> {
             if (e1.getAge() == e2.getAge()) {
-                // 年龄相等，比较姓名（升序）
+                // 年龄相同, 比较姓名(升序)
                 return e1.getName().compareTo(e2.getName()); 
             } else {
-                // 年龄不相等，比较年龄（升序）
+                // 年龄不同, 比较年龄(升序)
                 return Integer.compare(e1.getAge(), e2.getAge());
             }
         });
@@ -47,11 +48,16 @@ public class LamdbaExerciseTest extends BaseTest{
     }
     
     /**
-     * 1. 声明函数式接口，接口中声明抽象方法，public Stirng getValue(String str);</br>
-     * 2. 声明类 TestLambda，类中编写方法使用接口作为参数，将一个字符串转换成大写，并作为方法的返回值。</br>
-     * 3. 再将一个字符串的第2个和第4个索引位置进行截取子串。
+     * 函数式接口
+     * 
+     * <pre>
+     *  1. 声明函数式接口, 接口中声明抽象方法, public String getValue(String str);
+     *  2. 声明类TestLambda, 类中编写方法, 使用接口作为参数, 将一个字符串转换成大写, 并作为方法的返回值.
+     *  3. 再将一个字符串的第2个和第4个索引位置进行截取子串.
+     * </pre>
      *
      * @throws Exception
+     * @author colg
      */
     @Test
     public void test02() throws Exception {
@@ -64,12 +70,16 @@ public class LamdbaExerciseTest extends BaseTest{
     }
     
     /**
-     * 1. 声明一个带两个泛型的函数式接口，反省类型为<T, R>，T为参数，R为返回值.</br>
-     * 2. 接口中声明对应抽象方法。</br>
-     * 3. 在TetLambda类中声明方法，使用接口作为参数，计算两个long型参数的和。</br>
-     * 4. 再计算两个long型参数的乘积。
+     * 函数式接口
+     * <pre>
+     *  1. 声明一个带两个泛型的函数式接口, 泛型类型为<T, R>, T为参数, R为返回值.
+     *  2. 接口中声明对应抽象方法.
+     *  3. 在TestLambda类中声明方法, 使用接口作为参数, 计算两个long型参数的和
+     *  4. 再计算两个long型参数的乘积.
+     * </pre>
      *
      * @throws Exception
+     * @author colg
      */
     @Test
     public void test03() throws Exception {

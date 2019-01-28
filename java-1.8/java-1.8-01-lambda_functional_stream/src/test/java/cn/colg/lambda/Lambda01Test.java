@@ -23,15 +23,13 @@ public final class Lambda01Test extends BaseTest{
      */
     @Test
     public void test01() throws Exception {
-        Comparator<Integer> comparator = new Comparator<Integer>() {
+        TreeSet<Integer> treeSet = new TreeSet<>(new Comparator<Integer>() {
 
             @Override
             public int compare(Integer o1, Integer o2) {
                 return Integer.compare(o1, o2);
             }
-        };
-
-        TreeSet<Integer> treeSet = new TreeSet<>(comparator);
+        });
         treeSet.add(1);
         treeSet.add(3);
         treeSet.add(2);

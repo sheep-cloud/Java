@@ -10,7 +10,7 @@ import cn.colg.entity.Employee;
 public class FilterEmployeeBySalary implements MyStrategy<Employee> {
 
     /**
-     * 返回工作大于5000的员工
+     * 返回工资高于5000的员工
      *
      * @param t
      * @return

@@ -1,7 +1,7 @@
 package cn.colg.exercise;
 
 /**
- * 函数式接口，功能类
+ * 函数式接口, 功能类
  *
  * @author colg
  */
@@ -13,6 +13,7 @@ public class TestLambda {
      * @param str
      * @param myFunction
      * @return
+     * @author colg
      */
     public static String strHandler(String str, MyFunction myFunction) {
         return myFunction.getValue(str);
@@ -25,6 +26,7 @@ public class TestLambda {
      * @param t2
      * @param myFunction2
      * @return
+     * @author colg
      */
     public static long getValue(long t1, long t2, MyFunction2<Long, Long> myFunction2) {
         return myFunction2.getValue(t1, t2);

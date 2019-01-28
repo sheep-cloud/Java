@@ -74,11 +74,12 @@ public final class EmployeeTest extends BaseTest{
     /// ----------------------------------------------------------------------------------------------------
 
     /**
-     * 优化方式一：策略模式
+     * 优化方式一: 策略模式
      *
      * @param employees
      * @param myStrategy
      * @return
+     * @author colg
      */
     private List<Employee> filterEmployeesByStrategy(List<Employee> employees, MyStrategy<Employee> myStrategy) {
         List<Employee> list = new ArrayList<>();
@@ -91,7 +92,7 @@ public final class EmployeeTest extends BaseTest{
     }
     
     /**
-     * 策略模式，声明类
+     * 策略模式, 声明类
      *
      * @throws Exception
      */
@@ -105,13 +106,14 @@ public final class EmployeeTest extends BaseTest{
     }
     
     /**
-     * 策略模式，匿名内部类
+     * 策略模式, 匿名内部类
      *
      * @throws Exception
      */
     @Test
     public void test03() throws Exception {
-        List<Employee> list = filterEmployeesByStrategy(employees, new MyStrategy<Employee>() {
+        List<Employee> list;
+        list = filterEmployeesByStrategy(employees, new MyStrategy<Employee>() {
 
             @Override
             public boolean compartor(Employee t) {
@@ -131,14 +133,14 @@ public final class EmployeeTest extends BaseTest{
     }
     
     /**
-     * 优化方式二：Lambda 表达式
+     * 策略模式: Lambda 表达式
      *
      * @throws Exception
      */
     @Test
     public void test04() throws Exception {
-        MyStrategy<Employee> myStrategy = employee -> employee.getAge() > 35;
-        List<Employee> list = filterEmployeesByStrategy(employees, myStrategy);
+        List<Employee> list;
+        list = filterEmployeesByStrategy(employees, employee -> employee.getAge() > 35);
         log.info("list : {}", list);
         
         list = filterEmployeesByStrategy(employees, employee -> employee.getSalary() > 5000);
@@ -152,10 +154,15 @@ public final class EmployeeTest extends BaseTest{
      */
     @Test
     public void test05() throws Exception {
-        List<Employee> list = employees.stream().filter(employee -> employee.getAge() > 35).collect(Collectors.toList());
+        List<Employee> list;
+        list = employees.stream()
+                        .filter(employee -> employee.getAge() > 35)
+                        .collect(Collectors.toList());
         log.info("list : {}", list);
         
-        list = employees.stream().filter(employee -> employee.getSalary() > 5000).collect(Collectors.toList());
+        list = employees.stream()
+                        .filter(employee -> employee.getSalary() > 5000)
+                        .collect(Collectors.toList());
         log.info("list : {}", list);
     }
 }

@@ -4,13 +4,12 @@ package cn.colg.strategy;
  * 过滤对象信息的接口
  * 
  * <pre>
- * 函数式接口：
- *  接口中只有一个抽象方法的接口，称为函数式接口。
- *  '@FunctionalInterface'： 检查是否是函数式接口。
+ * 函数式接口:
+ *  接口中只有一个抽象方法的接口, 称为函数式接口.
+ *  `@FunctionalInterface`: 检查是否是函数式接口
  * </pre>
  *
  * @author colg
- * @param <T>
  */
 @FunctionalInterface
 public interface MyStrategy<T> {
@@ -20,6 +19,7 @@ public interface MyStrategy<T> {
      *
      * @param t
      * @return
+     * @author colg
      */
     boolean compartor(T t);
 }

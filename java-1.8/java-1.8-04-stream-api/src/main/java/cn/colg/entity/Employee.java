@@ -1,9 +1,11 @@
 package cn.colg.entity;
 
+import cn.colg.core.BaseEntity;
 import cn.colg.enums.Status;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 /**
@@ -11,11 +13,12 @@ import lombok.experimental.Accessors;
  *
  * @author colg
  */
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Accessors(chain = true)
-public class Employee {
+public class Employee extends BaseEntity{
 
     /** 姓名 */
     private String name;
