@@ -2,8 +2,8 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>cn.colg</groupId>
-    <artifactId>java-11-multi-thread</artifactId>
+    <artifactId>java-07-collection-map</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>java-11-multi-thread-01-helloworld</artifactId>
+  <artifactId>java-07-collection-map-01-collection</artifactId>
 </project>

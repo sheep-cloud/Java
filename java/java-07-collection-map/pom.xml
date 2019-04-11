@@ -1,10 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.colg</groupId>
-    <artifactId>java-11-multi-thread</artifactId>
+    <artifactId>java-07-collection-map</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>java-11-multi-thread :: JavaSE 多线程</name>
+    <name>java-07-collection-map :: 集合</name>
 
     <dependencies>
         <dependency>
@@ -15,7 +15,6 @@
     </dependencies>
 
     <modules>
-        <module>java-11-multi-thread-01-helloworld</module>
+        <module>java-07-collection-map-01-collection</module>
     </modules>
-
 </project>
