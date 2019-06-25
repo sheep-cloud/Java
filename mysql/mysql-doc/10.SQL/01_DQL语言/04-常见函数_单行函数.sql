@@ -33,7 +33,7 @@ USE mysql_base;
 
 -- 1. 字符函数
 
--- 1.1. LENGTH 获取参数自的字节个数
+-- 1.1. LENGTH 获取参数的字节个数
 SELECT LENGTH('john');
 SELECT LENGTH('杰克jack');
 SHOW VARIABLES LIKE '%char%';

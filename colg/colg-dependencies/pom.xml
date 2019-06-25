@@ -1,13 +1,12 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>cn.colg</groupId>
     <artifactId>colg-dependencies</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>colg-dependencies :: 包含（hutool-all、junit、lombok、fastjson、logback-classic、commons-lang3）</name>
-    
-    <!-- 
-        ! Centralized definition of dependent versions
-     -->
+
+    <!-- ! Centralized definition of dependent versions -->
     <properties>
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,16 +17,14 @@
         <maven-surefire-plugin.version>2.22.1</maven-surefire-plugin.version>
         <skipTests>true</skipTests>
         <junit.version>4.12</junit.version>
-        <lombok.version>1.18.4</lombok.version>
-        <hutool.version>4.5.4</hutool.version>
-        <fastjson.version>1.2.55</fastjson.version>
+        <lombok.version>1.18.8</lombok.version>
+        <hutool.version>4.5.10</hutool.version>
+        <fastjson.version>1.2.58</fastjson.version>
         <logback.version>1.2.3</logback.version>
-        <commons-lang3.version>3.8.1</commons-lang3.version>
+        <commons-lang3.version>3.9</commons-lang3.version>
     </properties>
 
-    <!-- 
-        ! Centralized management dependence 
-     -->
+    <!-- ! Centralized management dependence -->
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
