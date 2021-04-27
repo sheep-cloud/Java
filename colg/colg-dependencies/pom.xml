@@ -21,7 +21,7 @@
         <maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
         <maven-install-plugin.version>3.0.0-M1</maven-install-plugin.version>
         <skipTests>true</skipTests>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <lombok.version>1.18.8</lombok.version>
         <hutool.version>4.5.10</hutool.version>
         <fastjson.version>1.2.58</fastjson.version>
